@@ -1,0 +1,49 @@
+/* YO MIKEY I LEFT SOME CSS THAT MAY BE USEFUL */
+
+body {
+    background-color: #f8f8f8;
+    padding: 25px;
+}
+a {
+    cursor: pointer;
+}
+.error {
+    color: #c90a3a;
+}
+@-webkit-keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.bounce {
+    -moz-animation: bounce 3s infinite;
+    -webkit-animation: bounce 3s infinite;
+    animation: bounce 3s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    40% {
+        -moz-transform: translateX(15px);
+        -ms-transform: translateX(15px);
+        -webkit-transform: translateX(15px);
+        transform: translateX(15px);
+    }
+    60% {
+        -moz-transform: translateX(10px);
+        -ms-transform: translateX(10px);
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+}

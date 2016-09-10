@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reboot</title>
+
+    <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- json objects -->
+    <script src="{{ url_for('static', filename='data/display_github.json') }}"></script>
+
+    <!-- google analytics script -->
+
+</head>
+<body>
+    <!-- YO MIKEY HERE IS AN EXAMPLE OF HOW TO POPULATE SECTIONS OF HTML USING FLASK/MONGODB. SIMILAR TO ANGULAR -->
+    <div class="" id="blog">
+        <div class="title"></div>
+        <br>
+        {% for post in posts %}
+            {% if post.post.published == True %}
+                <div class="blog-title" style="margin-left: 3px;"><a href="/blog/{{ post.post.url }}">{{ post.post.title }}</a></div>
+                <div class="subtitle" style="margin-left: 3px;">{{ post.post.subtitle }}</div>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- news reel with latest commits from github and/or some other information. -->
+    <div class="news-feed">
+        <p class="css-typing" id="css-typing-container"><a id="css-typing" href="https://www.github.com/vc1492a" target="_blank">see what I've been developing lately</a></p>
+    </div>
+</body>
+<!-- javascript -->
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
+</html>
