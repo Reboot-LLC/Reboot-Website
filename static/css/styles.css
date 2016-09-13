@@ -3,6 +3,22 @@ body {
     font-family: 'Muli',sans-serif !important;
     background-color: #f8f8f8;
     padding: 25px;
+    visibility: hidden;
+}
+
+.loading-gif {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    visibility: visible;
+}
+
+.loading-gif img {
+    margin: 0 auto;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    z-index: 999;
 }
 
 a {
@@ -149,6 +165,7 @@ a {
     font-size: 44px;
     margin-bottom: 25px;
     line-height: 90%;
+    font-weight: bold;
 }
 
 /* Home Page - Team Cards */
@@ -199,7 +216,27 @@ a {
     width: 100%;
 }
 
-.card .user {
+.cover-m {
+    background: url(../images/philadelphia.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.cover-s {
+    background: url(../images/knoxville.png) no-repeat center;
+    background-size: cover;
+}
+
+.cover-t {
+    background: url(../images/pasadena.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.cover-v {
+    background: url(../images/chicago.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.card .team-member {
     border-radius: 50%;
     display: block;
     height: 120px;
@@ -208,7 +245,7 @@ a {
     width: 120px;
 }
 
-.card .user img {
+.card .team-member img {
     background: none repeat scroll 0 0 #FFF;
     border: 4px solid #FFF;
     width: 100%;
@@ -230,6 +267,7 @@ a {
 
 .card .name {
     font-size: 22px;
+    font-weight: bold;
     line-height: 28px;
     margin: 10px 0 0;
     text-align: center;
@@ -242,6 +280,29 @@ a {
     line-height: 20px;
     text-align: left;
     display: inline-block;
+}
+
+@media (max-width: 992px) {
+    .card h5 {
+        margin: 0 auto;
+        width: 75%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .card .name {
+        font-size: 18px;
+    }
+    .card .profession {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 610px) {
+    .card h5 {
+        width:85%;
+    }
 }
 
 .card .profession {

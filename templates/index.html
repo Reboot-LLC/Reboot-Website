@@ -16,6 +16,7 @@
     <script src="{{ url_for('static', filename='data/display_github.json') }}"></script>
     <!-- google analytics script -->
 </head>
+<div class="loading-gif"><img src="static/images/loading.gif"></div>
 <body>
     <div id="fullpage">
         <div class="section" id="section0">
@@ -25,9 +26,9 @@
                     <div class="row text-center">
                         <div class="col-md-12">
                             <div class="declaration">
-                                <h1 class="logo wow fadeInUp"><img src="static/images/logo.png"> REBOOT</h1>
+                                <h1 class="logo"><img src="static/images/logo.png"> REBOOT</h1>
                                 <div class="spacing-15"></div>
-                                <h3 class="wow fadeInDown">Discover the beautiful side of logic.</h3>
+                                <h3>Discover the beautiful side of logic.</h3>
                             </div>   
                         </div>       
                     </div>
@@ -55,12 +56,12 @@
                     <h2 class="title">Meet The Team</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <section class="card-container">
                             <div class="card card-m" onclick="flipM()">
                                 <div class="front">
-                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
-                                    <div class="user"><img class="img-circle" src="static/images/mikey.jpg"></div>
+                                    <div class="cover cover-m"></div>
+                                    <div class="team-member"><img class="img-circle" src="static/images/mikey.jpg"></div>
                                     <div class="content">
                                         <div class="main">
                                             <h3 class="name">Michael Thompson</h3>
@@ -76,12 +77,12 @@
                             </div>
                         </section>
                     </div>                    
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <section class="card-container">
                             <div class="card card-s" onclick="flipS()">
                                 <div class="front">
-                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
-                                    <div class="user"><img class="img-circle" src="static/images/sammy.png"></div>
+                                    <div class="cover cover-s"></div>
+                                    <div class="team-member"><img class="img-circle" src="static/images/sammy.png"></div>
                                     <div class="content">
                                         <div class="main">
                                             <h3 class="name">Sammy Thomas</h3>
@@ -99,12 +100,12 @@
                     </div>                    
                 </div>
                 <div class="row">                 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <section class="card-container">
                             <div class="card card-t" onclick="flipT()">
                                 <div class="front">
-                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
-                                    <div class="user"><img class="img-circle" src="static/images/taylor.png"></div>
+                                    <div class="cover cover-t"></div>
+                                    <div class="team-member"><img class="img-circle" src="static/images/taylor.png"></div>
                                     <div class="content">
                                         <div class="main">
                                             <h3 class="name">Taylor Stevens</h3>
@@ -120,12 +121,12 @@
                             </div>
                         </section>
                     </div>                    
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <section class="card-container">
                             <div class="card card-v" onclick="flipV()">
                                 <div class="front">
-                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
-                                    <div class="user"><img class="img-circle" src="static/images/val.jpg"></div>
+                                    <div class="cover cover-v"></div>
+                                    <div class="team-member"><img class="img-circle" src="static/images/val.jpg"></div>
                                     <div class="content">
                                         <div class="main">
                                             <h3 class="name">Valentino Constantinou</h3>
@@ -192,6 +193,7 @@
 <script src="{{ url_for('static', filename='js/styles.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
