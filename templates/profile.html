@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- google analytics script -->
+
+</head>
+<body>
+<div class="admin-container">
+    <div class="title">My Profile</div>
+    <div class="subtitle" style="margin-left: 3px;">
+        {% if current_user.is_authenticated %}
+            Hi {{ current_user.first_name }}! Here is your information.
+        {% endif %}
+    </div>
+    <br>
+    <div class="subtitle">username: {{ user.username }}</div>
+    <div class="subtitle">first name: {{ user.profile.first_name }}</div>
+    <div class="subtitle">last name: {{ user.profile.last_name }}</div>
+    <div class="subtitle">email: {{ user.profile.email }}</div>
+    <br>
+    <div class="menu-key" id="menu3">
+        <a href="/edit_profile" target="" class="portfolio-link">edit my profile</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="resume-title">My Blog Posts</div>
+    {% for post in posts %}
+        {% if post.post.user == current_user.id %}
+            <div class="subtitle" style="margin-left: 3px;"><a href="blog/{{ post.post.url }}">{{ post.post.title }}</a></div>
+        {% endif %}
+    {% endfor %}
+    <br>
+    <div class="menu-key" id="menu4">
+        <a href="/create_post" target="" class="portfolio-link">new blog post</a>
+    </div>
+</div>
+</body>
+</html>

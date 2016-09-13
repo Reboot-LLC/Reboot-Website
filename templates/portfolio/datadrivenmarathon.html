@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap 3 mobile first. Disable zooming to make it feel like a more native app -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Chicago Case Study | dataRunner</title>
+
+    <!-- CSS, FONTS and STYLING -->
+    <link href="{{ url_for('static', filename='css/marathon.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Titillium+Web:400,600,300' rel='stylesheet' type='text/css'>
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<!-- Page loading animation -->
+<!-- IDEA: Use map of course for svg loading animaiton -->
+<div id="loading">
+    <svg version="1.1" id="loading-image" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" style="padding-right: 15px;"
+	 width="300px" height="300px" viewBox="0 0 750 750" fill="#fff" stroke="#7A7C88" stroke-width="4" xml:space="preserve">
+        <polygon points="484.400 426.800, 485.400 403.800, 487.800 369.500, 456.700 369.500, 456.700 438.500,
+        438.400 438.500, 438.400 251.200, 445.400 245.000, 437.300 232.900, 434.800 219.200, 428.400 199.800,
+        427.200 182.500, 438.600 182.500, 417.500 145.800, 417.500 102.800, 417.000 97.800, 401.800 56.900,
+        383.700 64.600, 395.500 90.800, 397.000 95.800, 397.200 121.800, 392.000 143.300, 419.500 200.800,
+        415.000 203.500, 417.200 260.200, 432.100 260.200, 432.100 375.300, 421.000 374.700, 420.100 379.500,
+        420.100 381.200, 427.700 402.200, 426.500 431.700, 259.400 431.700, 260.700 445.200, 277.100 445.200,
+        282.600 439.200, 378.300 439.200, 378.300 484.000, 299.000 484.000, 299.000 545.200, 377.500 545.200,
+        377.500 568.200, 377.500 604.200, 377.500 604.200, 387.500 596.200, 417.800 578.000, 437.000 574.200,
+        435.800 673.400, 456.000 673.400, 456.000 692.900, 470.800 692.900, 469.500 495.700, 484.900 495.700,
+        484.900 481.200">
+        </polygon>
+    </svg>
+    <div class="loading-text pulsate">loading...</div>
+    <!-- Mobile Warning -->
+    <div class="mobile-warning">
+        <div class="mobile-warning-text">
+            best viewed on
+            <br>
+            larger screen
+        </div>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div id="#header-image" class="header-image"></div>
+
+<!-- Using Bootstrap 3 for page structure and mobile responsiveness -->
+<div id="content" class="container">
+    <div class="row">
+        <div class="main-title col-sm-12">The Case for a Data Driven Marathon</div>
+        <div class="author-title col-sm-12">by Valentino Constantinou & Ashley Felber</div>
+        <div class="rectangle">
+            <svg width="350" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="main-subtitle col-sm-12">
+            Every year, tens of thousands of runners compete in the Chicago Marathon. Thousands more fail to finish.
+            Roughly one thousand have injuries that vary widely in severity, from a simple blister to cardiac arrest.
+            <br>
+            <br>
+            The city of Chicago is forward-thinking in regards to marathon medicine and in driving open access
+            to civic data. We illustrate that marathon organizers and the city could improve the safety of the Chicago Marathon
+            by retrieving data from health trackers, such as those from Nike, Fitbit, and Garmin. Access to participants'
+            health tracker data could provide understanding of a runner's physical condition, such as through examining heart rate,
+            throughout the course and also prior to injury.
+        </div>
+    </div>
+    <div class="row">
+        <div class="title col-sm-12">Some Background</div>
+        <div class="rectangle">
+            <svg width="175" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="subtitle col-sm-8">
+            The first Chicago Marathon took place on September 23, 1905 with 20 registered participants. Today,
+            that number has grown to 45,000 participants, with over 70,000 applicants
+            [<a class="ref-link" href="http://www.isbnplus.com/9780738577180" target="_blank" style="target-new: tab;">1</a>,
+            <a class="ref-link" href="http://isbnplus.com/9780252031687" target="_blank" style="target-new: tab;">2</a>].
+            While thousands of participants
+            run or compete in the marathon, thousands more come to watch the event from in and around Chicago, and even
+            from other states. Last year, 84% of marathon participants ran the entirety of the course. While certainly
+            an achievement, this means that 7,818 failed to finish because they did not show up or due to exhaustion or injury.
+            Most of the non-finishers have simply overestimated their ability, but roughly a
+            thousand have injuries during the event every single year. What if we had a better idea of where
+            exactly those injuries occurred, and under what physical conditions?
+            <br>
+            <div class="button-highlight button-highlight2">37,182 participants completed the 2015 Chicago Marathon [<a class="ref-link" href="http://www.marathonguide.com/results/browse.cfm?MIDD=67001022" target="_blank" style="target-new: tab;">3</a>].
+            </div>
+            <br>
+            <br>
+            A growing amount of Chicago Marathon participants are using health tracking devices to
+            record heart rates, calories burned, distance traveled, and the intensity of our physical activity. What if we leveraged that
+            information to improve the safety and efficiency of the entire event? The City of Chicago has been a
+            pioneer in open civic data in recent years [<a class="ref-link" href="http://www.cityofchicago.org/city/en/narr/foia/CityData.html" target="_blank" style="target-new: tab;">4</a>,
+            <a class="ref-link" href="https://www.metrochicagodata.org/" target="_blank" style="target-new: tab;">5</a>,
+            <a class="ref-link" href="https://github.com/Chicago" target="_blank" style="target-new: tab;">6</a>].
+            Continuing that trend towards events such as the Chicago Marathon
+            could help the health and safety of participants by making improvements to operations. These are improvements
+            that can only be made by having a better understanding of participants' physical strain and speed as they
+            progress throughout the course.
+        </div>
+        <div class="plot col-sm-4">
+            <svg version="1.1" id="course-plot" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" style="padding-right: 30px;"
+	        width="300px" height="300px" viewBox="150 0 450 750" fill="#fff" stroke="#8CB4DD" stroke-width="4" xml:space="preserve">
+                <polygon points="484.400 426.800, 485.400 403.800, 487.800 369.500, 456.700 369.500, 456.700 438.500,
+                438.400 438.500, 438.400 251.200, 445.400 245.000, 437.300 232.900, 434.800 219.200, 428.400 199.800,
+                427.200 182.500, 438.600 182.500, 417.500 145.800, 417.500 102.800, 417.000 97.800, 401.800 56.900,
+                383.700 64.600, 395.500 90.800, 397.000 95.800, 397.200 121.800, 392.000 143.300, 419.500 200.800,
+                415.000 203.500, 417.200 260.200, 432.100 260.200, 432.100 375.300, 421.000 374.700, 420.100 379.500,
+                420.100 381.200, 427.700 402.200, 426.500 431.700, 259.400 431.700, 260.700 445.200, 277.100 445.200,
+                282.600 439.200, 378.300 439.200, 378.300 484.000, 299.000 484.000, 299.000 545.200, 377.500 545.200,
+                377.500 568.200, 377.500 604.200, 377.500 604.200, 387.500 596.200, 417.800 578.000, 437.000 574.200,
+                435.800 673.400, 456.000 673.400, 456.000 692.900, 470.800 692.900, 469.500 495.700, 484.900 495.700,
+                484.900 481.200">
+                </polygon>
+            </svg>
+            <div class="caption-text">The Chicago Marathon's 26.219 mile course. The Chicago Marathon is one of six
+                World Marathon Majors.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="title col-sm-12">An Organized Trial</div>
+        <div class="rectangle">
+            <svg width="175" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="subtitle col-sm-12">
+            We decided to conduct a small trial using Fitbit devices in order to assess the validity and usability
+            of the data in a marathon context. The trial took place on May 14th, 2016 in Evanston, Illinois just south
+            of the Northwestern University campus. Twelve volunteers completed an approximately 2.1 mile course along
+            Lake Michigan, with an average temperature of 46F during the time the event was held. Many thanks to these
+            wonderful volunteers. This proof-of-concept would not have become a reality without their time and sweat.
+            <br>
+            <br>
+            So, what did we gain from our trial run? After all, at 2.1 miles it represents just 8% of a total marathon
+            distance (just 16% for a half marathon). While this is true, we were nevertheless able to easily
+            see varying trends of runner pace over each minute of the trial race. Some participants had increased speed
+            at the start and finish while others had a fairly constant pace throughout. The visualization below clearly
+            shows differences in pace across participants.
+        </div>
+        <div class="col-sm-12">
+            <div id="animatedtimelapse"></div>
+            <div id="timelapse-caption" class="caption-text">Individual runner pace
+                over the course distance, animated by the minute. Note that clear differences can be seen between
+                participants. On a larger scale, pace across groups of runners could be visualized.</div>
+        </div>
+        <div class="subtitle col-sm-12">
+            <br>
+            On a larger scale with thousands of runners and in a marathon context, a similar visualization could be used
+            to illustrate the density of runners over the entire course at any point in time. This density could then
+            be split between groups in order to show differences or similarities between them. How strongly does
+            skill level affect overall pace? Does age have an impact on pace in the early stages, or in later stages?
+            How far in advance of an aid station did a participant's injury occur, and would altering the location
+            of those aid stations provide a better level of care? These are all questions that could be answered
+            with similar graphs. While the above visualization is modest, it can easily serve as the foundation for
+            the analysis of large groups of runners, such as the hundreds or thousands with health trackers that participate
+            in the marathon each year.
+        </div>
+    </div>
+    <div class="row">
+        <div class="title col-sm-12">What We Learned</div>
+        <div class="rectangle">
+            <svg width="175" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="subtitle col-sm-4">
+            Understanding runner pace over the length of the course was a great first step towards validation of the data
+            and how it could potentially be used in a marathon context. It's certainly important, but we learned
+            many other valuable lessons throughout the project that could aid in large-scale implementation from
+            data collection to storage to retrieval and analysis. We go into further detail in the preceding paragraphs,
+            but one of the major facts about the data we did not foresee is that the data lacks integrity near
+            the start and finish. We also learned a decent amount of fun facts, such as:
+            <br>
+            <div class="button-highlight button-highlight2">Avg Pace: 13.4 min/mile
+            </div>
+            <br>
+            <br>
+            So... it is clear that we don't have any record-setters in our sample population (the current record holder
+            is Dennis Kimetto, at roughly 4:40). Regardless, it is not hugely relevant in our case. The majority of marathon runners do
+            not approach record-setting pace. Marathon runners will show better overall pace over our sample, but the
+            differences are not drastic enough as to impede on the exploration of the data's usefulness. In the adjacent
+            heatmap, we show just one visualization possibility that could be directly applied to a larger scale.
+            Do certain brands of shoes enhance or degrade pace? Could some cause more podiatric injuries?
+            <br>
+            <br>
+            A good amount of the lessons we learned came about early in the process during framework development. While
+            accessing the Fitbit API and retrieving data is relatively straight-forward, by default Fitbit
+            places a restriction on the level of granularity an application can access. Fitbit regularly allows a deeper
+            granularity of access by special request, and we were granted intraday granularity following a polite email
+            where we explained our research goals. This process took about 26 days from sending the email to being
+            granted access.
+            <br>
+            <br>
+            It also became clear that achieving critical mass would only be attainable by migrating our scripts
+            to the web. In order to be granted access to the data, we had to have each participant sign into their
+            Fitbit account prior to the start of the race.
+            While running the script for each user provided the minimum amount of functionality for our trial
+            purposes, allowing would-be participants to sign up online would dramatically expand the potential audience.
+            This is currently a goal we would like to pursue in our development plan, along with including new functionality
+            to retrieve data from other types of devices.
+        </div>
+        <div class="col-sm-4">
+            <div id="heatmap"></div>
+            <!--<div id="dataset-picker">-->
+            <div id="heatmap-hover" class="info-on-hover">Avg Pace: 13.4 min/mile</div>
+        </div>
+        <div class="subtitle col-sm-4">
+            We also learned lessons in regards to data retrieval and validity. The data retrieval is a post-race process,
+            which involves querying the Fitbit API for a specific set of information using credentials received during the
+            initial sign up and login process. The amount of data we can access is partly a function of the amount of time
+            that has passed since the conclusion of the race. Since participants' wearables may sync with the Fitbit
+            server in different intervals, at least several days may pass before being able to retrieve a large sample
+            of the potential population. In our case, we queried the data four days following the event. Two users had
+            syncing issues, resulting in ten total participants in our data set. On a larger scale, we'd suggest waiting
+            several weeks between event and retrieval of data in order to guarantee a successful retrieval.
+            <br>
+            <br>
+            Data integrity was a key attribute of the data we wanted to examine as part of our
+            analysis. Upon visual examination of the data, such as in the adjacent heatmap, we discovered that the
+            first few minutes of data could be empty or not representative of initial pace.
+            It was also not immediately clear as to when the runner completed the event from the data itself. We were able to infer end
+            times from our manual recordings on the day of the event, but translation to marathon scale should involve
+            the use of officially recorded runner start and end times. Both the start and end of the data for each runner
+            is highly skewed and should be disregarded in certain areas of analysis. The vast majority of the data, however, was
+            representative of a particular participant's pace throughout the course. It's not surgical quality data,
+            but it's certainly enough to make robust inferences.
+            <br>
+            <div class="button-highlight button-highlight2">Total Steps: 34,496
+            </div>
+            <br>
+            <br>
+            Lastly, the data's validity was examined through the eyes of researchers and analysts. Beyond analyzing pace,
+            it is possible to examine elevation changes, heart rates (depends on device), cardio activity levels,
+            stride lengths (walking and running), and the standard set of demographic variables, among other factors.
+            While demographics such as shoe brand were obtained through a participant survey, the Fitbit API
+            provides the analyst with device-generated data, some of which is averaged
+            over the lifetime of the user's activity (increasing accuracy). While we don't dive into a deeper analysis
+            of the data in this article, it is entirely possibly to adapt the frame of an analysis due to the breadth
+            of accessible data.
+        </div>
+    </div>
+    <div class="row">
+        <div class="title col-sm-12">Towards the Future</div>
+        <div class="rectangle">
+            <svg width="175" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="subtitle col-sm-12">
+            While the JavaScript <a class="ref-link" href="https://d3js.org/" target="_blank" style="target-new: tab;">D3 library</a>
+            was used for the visualizations in this article, we also used R and the
+            <a class="ref-link" href="http://shiny.rstudio.com/" target="_blank" style="target-new: tab;">RShiny</a>
+            package to construct a visualization dashboard more tailored towards individual participants. While
+            researchers could use the data to improve the safety of the event, participants can also improve their
+            own lives by having easier and better access to their personal data. Our RShiny package (linked below under
+            "explore") provides an example of how access to data could be expanded for the greater public good.
+            <br>
+            <br>
+            Data collection was facilitated by the
+            <a class="ref-link" href="https://dev.fitbit.com/" target="_blank" style="target-new: tab;" >Fitbit API</a>, which allowed us to build a framework using Python 3 and
+            <a class="ref-link" href="https://www.mongodb.com/" target="_blank" style="target-new: tab;">MongoDB</a>
+            to complete the end-to-end process of requesting data storage to formal analysis. Our framework
+            includes functions that request user access, store unique access credentials, and request user specific
+            information on physical activity by daily summaries or intraday level (1 min most granular). Going forward,
+            we would like to bring the framework online as an open invitation to any marathon participant that may be
+            interested in sharing their marathon data, partly by expanding the use beyond Fitbit devices to others such
+            as Nike+. Development is open source and free to anyone with an interest to help (simply click "develop" below).
+        </div>
+        <div class="col-sm-4">
+            <a href="https://datalens.shinyapps.io/Dashboard/" target="_blank" style="target-new: tab;" id="button1" class="button">explore</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="https://github.com/vc1492a/dataRunner.py" target="_blank" style="target-new: tab;" id="button2" class="button">develop</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="/" style="target-new: tab;" id="button3" class="button">valentino.io</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="title col-sm-12">About the Data Scientists</div>
+        <div class="rectangle">
+            <svg width="225" height="1">
+                <rect width="300" height="100">
+                    Sorry, your browser does not support inline SVG.</rect>
+            </svg>
+        </div>
+        <div class="subtitle col-sm-12">
+            Valentino Constantinou is a student at Northwestern University's Master of Science in Analytics program.
+            He is a graduate of the University of Tennessee’s Haslam College of Business, where he studied Economics.
+            In his spare time, Valentino enjoys reading, spending
+            time outdoors, and working on extracurricular projects such as analysis of medical data for the Chicago
+            Marathon. He has accepted a 2016 summer internship position at the Jet Propulsion Laboratory, a joint facility
+            between NASA and Caltech in Pasadena, California, as an IT Data Scientist. Valentino will be graduating from
+            the MSiA program in December 2016.
+            <br>
+            <br>
+            Ashley Felber is also a student at Northwestern's Master of Science in Analytics program. She is a graduate
+            of the University of Michigan with a degree in Economics and minor in Mathematics, and will be interning
+            at Amazon in Seattle for her 2016 summer internship. Ashley enjoys spending time outdoors, hiking,
+            and enjoying some delicious wine and cheese in her free time. She will also be graduating from the MSiA
+            program in December 2016.
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+<div id="#footer-image" class="footer-image"></div>
+
+</body>
+<!-- JAVASCRIPT -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+<script src="{{ url_for('static', filename='js/animatedtimelapse.js') }}"></script>
+<script src="{{ url_for('static', filename='js/heatmap.js') }}"></script>
+
+<!-- Hides loading screen and fades in content after certain amount of time or after page load. jQuery implementation. -->
+<script>
+    jQuery(document).ready(function ($) {
+        $(window).load(function () {
+            setTimeout(function(){
+                $('#loading').fadeOut('slow', function () {});
+            }, 4000); // set the time here
+            setTimeout(function () {
+                $('#content').fadeIn('slow', function () {});
+                $('.header-image').fadeIn('slow', function () {});
+                $('.footer-image').fadeIn('slow', function () {});
+            }, 5000);
+        });
+    });
+</script>
+</html>

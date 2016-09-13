@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+
+    <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- google analytics script -->
+
+</head>
+<body>
+<div class="admin-container">
+    <div class="title">Edit Profile</div>
+        <div class="subtitle" style="margin-left: 3px;">
+            {% if current_user.is_authenticated %}
+                Hi {{ current_user.first_name }}! Edit your profile below.
+            {% endif %}
+            <br>
+            <a class="subtitle" href="/profile">back to profile</a>
+    </div>
+    <br>
+    <form action="" method="post" class="login">
+        <p><input class="post-input" placeholder="new username" type=text name="username" value="{{ user.username }}" required></p>
+        <p><input class="post-input" placeholder="first name" type=text name="firstname" value="{{ user.profile.first_name }}" required></p>
+        <p><input class="post-input" placeholder="last name" type=text name="lastname" value="{{ user.profile.last_name }}" required></p>
+        <p><input class="post-input" placeholder="email address" type=text name="email" value="{{ user.profile.email }}" required></p>
+        <div class="menu-container-horizontal">
+            <input id="input-submit" type=submit value="Save Changes">
+            <div class="menu-key" id="menu3">
+                <a href="/change_password" target="" class="portfolio-link">change password</a>
+            </div>
+            <div class="menu-key" id="menu1">
+                <a href="/delete_profile" target="" class="portfolio-link">delete profile</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

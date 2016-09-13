@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.post.title }}</title>
+
+    <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- google analytics script -->
+
+</head>
+<body>
+
+<div class="blog-post-container">
+    <div class="resume-title">{{ post.post.title }}</div>
+    <div class="subtitle">{{ post.post.subtitle }}</div>
+    <br>
+    <div class="tertiary-title">by {{ post.post.authors }}</div>
+    <div class="tertiary-title">{{ post.post.publish_date.split(' ')[0] }}</div>
+    <br>
+    <br>
+    <div class="blog-body">{{ post.post.body }}</div>
+    <br>
+    <br>
+    <br>
+    <!-- display delete and edit post functionality if logged in -->
+    {% if current_user.is_authenticated %}
+        <div class="menu-container-horizontal">
+            <div class="menu-key" id="menu3">
+                <a href="/edit_post" target="" class="portfolio-link">edit blog post</a>
+            </div>
+            <div class="menu-key" id="menu1">
+                <a href="/delete_post" target="" class="portfolio-link">delete blog post</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+
+</body>
+</html>

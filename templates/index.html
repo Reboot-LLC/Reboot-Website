@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reboot | Logic Made Beautiful</title>
+    <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox-thumbs.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fullPage.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">
+    <!-- json objects -->
+    <script src="{{ url_for('static', filename='data/display_github.json') }}"></script>
+    <!-- google analytics script -->
+</head>
+<body>
+    <div id="fullpage">
+        <div class="section" id="section0">
+            <div class="blur-bg"></div>
+            <div class="homescreen">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="declaration">
+                                <h1 class="logo wow fadeInUp"><img src="static/images/logo.png"> REBOOT</h1>
+                                <div class="spacing-15"></div>
+                                <h3 class="wow fadeInDown">Discover the beautiful side of logic.</h3>
+                            </div>   
+                        </div>       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section1">
+            <div class="container">
+                <div class="row text-center">
+                    <h2 class="title">What's Reboot?</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="container">
+                <div class="row text-center">
+                    <h2 class="title">Meet The Team</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <section class="card-container">
+                            <div class="card card-m" onclick="flipM()">
+                                <div class="front">
+                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
+                                    <div class="user"><img class="img-circle" src="static/images/mikey.jpg"></div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="name">Michael Thompson</h3>
+                                            <p class="profession">Front-End & UI/UX</p>
+                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Philadelphia, PA</h5>
+                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i>michael@reboot.com</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>                    
+                    <div class="col-md-6">
+                        <section class="card-container">
+                            <div class="card card-s" onclick="flipS()">
+                                <div class="front">
+                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
+                                    <div class="user"><img class="img-circle" src="static/images/sammy.png"></div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="name">Sammy Thomas</h3>
+                                            <p class="profession">Strategic Planning</p>
+                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Knoxville, TN</h5>
+                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i>sammy@reboot.com</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>                    
+                </div>
+                <div class="row">                 
+                    <div class="col-md-6">
+                        <section class="card-container">
+                            <div class="card card-t" onclick="flipT()">
+                                <div class="front">
+                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
+                                    <div class="user"><img class="img-circle" src="static/images/taylor.png"></div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="name">Taylor Stevens</h3>
+                                            <p class="profession">Back-End & UX</p>
+                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Pasadena, CA</h5>
+                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i>taylor@reboot.com</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>                    
+                    <div class="col-md-6">
+                        <section class="card-container">
+                            <div class="card card-v" onclick="flipV()">
+                                <div class="front">
+                                    <div class="cover"><img src="http://placehold.it/1000x215"></div>
+                                    <div class="user"><img class="img-circle" src="static/images/val.jpg"></div>
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="name">Valentino Constantinou</h3>
+                                            <p class="profession">Data Science & UI/UX</p>
+                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Chicago, IL</h5>
+                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i>valentino@reboot.com</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section3">
+            <div class="container">
+                <div class="row text-center">
+                    <h2 class="title">Our Blog</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="" id="blog">
+                            <div class="title"></div>
+                            <br>
+                            {% for post in posts %}
+                                {% if post.post.published == True %}
+                                    <div class="blog-title" style="margin-left: 3px;"><a href="/blog/{{ post.post.url }}">{{ post.post.title }}</a></div>
+                                    <div class="subtitle" style="margin-left: 3px;">{{ post.post.subtitle }}</div>
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- news reel with latest commits from github and/or some other information. -->
+                        <div class="news-feed">
+                            <p class="css-typing" id="css-typing-container"><a id="css-typing" href="https://www.github.com/vc1492a" target="_blank">see what I've been developing lately</a></p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section4">
+            <div class="container">
+                <div class="row text-center">
+                    <h2 class="title">Let's Talk</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- javascript -->
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fancybox-thumbs.js') }}"></script>
+<script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
+</html>

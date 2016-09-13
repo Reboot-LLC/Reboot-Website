@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+
+    <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- google analytics script -->
+
+</head>
+<body>
+<div class="error-container">
+    <div class="title">Login</div>
+    <br>
+    <br>
+    <form action="" method="post" class="login">
+        <p><input class="login-input" placeholder="username" type=text name="username" required></p>
+        <p><input class="login-input" placeholder="password" type=password name="password" required></p>
+        <input id="input-submit" type=submit value=Login>
+    </form>
+    <br>
+    <a href="/forgot_password">forgot password?</a>
+    <br>
+    <a href="/new_user">new user?</a>
+</div>
+</body>
+</html>
