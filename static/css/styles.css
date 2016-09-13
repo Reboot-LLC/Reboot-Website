@@ -222,7 +222,7 @@ a {
 }
 
 .cover-s {
-    background: url(../images/knoxville.png) no-repeat center;
+    background: url(../images/knoxville.jpg) no-repeat center;
     background-size: cover;
 }
 
@@ -255,6 +255,8 @@ a {
     background-color: transparent;
     box-shadow: none;
     padding: 10px 20px 20px;
+    overflow: auto;
+    max-height: 100%;
 }
 
 .card .content .main {
@@ -322,10 +324,16 @@ a {
 }
 
 .card .back {
+    text-align: justify;
+    text-justify: inter-word;
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
+}
+
+.card .skills {
+    text-align: center;
 }
 
 .card.flipped {
@@ -335,3 +343,82 @@ a {
     transform: rotateY(180deg);
 }
 
+/* Home Page - Contact Form */
+#contact {
+    padding: 10px 0;
+}
+
+.contact-text {
+    margin: 45px auto;
+}
+
+.inner.contact {
+    margin: 25px auto;
+}
+
+.form {
+    width: 100%;
+    padding: 15px;
+    background: #f8f8f8;
+    border: 1px solid rgba(0,0,0,0.075);
+    margin-bottom: 25px;
+    color: #727272 !important;
+    font-size: 13px;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+}
+
+.form:hover {
+    border: 1px solid #006691;
+}
+
+.form:focus {
+    color: #fff;
+    outline: none;
+    border: 1px solid #006691;
+}
+
+.textarea {
+    height: 200px;
+    max-height: 200px;
+    max-width: 100%;
+}
+
+.form-btn {
+    width: 180px;
+    display: block;
+    height: auto;
+    padding: 15px;
+    color: #fff;
+    background: #006691;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    margin: auto;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.form-btn:hover {
+    background: #111;
+    color: #fff;
+    border: none;
+}
+
+.form-btn:active {
+    opacity: .9;
+}
+
+center {
+    margin-top: 330px;
+}
+
+input {
+    position: relative;
+    z-index: 9999;
+}
