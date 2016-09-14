@@ -377,6 +377,9 @@ a {
         font-size: 25px;
         margin: 5px auto;
     }
+    .skills,.team-bio {
+        font-size: 20px
+    }
 }
 
 /* Home Page - Contact Form */
