@@ -326,6 +326,9 @@ a {
 .card .back {
     text-align: justify;
     text-justify: inter-word;
+    -webkit-box-shadow: inset 0px -12px 19px -7px rgba(0,0,0,0.09);
+    -moz-box-shadow: inset 0px -12px 19px -7px rgba(0,0,0,0.09);
+    box-shadow: inset 0px -12px 19px -7px rgba(0,0,0,0.09);
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
@@ -341,6 +344,39 @@ a {
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
+}
+
+/* Home Page - Mobile Team */
+.team-mobile {
+    display: none;
+}
+
+.mobile-slides {
+    margin: 0px 100px;
+}
+
+@media only screen and (max-device-width: 767px) {
+    .team-mobile {
+        display: block!important;
+    }
+    .team-desktop {
+        display: none!important; 
+    }
+    .card-container {
+        height: 450px;
+    }
+    .card .name {
+        font-size: 35px;
+    }
+    .card .profession {
+        margin-bottom:35px;
+        font-size: 30px;
+        margin-top: 5px;
+    }
+    .card h5 {
+        font-size: 25px;
+        margin: 5px auto;
+    }
 }
 
 /* Home Page - Contact Form */

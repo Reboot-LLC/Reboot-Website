@@ -71,17 +71,25 @@ html, body {
     -webkit-transform: translate3d(0,0,0);
     -ms-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
+    -webkit-transition: all 0.3s ease-out; /* Safari<=6 Android<=4.3 */
+    transition: all 0.3s ease-out;
 }
 .fp-controlArrow.fp-prev {
-    left: 15px;
+    left: 50px;
     width: 0;
     border-width: 38.5px 34px 38.5px 0;
-    border-color: transparent #fff transparent transparent;
+    border-color: transparent rgba(0,0,0,0.1) transparent transparent;
 }
 .fp-controlArrow.fp-next {
-    right: 15px;
+    right: 50px;
     border-width: 38.5px 0 38.5px 34px;
-    border-color: transparent transparent transparent #fff;
+    border-color: transparent transparent transparent rgba(0,0,0,0.1);
+}
+.fp-controlArrow.fp-prev:hover {
+    border-color: transparent rgba(0,0,0,0.15) transparent transparent;
+}
+.fp-controlArrow.fp-next:hover {
+    border-color: transparent transparent transparent rgba(0,0,0,0.15);
 }
 .fp-scrollable {
     overflow: scroll;
@@ -185,8 +193,7 @@ html, body {
     opacity: 0;
     width: 0;
 }
-#fp-nav ul li:hover .fp-tooltip,
-#fp-nav ul li a.active + .fp-tooltip {
+#fp-nav ul li:hover .fp-tooltip {
     -webkit-transition: opacity 0.2s ease-in;
     transition: opacity 0.2s ease-in;
     width: auto;
