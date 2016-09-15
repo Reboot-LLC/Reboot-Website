@@ -374,6 +374,38 @@ a {
     font-weight: bold;
 }
 
+.mobile-swipe {
+    position: absolute;
+    margin: 0px 150px;
+    left: 0;
+    right: 0;
+    bottom: 25%;
+}
+
+.swipe {
+    background: #FFF;
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 100px;
+    -webkit-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .25);
+    -moz-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .25);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .25);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.swipe img {
+    max-width: 95%;
+    opacity: 0.5;
+    margin: 0 auto;
+}
+
 @media only screen and (max-device-width: 767px) {
     .team-mobile {
         display: block!important;
