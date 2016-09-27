@@ -9,4 +9,3 @@ $(document).ready(function() {
 		scrollOverflow: false
 	});
 });
- new WOW().init();

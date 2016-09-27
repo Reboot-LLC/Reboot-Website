@@ -78,6 +78,10 @@ a {
     }
 }
 
+.justify-text {
+    text-align: justify!important;
+}
+
 .spacing-5 {
     padding: 5px;
 }
@@ -172,6 +176,239 @@ a {
     margin-bottom: 25px;
     line-height: 90%;
     font-weight: bold;
+}
+
+/* Home Page - About */
+.about-top {
+    padding: 0px 12.5%;
+}
+
+.about-top .fp-controlArrow {
+    display: block;
+}
+
+.about-top .fp-controlArrow.fp-next {
+   right:10%; 
+}
+
+.about-top .fp-controlArrow.fp-prev {
+    left:10%;
+}
+
+.browser, .browser * {
+  transition: width .3s ease;
+}
+
+.devices {
+    margin: 0 auto 20px;
+    width: 600px;
+    text-align: center;
+}
+
+.devices a {
+    margin: 0 20px;
+}
+
+.devices .mobile {
+    width: 40px;
+    height: 60px;
+    border: 2px solid #f5f5f5;
+    border-top-width: 5px;
+    border-bottom-width: 8px;
+    background: #b0b0b0;
+    display: inline-block;
+    border-radius: 3px;
+    position: relative;
+}
+
+.devices .mobile:hover {
+    background: #8f8f8f;
+}
+
+.devices .mobile:before {
+    content: '';
+    display: block;
+    background: #888;
+    width: 17px;
+    height: 1px;
+    border-radius: 2px;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    margin-left: -8px;
+}
+
+.devices .mobile:after {
+    content: '';
+    display: block;
+    background: #888;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.devices .tablet {
+    width: 100px;
+    height: 133px;
+    border: 2px solid #f5f5f5;
+    border-top-width: 5px;
+    border-bottom-width: 8px;
+    background: #b0b0b0;
+    display: inline-block;
+    border-radius: 3px;
+    position: relative;
+}
+
+.devices .tablet:hover {
+    background: #8f8f8f;
+}
+
+.devices .tablet:before {
+    content: '';
+    display: block;
+    background: #888;
+    width: 1px;
+    height: 1px;
+    border-radius: 2px;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+}
+
+.devices .tablet:after {
+    content: '';
+    display: block;
+    background: #888;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.devices .laptop {
+    width: 237px;
+    height: 150px;
+    border: 8px solid #f5f5f5;
+    background: #b0b0b0;
+    display: inline-block;
+    border-radius: 3px 3px 0 0;
+    position: relative;
+}
+
+.devices .laptop:hover {
+    background: #8f8f8f;
+}
+
+.devices .laptop:after {
+    content: " ";
+    background: #e8e8e8;
+    display: block;
+    width: 120%;
+    position: absolute;
+    bottom: -10px;
+    margin-left: -10%;
+    height: 10px;
+    border-radius: 0 0 5px 5px;
+}
+
+.browser {
+    position: relative;
+    margin: 20px auto;
+    width: 320px;
+    min-height: 640px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.browser.mobile {
+    width: 335px;
+}
+
+.browser.mobile .btn {
+    width: 20%;
+}
+
+.browser.mobile input[type="url"] {
+    width: 78%;
+}
+
+.browser.tablet {
+    width: 790px;
+}
+
+.browser.tablet .btn {
+    width: 14%;
+}
+
+.browser.tablet input[type="url"] {
+    width: 85%;
+}
+
+.browser.laptop {
+    width: 90%;
+}
+
+.browser.laptop .btn {
+    width: 9%;
+}
+
+.browser.laptop input[type="url"] {
+    width: 90%;
+}
+
+.browser .searchbar {
+    border-radius: 5px 5px 0 0;
+    background: #ddd;
+    height: 33px;
+    width: 100%;
+    padding: 5px;
+    position: relative;
+}
+
+.browser .searchbar .btn {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    border: none;
+    display: block;
+    text-align: center;
+    background: #3a99a7;
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.1);
+    padding: 3px 8px;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+    transition: background-color .3s ease;
+}
+
+.browser .searchbar .btn:hover {
+    background: #368f9c;
+}
+
+.browser .searchbar input[type="url"] {
+    height: 20px;
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
+    outline: none;
+    font-size: 9px;
+    color: #aaa;
+    display: inherit;
+}
+
+.portfolioSlider .fp-tableCell {
+    height:100%!important;
 }
 
 /* Home Page - Team Cards */
@@ -431,6 +668,155 @@ a {
     .skills,.team-bio {
         font-size: 20px
     }
+}
+
+/* Home Page - Portfolio Cards */
+.modal-title {
+    font-weight: bold;
+}
+
+.skillsList li {
+    list-style: none;
+    display: inline-block;
+    padding: 15px 25px;
+}
+
+.body-message {
+    padding:25px;
+}
+
+.modal-dialog.portfolioPopup {
+    top: 15%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    height: auto;
+    overflow: auto;
+}
+
+.modal-dialog.portfolioPopup .modal-content {
+    box-shadow: none;
+    border: none;
+    border-radius: 0px;
+}
+
+.websitedisplay {
+    width: 300px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    margin: 25px auto;
+}
+
+.websitedisplay:hover > .information {
+    margin-left: -159px;
+    opacity: 0;
+}
+
+.information {
+    display: inline-block;
+    width: 150px;
+    height: 250px;
+    -webkit-transition: all .3s linear;
+    position: relative;
+}
+
+.laptop {
+    display: inline-block;
+    width: 300px;
+    height: 250px;
+    position: relative;
+}
+
+.information h1 {
+    font-family: 'lato','segoe ui regular',arial;
+    font-weight: bolder;
+    font-size: 18px;
+    position: absolute;
+    top: 90px;
+    left: 20px;
+}
+
+.information h2 {
+    font-family: 'lato','segoe ui light',arial;
+    font-size: 16px;
+    position: absolute;
+    font-weight: 100;
+    top: 110px;
+    left: 20px;
+}
+
+.laptop img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 240px;
+    height: auto;
+    -webkit-transition: all .3s linear;
+}
+
+.view {
+    opacity: 0;
+    -webkit-transition: all .3s linear;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-transform: rotateY(540deg);
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    background-color: #1b1b1b;
+    border-radius: 100%;
+    font-weight: bolder;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+.websitedisplay:hover > .view {
+    -webkit-transform: rotateY(0deg);
+    position: absolute;
+    opacity: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 100%;
+    color: #f5f5f5;
+    text-align: center;
+    text-decoration: none;
+}
+
+.view:hover {
+    background-color: #006691;
+}
+
+.view p {
+    margin-top: -4px;
+}
+
+button.view:focus {
+    outline:none!important;
+}
+
+.modal-slider img {
+    max-width: 350px;
+    max-height: 100%
 }
 
 /* Home Page - Contact Form */

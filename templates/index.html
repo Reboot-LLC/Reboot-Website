@@ -12,11 +12,12 @@
     <link href="{{ url_for('static', filename='css/jquery.fancybox-thumbs.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/jquery.fullPage.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/lightbox.min.css') }}" type="text/css" rel="stylesheet">
     <!-- json objects -->
     <script src="{{ url_for('static', filename='data/display_github.json') }}"></script>
     <!-- google analytics script -->
 </head>
-<div class="loading-gif"><img src="static/images/loading.gif"></div>
+<div class="loading-gif"><img src="https://s3.amazonaws.com/rebootimgs/loading.gif"></div>
 <body>
     <div id="fullpage">
         <div class="section" id="section0">
@@ -36,163 +37,187 @@
             </div>
         </div>
         <div class="section" id="section1">
-            <div class="container">
-                <div class="row text-center">
-                    <h2 class="title">What's Reboot?</h2>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-
+            <div class="about-top">
+                <div class="slide active" id="slide1" data-anchor="creatives">
+                    <div class="row text-center">
+                        <div class="browser mobile">
+                            <div class="searchbar">
+                                <form>
+                                    <input type="url" class="url" value="http://www.reboot.com" />
+                                    <button class="btn">Browse</button>
+                                </form>
+                            </div>
+                            <div class="iframe">
+                                <div class="col-md-4">about</div>
+                                <div class="col-md-4">reboot</div>
+                                <div class="col-md-4">here</div>
+                            </div>
+                        </div>
+                        <div class="spacing-15"></div>
+                        <div class="devices">
+                            <a href="#" class="mobile"></a>
+                            <a href="#" class="tablet"></a>
+                            <a href="#" class="laptop"></a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-
+                </div>
+                <div class="slide" id="slide2" data-anchor="problem-solving">
+                    <div class="row text-center">
+                        <h2 class="title">What's Reboot?</h2>
                     </div>
                 </div>
+                <div class="slide" id="slide3" data-anchor="strategy">
+                    <div class="row text-center">
+                        <h2 class="title">What's Reboot?</h2>
+                    </div>
+                </div> 
             </div>
         </div>
-        <div class="section" id="section2">
-            <div class="container team-desktop">
-                <div class="row text-center">
-                    <h2 class="title">Meet The Team</h2>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <section class="card-container">
-                            <div class="card card-v" onclick="flipV()">
-                                <div class="front">
-                                    <div class="cover cover-v"></div>
-                                    <div class="team-member"><img class="img-circle" src="static/images/val.jpg"></div>
-                                    <div class="content">
-                                        <div class="main">
-                                            <h3 class="name">Valentino Constantinou</h3>
-                                            <p class="profession">Data Science & UI/UX</p>
-                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Chicago, IL</h5>
-                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> valentino@reboot.com</h5>
+        <div class="section fp-table" id="section2">
+            <div class="team-desktop fp-tableCell">
+                <div class="container">
+                    <div class="row text-center">
+                        <h2 class="title">Meet The Team</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <section class="card-container">
+                                <div class="card card-v" onclick="flipV()">
+                                    <div class="front">
+                                        <div class="cover cover-v"></div>
+                                        <div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/val.jpg"></div>
+                                        <div class="content">
+                                            <div class="main">
+                                                <h3 class="name">Valentino Constantinou</h3>
+                                                <p class="profession">Data Science & UI/UX</p>
+                                                <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Chicago, IL</h5>
+                                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> valentino@reboot.com</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="back">
+                                        <div class="content">
+                                            <p class="profession">About</p>
+                                            <div class="spacing-5"></div>
+                                            <p>Valentino Constantinou is a student at Northwestern University's Master of Science in Analytics program. He is a graduate of the University of Tennessee’s Haslam College of Business, where he studied Economics. In his spare time, Valentino enjoys reading, spending time outdoors, and working on extracurricular projects such as analysis of medical data for the Chicago Marathon. He has accepted a 2016 summer internship position at the Jet Propulsion Laboratory, a joint facility between NASA and Caltech in Pasadena, California, as an IT Data Scientist. Valentino will be graduating from the MSiA program in December 2016.</p>
+                                            <div class="spacing-10"></div>
+                                            <p class="profession">Skills</p>
+                                            <div class="spacing-5"></div>
+                                            <p class="skills">Machine Learning</p>
+                                            <p class="skills">Deep Learning</p>
+                                            <p class="skills">Data Visualization</p>
+                                            <p class="skills">Data Mining</p>
+                                            <p class="skills">Text Analytics</p>
+                                            <p class="skills">Predictive Analytics</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="back">
-                                    <div class="content">
-                                        <p class="profession">About</p>
-                                        <div class="spacing-5"></div>
-                                        <p>Valentino Constantinou is a student at Northwestern University's Master of Science in Analytics program. He is a graduate of the University of Tennessee’s Haslam College of Business, where he studied Economics. In his spare time, Valentino enjoys reading, spending time outdoors, and working on extracurricular projects such as analysis of medical data for the Chicago Marathon. He has accepted a 2016 summer internship position at the Jet Propulsion Laboratory, a joint facility between NASA and Caltech in Pasadena, California, as an IT Data Scientist. Valentino will be graduating from the MSiA program in December 2016.</p>
-                                        <div class="spacing-10"></div>
-                                        <p class="profession">Skills</p>
-                                        <div class="spacing-5"></div>
-                                        <p class="skills">Machine Learning</p>
-                                        <p class="skills">Deep Learning</p>
-                                        <p class="skills">Data Visualization</p>
-                                        <p class="skills">Data Mining</p>
-                                        <p class="skills">Text Analytics</p>
-                                        <p class="skills">Predictive Analytics</p>
+                            </section>
+                        </div>                  
+                        <div class="col-md-6 col-sm-6">
+                            <section class="card-container">
+                                <div class="card card-s" onclick="flipS()">
+                                    <div class="front">
+                                        <div class="cover cover-s"></div>
+                                        <div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/sammy.png"></div>
+                                        <div class="content">
+                                            <div class="main">
+                                                <h3 class="name">Sammy Thomas</h3>
+                                                <p class="profession">Strategic Planning</p>
+                                                <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Knoxville, TN</h5>
+                                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> sammy@reboot.com</h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>                  
-                    <div class="col-md-6 col-sm-6">
-                        <section class="card-container">
-                            <div class="card card-s" onclick="flipS()">
-                                <div class="front">
-                                    <div class="cover cover-s"></div>
-                                    <div class="team-member"><img class="img-circle" src="static/images/sammy.png"></div>
-                                    <div class="content">
-                                        <div class="main">
-                                            <h3 class="name">Sammy Thomas</h3>
-                                            <p class="profession">Strategic Planning</p>
-                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Knoxville, TN</h5>
-                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> sammy@reboot.com</h5>
+                                    <div class="back">
+                                        <div class="content">
+                                            <p class="profession">About</p>
+                                            <div class="spacing-5"></div>
+                                            <p>Sammmmmmmyyyyyyyyyyyyy</p>
+                                            <div class="spacing-10"></div>
+                                            <p class="profession">Skills</p>
+                                            <div class="spacing-5"></div>
+                                            <p class="skills">Making</p>
+                                            <p class="skills">Shit</p>
+                                            <p class="skills">Work</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="back">
-                                    <div class="content">
-                                        <p class="profession">About</p>
-                                        <div class="spacing-5"></div>
-                                        <p>Sammmmmmmyyyyyyyyyyyyy</p>
-                                        <div class="spacing-10"></div>
-                                        <p class="profession">Skills</p>
-                                        <div class="spacing-5"></div>
-                                        <p class="skills">Making</p>
-                                        <p class="skills">Shit</p>
-                                        <p class="skills">Work</p>
+                            </section>
+                        </div>                    
+                    </div>
+                    <div class="row">                 
+                        <div class="col-md-6 col-sm-6">
+                            <section class="card-container">
+                                <div class="card card-t" onclick="flipT()">
+                                    <div class="front">
+                                        <div class="cover cover-t"></div>
+                                        <div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/taylor.png"></div>
+                                        <div class="content">
+                                            <div class="main">
+                                                <h3 class="name">Taylor Stevens</h3>
+                                                <p class="profession">Back-End & UX</p>
+                                                <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Pasadena, CA</h5>
+                                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> taylor@reboot.com</h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>                    
-                </div>
-                <div class="row">                 
-                    <div class="col-md-6 col-sm-6">
-                        <section class="card-container">
-                            <div class="card card-t" onclick="flipT()">
-                                <div class="front">
-                                    <div class="cover cover-t"></div>
-                                    <div class="team-member"><img class="img-circle" src="static/images/taylor.png"></div>
-                                    <div class="content">
-                                        <div class="main">
-                                            <h3 class="name">Taylor Stevens</h3>
-                                            <p class="profession">Back-End & UX</p>
-                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Pasadena, CA</h5>
-                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> taylor@reboot.com</h5>
+                                    <div class="back">
+                                        <div class="content">
+                                            <p class="profession">About</p>
+                                            <div class="spacing-5"></div>
+                                            <p>Taylor is a currently a PhD student in Biochemistry and Molecular Biophysics at Caltech. Taylor received his Bachelor's degree in Biochemistry, Cellular and Molecular Biology at the University of Tennessee. As the result of being immersed in computational and experimental biochemistry research, Taylor is equipped with a strong set of problem solving skills. Taylor's strong attention to detail paired with his training in scientific programming led him to become strongly involved in web development while still a student at the University of Tennessee.</p>
+                                            <div class="spacing-10"></div>
+                                            <p class="profession">Skills</p>
+                                            <div class="spacing-5"></div>
+                                            <p class="skills">JavaScript</p>
+                                            <p class="skills">Python</p>
+                                            <p class="skills">PHP</p>
+                                            <p class="skills">Golang</p>
+                                            <p class="skills">System Administration Tasks</p>
+                                            <p class="skills">Front-End Web Applications</p>
+                                            <p class="skills">Numerical Algorithms</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="back">
-                                    <div class="content">
-                                        <p class="profession">About</p>
-                                        <div class="spacing-5"></div>
-                                        <p>Taylor is a currently a PhD student in Biochemistry and Molecular Biophysics at Caltech. Taylor received his Bachelor's degree in Biochemistry, Cellular and Molecular Biology at the University of Tennessee. As the result of being immersed in computational and experimental biochemistry research, Taylor is equipped with a strong set of problem solving skills. Taylor's strong attention to detail paired with his training in scientific programming led him to become strongly involved in web development while still a student at the University of Tennessee.</p>
-                                        <div class="spacing-10"></div>
-                                        <p class="profession">Skills</p>
-                                        <div class="spacing-5"></div>
-                                        <p class="skills">JavaScript</p>
-                                        <p class="skills">Python</p>
-                                        <p class="skills">PHP</p>
-                                        <p class="skills">Golang</p>
-                                        <p class="skills">System Administration Tasks</p>
-                                        <p class="skills">Front-End Web Applications</p>
-                                        <p class="skills">Numerical Algorithms</p>
+                            </section>
+                        </div>                    
+                        <div class="col-md-6 col-sm-6">
+                            <section class="card-container">
+                                <div class="card card-m" onclick="flipM()">
+                                    <div class="front">
+                                        <div class="cover cover-m"></div>
+                                        <div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/mikey.jpg"></div>
+                                        <div class="content">
+                                            <div class="main">
+                                                <h3 class="name">Michael Thompson</h3>
+                                                <p class="profession">Front-End & UI/UX</p>
+                                                <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Philadelphia, PA</h5>
+                                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> michael@reboot.com</h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>                    
-                    <div class="col-md-6 col-sm-6">
-                        <section class="card-container">
-                            <div class="card card-m" onclick="flipM()">
-                                <div class="front">
-                                    <div class="cover cover-m"></div>
-                                    <div class="team-member"><img class="img-circle" src="static/images/mikey.jpg"></div>
-                                    <div class="content">
-                                        <div class="main">
-                                            <h3 class="name">Michael Thompson</h3>
-                                            <p class="profession">Front-End & UI/UX</p>
-                                            <h5><i class="fa fa-map-marker fa-fw text-muted"></i>Philadelphia, PA</h5>
-                                            <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> michael@reboot.com</h5>
+                                    <div class="back">
+                                        <div class="content">
+                                            <p class="profession">About</p>
+                                            <div class="spacing-5"></div>
+                                            <p>Michael Thompson is an alum of UNC-Chapel Hill and Duke University, where he double majored in History and Journalism, with a minor in PPE (Politics, Philosophy, Economics). In his second year of college, Michael took interest in programming - specifically web development - and spent the next few semesters finding time between classes to travel the country on a tour of Hackathons (24-hour programming competitions). By his third year, Michael co-founded a full-stack development firm with friends. Currently, Michael has ownership in several tech-related companies, in addition to a working partnership with a number of others. When he's not in front of a screen, Michael enjoys music production and triathlons.
+                                            </p>
+                                            <div class="spacing-10"></div>
+                                            <p class="profession">Skills</p>
+                                            <div class="spacing-5"></div>
+                                            <p class="skills">HTML/HTML5</p>
+                                            <p class="skills">CSS/CSS3</p>
+                                            <p class="skills">AngularJs</p>
+                                            <p class="skills">Adobe Photoshop/Illustrator</p>
+                                            <p class="skills">Graphic Design</p>
+                                            <p class="skills">Copywriting</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="back">
-                                    <div class="content">
-                                        <p class="profession">About</p>
-                                        <div class="spacing-5"></div>
-                                        <p>Michael Thompson is an alum of UNC-Chapel Hill and Duke University, where he double majored in History and Journalism, with a minor in PPE (Politics, Philosophy, Economics). In his second year of college, Michael took interest in programming - specifically web development - and spent the next few semesters finding time between classes to travel the country on a tour of Hackathons (24-hour programming competitions). By his third year, Michael co-founded a full-stack development firm with friends. Currently, Michael has ownership in several tech-related companies, in addition to a working partnership with a number of others. When he's not in front of a screen, Michael enjoys music production and triathlons.
-                                        </p>
-                                        <div class="spacing-10"></div>
-                                        <p class="profession">Skills</p>
-                                        <div class="spacing-5"></div>
-                                        <p class="skills">HTML/HTML5</p>
-                                        <p class="skills">CSS/CSS3</p>
-                                        <p class="skills">AngularJs</p>
-                                        <p class="skills">Adobe Photoshop/Illustrator</p>
-                                        <p class="skills">Graphic Design</p>
-                                        <p class="skills">Copywriting</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>  
+                            </section>
+                        </div>  
+                    </div>
                 </div>
             </div>
             <div class="team-mobile">
@@ -338,19 +363,162 @@
                     </div>
                 </div>
                 <div class="mobile-swipe">
-                    <div class="swipe"><img src="static/images/swipe.png"></div>
+                    <div class="swipe"><img src="https://s3.amazonaws.com/rebootimgs/swipe.png"></div>
                 </div>
             </div>
         </div>
-        <div class="section" id="section3">
-            <div class="container">
+        <div class="section fp-table" id="section3">
+            <div class="container fp-tableCell">
                 <div class="row text-center">
                     <h2 class="title">Stuff We've Done</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-4 text-center">
+                        <div class="websitedisplay">
+                            <div class="information">
+                                <h1>KETI OptiEd</h1>
+                                <h2>Web App</h2>
+                            </div>
+                            <div class="laptop">
+                                <img src="../static/pre-s3/keti.jpg">
+                            </div>
+                            <button class="view" data-target=".portfolioModalOne" data-toggle="modal" type="button"><p>+</p></button>
+                        </div>
+                        <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalOne" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lg portfolioPopup">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-text">
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                        <h3 class="modal-title">KETI OptiEd</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="body-message">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="modal-slider">
+                                                        <div class="about-top portfolioSlider">
+                                                            <div class="slide active" id="slide1a" data-anchor="KETI/laptop">
+                                                                <a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>
+                                                            </div>
+                                                            <div class="slide" id="slide2a" data-anchor="KETI/tablet">
+                                                                <a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>
+                                                            </div>
+                                                            <div class="slide" id="slide3a" data-anchor="KETI/mobile">
+                                                                <a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="spacing-15"></div>
+                                            <div class="row">
+                                                <div class="col-md-6 justify-text">
+                                                    <h4><b>Concept</b></h4>
+                                                    <div class="spacing-10"></div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>
+                                                    <div class="spacing-15"></div>
+                                                </div>
+                                                <div class="col-md-6 justify-text">
+                                                    <h4><b>Materials</b></h4>
+                                                    <div class="spacing-10"></div>
+                                                    <ul class="skillsList">
+                                                        <li>AngularJs</li>
+                                                        <li>Python</li>
+                                                        <li>Django</li>
+                                                        <li>PostgreSQL</li>
+                                                        <li>HTML</li>
+                                                        <li>CSS</li>
+                                                    </ul>
+                                                    <div class="spacing-15"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="websitedisplay">
+                            <div class="information">
+                                <h1>Project Two</h1>
+                                <h2>Web App</h2>
+                            </div>
+                            <div class="laptop">
+                                <img src="http://dizin.x10.bz/images/smilesofboisecp.png">
+                            </div>
+                            <button class="view" data-target=".portfolioModalTwo" data-toggle="modal" type="button"><p>+</p></button>
+                        </div>
+                        <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalTwo" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lg portfolioPopup">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="gridSystemModalLabel">title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="body-message">
+                                            <div class="row">
+                                                <div class="col-md-6 justify-text">
+                                                    <h4>The Purpose</h4>
+                                                    <div class="spacing-10"></div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>
+                                                </div>
+                                                <div class="col-md-6 justify-text">
 
-                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="websitedisplay">
+                            <div class="information">
+                                <h1>Project Three</h1>
+                                <h2>Web App</h2>
+                            </div>
+                            <div class="laptop">
+                                <img src="http://dizin.x10.bz/images/smilesofboisecp.png">
+                            </div>
+                            <button class="view" data-target=".portfolioModalTreeFiddy" data-toggle="modal" type="button"><p>+</p></button>
+                        </div>
+                        <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalTreeFiddy" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lg portfolioPopup">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="gridSystemModalLabel">title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="body-message">
+                                            <div class="row">
+                                                <div class="col-md-6 justify-text">
+                                                    <h4>The Purpose</h4>
+                                                    <div class="spacing-10"></div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>
+                                                </div>
+                                                <div class="col-md-6 justify-text">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -417,9 +585,8 @@
 <script src="{{ url_for('static', filename='js/preload.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.fancybox.js') }}"></script>
-<script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery.fancybox-thumbs.js') }}"></script>
 <script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>
 <script src="{{ url_for('static', filename='js/card.js') }}"></script>
+<script src="{{ url_for('static', filename='js/responsive-devices.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
 </html>
