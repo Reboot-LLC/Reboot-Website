@@ -576,18 +576,16 @@ def report_communication():
         as_user='@communication_kpi'
     )
 
-report_communication()
 
-
-# functions to fire periodically, like Slack bots #
-scheduler = BackgroundScheduler()
-scheduler.start()
-scheduler.add_job(
-    func=report_communication,
-    trigger=IntervalTrigger(days=1)
-)
-# shut down the scheduler when exiting the app
-atexit.register(lambda: scheduler.shutdown())
+# cron scheduler for functions that fire periodically, like Slack bots #
+# scheduler = BackgroundScheduler()
+# scheduler.start()
+# scheduler.add_job(
+#     func=report_communication,
+#     trigger=IntervalTrigger(days=1)
+# )
+# # shut down the scheduler when exiting the app
+# atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
