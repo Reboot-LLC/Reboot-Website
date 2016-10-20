@@ -578,14 +578,14 @@ def report_communication():
 
 
 # cron scheduler for functions that fire periodically, like Slack bots #
-# scheduler = BackgroundScheduler()
-# scheduler.start()
-# scheduler.add_job(
-#     func=report_communication,
-#     trigger=IntervalTrigger(days=1)
-# )
-# # shut down the scheduler when exiting the app
-# atexit.register(lambda: scheduler.shutdown())
+scheduler = BackgroundScheduler()
+scheduler.start()
+scheduler.add_job(
+    func=report_communication,
+    trigger=IntervalTrigger(days=1)
+)
+# shut down the scheduler when exiting the app
+atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
