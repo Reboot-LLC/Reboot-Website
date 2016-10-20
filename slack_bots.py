@@ -108,8 +108,8 @@ def define_color_sentiment(amount):
 
 # download nltk resources. only needed once so need to think of how to put this into production on Heroku
 # import nltk
-
 # nltk.download()
+
 
 # sentiment bot #
 def report_sentiment():
@@ -146,11 +146,18 @@ def report_sentiment():
         for text in response_last720['messages']:
             messages_720.append(text['text'])
         # perform sentiment analysis by channel
+        '''
+        This classifier uses the VADER (Valence Aware Dictionary and sEntiment Reasoner) sentiment analysis tool
+        as published by Hutto and Gilbert in 2014. It is specifically attuned to sentiments expressed in social media,
+        making it ideal for use in Slack. It is freely available for use under the MIT license.
+        ------
+        Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social
+        Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+        '''
         from nltk.sentiment import SentimentIntensityAnalyzer
         import twython # needed for nltk but not specified as import?
         sid = SentimentIntensityAnalyzer()
-
-        # kind of ashamed of this next bit: start block of shame #
+        # create a bunch of lists for storage
         negative_scores_24 = []
         positive_scores_24 = []
         neutral_scores_24 = []
@@ -196,7 +203,6 @@ def report_sentiment():
                     neutral_scores_720.append(ss[k])
                 elif k == 'pos':
                     positive_scores_720.append(ss[k])
-        # end block of shame #
         channel_summary[channel_id] = {
             'name': channel_name,
             'id': channel_id,
@@ -252,7 +258,6 @@ def report_sentiment():
         'compound_score_720': sum(cs_720) / len(cs_720),
         'channels': all_channels
     }
-    print(slack_summary)
     # post to slack
     sentiment_kpi.chat.post_message(
         '#kpi',
