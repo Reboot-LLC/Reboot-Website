@@ -893,6 +893,9 @@ def report_ticket(id, resolve):
         )
 
 
+# report_communication()
+# report_sentiment()
+
 # cron scheduler for functions that fire periodically, like Slack bots #
 scheduler = BackgroundScheduler()
 scheduler.start()

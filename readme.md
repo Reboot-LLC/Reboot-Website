@@ -27,8 +27,10 @@ is below:
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
+            * *Need to build in support for private channels.*
         * Sentiment: *Reports organizational positivity*.
-            * *Alpha*
+            * *Alpha, in testing.*
+            * *Need to build in support for private channels.*
         * Further Ideas:
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
