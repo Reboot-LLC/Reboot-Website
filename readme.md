@@ -41,6 +41,7 @@ is below:
                 * *Requires Google Analaytics API*
     * Support Bot
         * *Sends a message on #support if a ticket has been issued or resolved.*
+        * *Currently needs completion of urgency evaluation from issue category.*
     * Reboot Internal *Let's come up with a great name!*
         * *A means of resolving support tickets and other tasks that interface with our internal database.*
         * Further Ideas:
@@ -55,10 +56,18 @@ is below:
             * Add Images
                 * *Requires Amazon S3 integration.*
             * Fancy Text Formatting
+            * Save for Later
+            * Autosave
     * Edit Post
     * Delete Post
-6. Further Ideas for Core Functionality
-    * Prediction API (Pandas + SciPy + Matplotlib)
+6. Databases
+    * MongoDB
+    * Further Ideas:
+        * SQL
+            * *Requires creation of database classes for core db functions.*
+        * Elastic Search
+7. Further Ideas for Core Functionality
+    * Prediction API (Pandas + SciPy + *some nice viz library*)
     
             
 
