@@ -17,6 +17,7 @@ Non-native python dependencies:
 
 Some features to add: 
 * login roles (i.e. admin, normal user, team leader, etc.)
+    * required for expanded support ticket functionality (i.e. tie a ticket to a specific user)
 * refresh token on password refresh
 * set up Mailgun account for emailing password resets and such
 * nice front end features like "this username is taken" without submit

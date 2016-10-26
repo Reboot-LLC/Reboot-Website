@@ -43,11 +43,15 @@ if mongo_url:
     db = pymongo.MongoClient(mongo_url)[db_name]
     users = db['users']
     blog_posts = db['blog_posts']
+    support_tickets = db['support_tickets']
+    # add kpi collection
 else:
     conn = pymongo.MongoClient()
     db = conn['db']
     users = db['users']
     blog_posts = db['blog_posts']
+    support_tickets = db['support_tickets']
+    # add kpi collection
 
 # for local testing #
 # test = blog_posts.find()
@@ -57,6 +61,30 @@ else:
 # test = users.find()
 # for i in test:
 #     print(i)
+
+
+# support ticket functionality #
+# submit ticket
+def submit_ticket(product_name, contact_name, email, phone, description, urgent):
+    support_ticket = {
+        'id': int(support_tickets.count()) + 1,
+        'product_name': product_name,
+        'contact_name': contact_name,
+        'email': email,
+        'phone': phone,
+        'description': description,
+        'status': False,
+        'urgent': urgent
+    }
+    if support_tickets.find({'id': int(support_tickets.count()) + 1}).count() == 0:
+        support_tickets.insert_one(support_ticket)
+        return True
+    else:
+        return False
+
+
+# confirm ticket through email
+# resolve_ticket
 
 
 # login and logout functionality #
@@ -306,6 +334,22 @@ def home():
 
 @app.route('/support', methods=['GET', 'POST'])
 def support():
+    if request.method == 'POST':
+        product_name = request.form['product_name']
+        contact_name = request.form['contact_name']
+        email = request.form['email']
+        phone = request.form['phone']
+        description = request.form['description']
+        # define some of the check box options for description as urgent
+        # if its one of those, then mark as urgent
+        # if blah then urgent = True, else urgency is False
+        if submit_ticket(product_name, contact_name, email, phone, description, True) is True:
+            print('email support ticket')
+            report_ticket(product_name, contact_name, email, phone, description, True)
+            # confirm_ticker() # sends out an email confirmation
+        else:
+            return abort(401)
+
     return render_template('support.html')
 
 
@@ -498,7 +542,7 @@ def internal_error(e):
 
 
 # slack functions and bots #
-# color definition for communication
+# color definition for communication kpi
 def define_color_communication(amount):
     if amount >= 45:
         return "#23CF5F"
@@ -508,7 +552,7 @@ def define_color_communication(amount):
         return "#F64744"
 
 
-# color definition for communication
+# color definition for sentiment kpi
 def define_color_sentiment(amount):
     if amount >= 0.10:
         return "#23CF5F"
@@ -516,6 +560,14 @@ def define_color_sentiment(amount):
         return "#FFBF00"
     else:
         return "#F64744"
+
+
+# color definition for support bot
+def define_color_support_ticket(urgency):
+    if urgency is True:
+        return "#F64744"
+    else:
+        return "#FFBF00"
 
 
 # communication bot #
@@ -765,6 +817,38 @@ def report_sentiment():
         ],
         as_user='@sentiment_kpi'
     )
+
+
+# support bot; add functionality to respond and resolve ticket, see how many tickets are outstanding, etc.
+def report_ticket(product_name, contact_name, email, phone, description, urgency):
+    # token for bot
+    support_helper = Slacker('xoxb-96286074081-1F7tLojdfdO7DCDiDoHmCLHp')
+    # post to slack
+    support_helper.chat.post_message(
+        '#support',
+        'A support ticket has been issued.',
+        attachments=[
+            {
+                'title': contact_name + ' at ' + product_name,
+                'text': description,
+                "fields": [
+                    {
+                        "title": "Email",
+                        "value": email,
+                        "short": True
+                    },
+                    {
+                        "title": "Phone",
+                        "value": phone,
+                        "short": True
+                    }
+                ],
+                'color': define_color_support_ticket(urgency)
+            },
+        ],
+        as_user='@support_bot'
+    )
+
 
 
 # cron scheduler for functions that fire periodically, like Slack bots #
