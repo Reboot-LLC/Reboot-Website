@@ -304,6 +304,11 @@ def home():
     return render_template('index.html', posts=posts)
 
 
+@app.route('/support', methods=['GET', 'POST'])
+def support():
+    return render_template('support.html')
+
+
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
@@ -631,6 +636,8 @@ def report_sentiment():
         Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
         '''
         from nltk.sentiment import SentimentIntensityAnalyzer
+        from nltk import data as nltk_data
+        nltk_data.path.append('static/data/nltk/')
         # import twython # needed for nltk but not specified as import?
         sid = SentimentIntensityAnalyzer()
         # create a bunch of lists for storage, probably a cleaner way to do this
