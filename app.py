@@ -379,11 +379,6 @@ def admin():
     return render_template('admin.html', posts=posts)
 
 
-@app.route('/portfolio/datadrivenmarathon')
-def datadrivenmarathon():
-    return render_template('portfolio/datadrivenmarathon.html')
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -840,7 +835,7 @@ def report_sentiment():
     )
 
 
-# support bot; add functionality to respond and resolve ticket, see how many tickets are outstanding, etc.
+# support bot
 def report_ticket(id, resolve):
     # token for bot
     support_helper = Slacker('xoxb-96286074081-1F7tLojdfdO7DCDiDoHmCLHp')
@@ -878,7 +873,7 @@ def report_ticket(id, resolve):
             'Support ticket #' + str(id) + ' has been resolved!',
             attachments=[
                 {
-                    'title': ticket['contact_name'] + ': ' + random.choice(forms_of_gratitude),
+                    'title': ticket['contact_name'] + ': "' + random.choice(forms_of_gratitude) + '"',
                     "fields": [
                         {
                             "title": "Email",
@@ -896,9 +891,6 @@ def report_ticket(id, resolve):
             ],
             as_user='@support_bot'
         )
-
-
-resolve_ticket(10)
 
 
 # cron scheduler for functions that fire periodically, like Slack bots #
