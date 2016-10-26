@@ -18,16 +18,17 @@ is below:
             * *Required for expanded support ticket functionality (i.e. tie a ticket to a specific user)*
 2. Emails with MailGun
     * Send Email 
-        * *Non-operational; Requires MalGun config.*
+        * *Non-operational; Requires MailGun config.*
 3. Support
     * Create Ticket
     * Resolve Ticket
     * Further Ideas:
-        * Modify Ticket *Is this needed?*
+        * Modify Ticket: *Is this needed?*
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
         * Sentiment: *Reports organizational positivity*.
+            * *Alpha*
         * Further Ideas:
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
@@ -42,7 +43,7 @@ is below:
     * Support Bot
         * *Sends a message on #support if a ticket has been issued or resolved.*
         * *Currently needs completion of urgency evaluation from issue category.*
-    * Reboot Internal *Let's come up with a great name!*
+    * Reboot Internal: *Let's come up with a great name!*
         * *A means of resolving support tickets and other tasks that interface with our internal database.*
         * Further Ideas:
             * Resolve a support ticket using a command + ticket #.
