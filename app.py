@@ -66,15 +66,18 @@ else:
 # support ticket functionality #
 # submit ticket
 def submit_ticket(product_name, contact_name, email, phone, description, urgent):
+    session['support_ticket_id'] = int(support_tickets.count()) + 1
     support_ticket = {
         'id': int(support_tickets.count()) + 1,
+        'issue_date': str(datetime.utcnow()),
         'product_name': product_name,
         'contact_name': contact_name,
         'email': email,
         'phone': phone,
         'description': description,
         'status': False,
-        'urgent': urgent
+        'urgent': urgent,
+        'resolve_date': None
     }
     if support_tickets.find({'id': int(support_tickets.count()) + 1}).count() == 0:
         support_tickets.insert_one(support_ticket)
@@ -83,8 +86,24 @@ def submit_ticket(product_name, contact_name, email, phone, description, urgent)
         return False
 
 
-# confirm ticket through email
-# resolve_ticket
+# CONFIRM TICKET THROUGH EMAIL TO USER
+
+# resolve an open ticket
+def resolve_ticket(id):
+    resolve_date = str(datetime.utcnow())
+    if support_tickets.find_one({'id': id}) is not None:
+        support_tickets.update_one(
+            {
+                'id': id
+            },
+            {
+                '$set': {
+                    'status': True,
+                    'resolve_date': resolve_date
+                }
+            }
+        )
+        report_ticket(id, True)
 
 
 # login and logout functionality #
@@ -343,9 +362,9 @@ def support():
         # define some of the check box options for description as urgent
         # if its one of those, then mark as urgent
         # if blah then urgent = True, else urgency is False
-        if submit_ticket(product_name, contact_name, email, phone, description, True) is True:
+        if submit_ticket(product_name, contact_name, email, phone, description, False) is True:
             print('email support ticket')
-            report_ticket(product_name, contact_name, email, phone, description, True)
+            report_ticket(session['support_ticket_id'], False)
             # confirm_ticker() # sends out an email confirmation
         else:
             return abort(401)
@@ -566,8 +585,10 @@ def define_color_sentiment(amount):
 def define_color_support_ticket(urgency):
     if urgency is True:
         return "#F64744"
-    else:
+    elif urgency is False:
         return "#FFBF00"
+    else:
+        return "#C0C0BF"
 
 
 # communication bot #
@@ -820,35 +841,64 @@ def report_sentiment():
 
 
 # support bot; add functionality to respond and resolve ticket, see how many tickets are outstanding, etc.
-def report_ticket(product_name, contact_name, email, phone, description, urgency):
+def report_ticket(id, resolve):
     # token for bot
     support_helper = Slacker('xoxb-96286074081-1F7tLojdfdO7DCDiDoHmCLHp')
+    ticket = support_tickets.find_one({'id': id})
     # post to slack
-    support_helper.chat.post_message(
-        '#support',
-        'A support ticket has been issued.',
-        attachments=[
-            {
-                'title': contact_name + ' at ' + product_name,
-                'text': description,
-                "fields": [
-                    {
-                        "title": "Email",
-                        "value": email,
-                        "short": True
-                    },
-                    {
-                        "title": "Phone",
-                        "value": phone,
-                        "short": True
-                    }
-                ],
-                'color': define_color_support_ticket(urgency)
-            },
-        ],
-        as_user='@support_bot'
-    )
+    if resolve is False:
+        support_helper.chat.post_message(
+            '#support',
+            'Support ticket #' + str(id) + ' has been issued.',
+            attachments=[
+                {
+                    'title': ticket['contact_name'] + ' at ' + ticket['product_name'],
+                    'text': ticket['description'],
+                    "fields": [
+                        {
+                            "title": "Email",
+                            "value": ticket['email'],
+                            "short": True
+                        },
+                        {
+                            "title": "Phone",
+                            "value": ticket['phone'],
+                            "short": True
+                        }
+                    ],
+                    'color': define_color_support_ticket(ticket['urgent'])
+                },
+            ],
+            as_user='@support_bot'
+        )
+    elif resolve is True:
+        forms_of_gratitude = ['Thanks, guys!', 'Cool support system', 'That was fast!']
+        support_helper.chat.post_message(
+            '#support',
+            'Support ticket #' + str(id) + ' has been resolved!',
+            attachments=[
+                {
+                    'title': ticket['contact_name'] + ': ' + random.choice(forms_of_gratitude),
+                    "fields": [
+                        {
+                            "title": "Email",
+                            "value": ticket['email'],
+                            "short": True
+                        },
+                        {
+                            "title": "Phone",
+                            "value": ticket['phone'],
+                            "short": True
+                        }
+                    ],
+                    'color': "#23CF5F"
+                },
+            ],
+            as_user='@support_bot'
+        )
 
+
+resolve_ticket(10)
 
 
 # cron scheduler for functions that fire periodically, like Slack bots #
