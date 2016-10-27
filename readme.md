@@ -27,8 +27,10 @@ is below:
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
+            * *Needs refactoring*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
+            * *Needs refactoring*
         * Further Ideas:
             * Optimization: *Current scripts could have cleaner code.*
             * KPI Database: *Capture KPI metrics for later analysis.*

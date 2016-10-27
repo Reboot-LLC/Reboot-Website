@@ -733,6 +733,8 @@ def report_sentiment():
         ------
         Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social
         Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+        ------
+        NLTK on Heroku: https://stackoverflow.com/questions/13965823/resource-corpora-wordnet-not-found-on-heroku/14869451#14869451
         '''
         from nltk.sentiment import SentimentIntensityAnalyzer
         from nltk import data as nltk_data
@@ -859,6 +861,8 @@ def report_sentiment():
         ------
         Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social
         Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+        ------
+        NLTK on Heroku: https://stackoverflow.com/questions/13965823/resource-corpora-wordnet-not-found-on-heroku/14869451#14869451
         '''
         from nltk.sentiment import SentimentIntensityAnalyzer
         from nltk import data as nltk_data
