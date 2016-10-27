@@ -667,7 +667,7 @@ def report_communication():
     }
     # post to slack
     communication_kpi.chat.post_message(
-        '#kpi',
+        '#test',
         'How often are we communicating?',
         attachments=[
             {
@@ -972,7 +972,7 @@ def report_sentiment():
     }
     # post to slack
     sentiment_kpi.chat.post_message(
-        '#kpi',
+        '#test',
         'How are we feeling?',
         attachments=[
             {
@@ -1061,12 +1061,14 @@ report_sentiment()
 scheduler = BackgroundScheduler()
 scheduler.start()
 scheduler.add_job(
-    func=report_communication,
-    trigger=IntervalTrigger(days=1)
+    report_communication,
+    'interval',
+    minutes=1
 )
 scheduler.add_job(
-    func=report_sentiment,
-    trigger=IntervalTrigger(days=1)
+    report_sentiment,
+    'interval',
+    minutes=1
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
