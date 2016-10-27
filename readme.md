@@ -27,11 +27,10 @@ is below:
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
-            * *Need to build in support for private channels.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
-            * *Need to build in support for private channels.*
         * Further Ideas:
+            * Optimization: *Current scripts could have cleaner code.*
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
             * Bank Account Balance
@@ -41,7 +40,7 @@ is below:
             * Support
                 * *Report on support ticket frequency, avg response time, etc.*
             * Site Traffic
-                * *Requires Google Analaytics API*
+                * *Requires Google Analytics API*
     * Support Bot
         * *Sends a message on #support if a ticket has been issued or resolved.*
         * *Currently needs completion of urgency evaluation from issue category.*
@@ -65,6 +64,7 @@ is below:
     * Delete Post
 6. Databases
     * MongoDB
+        * *Create collection to store KPI information.*
     * Further Ideas:
         * SQL
             * *Requires creation of database classes for core db functions.*
