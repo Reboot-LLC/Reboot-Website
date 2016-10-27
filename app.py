@@ -1054,27 +1054,24 @@ def report_ticket(id, resolve):
         )
 
 
-# report_communication()
-report_sentiment()
-
 # cron scheduler for functions that fire periodically, like Slack bots #
 scheduler = BackgroundScheduler()
-scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=1
+    days=1
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=1
+    days=1
 )
+scheduler.start()
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
-# if __name__ == '__main__':
-#     port = int(os.environ.get('PORT', 5000))
-#     app.run(host='0.0.0.0', port=port, threaded=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, threaded=True)
