@@ -1008,13 +1008,13 @@ def report_ticket(id, resolve):
     # post to slack
     if resolve is False:
         support_helper.chat.post_message(
-            '#support',
+            '#test',
             'Support ticket #' + str(id) + ' has been issued.',
             attachments=[
                 {
                     'title': ticket['contact_name'] + ' at ' + ticket['product_name'],
                     'text': ticket['description'],
-                    "fields": [
+                    'fields': [
                         {
                             "title": "Email",
                             "value": ticket['email'],
@@ -1026,6 +1026,19 @@ def report_ticket(id, resolve):
                             "short": True
                         }
                     ],
+                    # 'actions': {
+                    #     "name": "resolve",
+                    #     "text": "Resolve Ticket",
+                    #     "style": "danger",
+                    #     "type": "button",
+                    #     "value": "resolve",
+                    #     "confirm": {
+                    #         "title": "Are you sure?",
+                    #         "text": "Was the client's issue solved successfully?",
+                    #         "ok_text": "Yes",
+                    #         "dismiss_text": "No"
+                    #     }
+                    # },
                     'color': define_color_support_ticket(ticket['urgent'])
                 },
             ],
@@ -1034,12 +1047,12 @@ def report_ticket(id, resolve):
     elif resolve is True:
         forms_of_gratitude = ['Thanks, guys!', 'Cool support system', 'That was fast!']
         support_helper.chat.post_message(
-            '#support',
+            '#test',
             'Support ticket #' + str(id) + ' has been resolved!',
             attachments=[
                 {
                     'title': ticket['contact_name'] + ': "' + random.choice(forms_of_gratitude) + '"',
-                    "fields": [
+                    'fields': [
                         {
                             "title": "Email",
                             "value": ticket['email'],
@@ -1068,7 +1081,7 @@ scheduler.add_job(
 scheduler.add_job(
     report_sentiment,
     'interval',
-    horus=12
+    hours=12
 )
 scheduler.start()
 # shut down the scheduler when exiting the app
