@@ -1063,12 +1063,12 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(
     report_communication,
     'interval',
-    days=1
+    minutes=5
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    days=1
+    minutes=5
 )
 scheduler.start()
 # shut down the scheduler when exiting the app

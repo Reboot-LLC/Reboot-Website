@@ -12,7 +12,7 @@ is below:
     * Remove Profile
     * Change Password
     * Reset Password
-        * *Non-operational; Requires MalGun config.*
+        * *Non-operational; Requires MailGun config.*
     * Further Ideas:
         * User Roles (i.e. admin, client, team leader, etc.)
             * *Required for expanded support ticket functionality (i.e. tie a ticket to a specific user)*
@@ -24,15 +24,15 @@ is below:
     * Resolve Ticket
     * Further Ideas:
         * Modify Ticket: *Is this needed?*
+        * Database: *Record all support tickets in db for later analysis.*
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
-            * *Needs refactoring*
+            * *Needs refactoring.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
-            * *Needs refactoring*
+            * *Needs refactoring.*
         * Further Ideas:
-            * Optimization: *Current scripts could have cleaner code.*
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
             * Bank Account Balance

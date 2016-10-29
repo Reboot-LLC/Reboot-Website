@@ -1,2 +1,6 @@
 *.DS_Store
 *.xml
+*.crt
+*.csr
+*.key
+xero_oauth.txt
