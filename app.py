@@ -5,7 +5,6 @@ from logging import FileHandler, Formatter
 from datetime import timedelta, datetime
 from urllib.parse import urlsplit
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
 from slacker import Slacker
 import pymongo
 import os
@@ -104,6 +103,9 @@ def resolve_ticket(id):
             }
         )
         report_ticket(id, True)
+        return True
+    else:
+        return False
 
 
 # login and logout functionality #
@@ -363,13 +365,25 @@ def support():
         # if its one of those, then mark as urgent
         # if blah then urgent = True, else urgency is False
         if submit_ticket(product_name, contact_name, email, phone, description, False) is True:
-            print('email support ticket')
             report_ticket(session['support_ticket_id'], False)
-            # confirm_ticker() # sends out an email confirmation
+            # confirm_ticket() # sends out an email confirmation
         else:
             return abort(401)
 
     return render_template('support.html')
+
+
+@app.route('/support/resolve', methods=['GET', 'POST'])
+@login_required
+def support_resolve():
+    if request.method == 'POST':
+        ticket_id = int(request.form['ticket_id'])
+        if resolve_ticket(ticket_id) is True:
+            # confirm_ticket() # sends out an email confirmation
+            return render_template('resolve.html', message='Success! The support ticket has been resolved.')
+        else:
+            return render_template('resolve.html', message='Ticket ID not found or invalid ID format.')
+    return render_template('resolve.html')
 
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -528,7 +542,7 @@ def edit_post():
 
 
 @app.route('/blog/<url>', methods=['GET', 'POST'])
-def blog_route(url):
+def blog_route():
     url = request.path.split('/')[-1]
     post = blog_posts.find_one({'post.url': url})
     session['blog_url'] = url
@@ -1009,7 +1023,7 @@ def report_ticket(id, resolve):
     if resolve is False:
         support_helper.chat.post_message(
             '#test',
-            'Support ticket #' + str(id) + ' has been issued.',
+            'Support ticket #' + str(id) + ' has been issued. To resolve, visit /support/resolve.',
             attachments=[
                 {
                     'title': ticket['contact_name'] + ' at ' + ticket['product_name'],
@@ -1026,26 +1040,13 @@ def report_ticket(id, resolve):
                             "short": True
                         }
                     ],
-                    # 'actions': {
-                    #     "name": "resolve",
-                    #     "text": "Resolve Ticket",
-                    #     "style": "danger",
-                    #     "type": "button",
-                    #     "value": "resolve",
-                    #     "confirm": {
-                    #         "title": "Are you sure?",
-                    #         "text": "Was the client's issue solved successfully?",
-                    #         "ok_text": "Yes",
-                    #         "dismiss_text": "No"
-                    #     }
-                    # },
                     'color': define_color_support_ticket(ticket['urgent'])
                 },
             ],
             as_user='@support_bot'
         )
     elif resolve is True:
-        forms_of_gratitude = ['Thanks, guys!', 'Cool support system', 'That was fast!']
+        forms_of_gratitude = ['Thanks, guys!', 'Cool support system.', 'That was fast!']
         support_helper.chat.post_message(
             '#test',
             'Support ticket #' + str(id) + ' has been resolved!',

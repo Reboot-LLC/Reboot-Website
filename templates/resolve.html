@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resolve Ticket</title>
+    <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox-thumbs.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fullPage.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/lightbox.min.css') }}" type="text/css" rel="stylesheet">
+    <!-- google analytics script -->
+</head>
+<body>
+<div class="admin-container">
+    <div class="title">Resolve a Support Ticket</div>
+        <div class="subtitle" style="margin-left: 3px;">
+            {% if current_user.is_authenticated %}
+                <form action="" method="post" class="">
+                    <p><input class="post-input" placeholder="ticket ID" type=text name="ticket_id" value="" required></p>
+                    <p><input id="input-submit" type=submit value="Resolve Support Ticket"></p>
+                </form>
+            {% endif %}
+            <br>
+        </div>
+    <br>
+</div>
+</body>
+<!-- javascript -->
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
+<script src="{{ url_for('static', filename='js/responsive-devices.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
+</html>

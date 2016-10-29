@@ -19,12 +19,12 @@ is below:
 2. Emails with MailGun
     * Send Email 
         * *Non-operational; Requires MailGun config.*
-3. Support
+3. Support: *Creates, resolves, and records support tickets.*
     * Create Ticket
     * Resolve Ticket
+        * *Resolve tickets through /support/resolve.*
     * Further Ideas:
         * Modify Ticket: *Is this needed?*
-        * Database: *Record all support tickets in db for later analysis.*
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
