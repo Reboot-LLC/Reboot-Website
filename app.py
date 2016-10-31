@@ -43,6 +43,7 @@ if mongo_url:
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
+    website_leads = db['website_leads']
     # add kpi collection
 else:
     conn = pymongo.MongoClient()
@@ -50,6 +51,7 @@ else:
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
+    website_leads = db['website_leads']
     # add kpi collection
 
 # for local testing #
@@ -341,6 +343,21 @@ def modify_post(title, subtitle, authors, body, username, url, url_new):
         )
 
 
+# other site functionality #
+# web leads from main page
+def record_web_lead(name, email, subject, message):
+    key = hashlib.sha224(str(time.time()).encode('UTF-8')).hexdigest()
+    date_posted = str(datetime.utcnow())
+    post = {
+        'date_posted': date_posted,
+        'name': name,
+        'email': email,
+        'subject': subject,
+        'message': message
+    }
+    website_leads.insert_one({'key': key, 'post': post})
+
+
 ### SAVE FOR LATER ###
 
 ### AUTOSAVE ###
@@ -350,6 +367,21 @@ def modify_post(title, subtitle, authors, body, username, url, url_new):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     posts = blog_posts.find()
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        if record_web_lead(name, email, subject, message) is True:
+            render_template('index.html',
+                            message='Message sent successfully! We will be in touch as soon as possible.',
+                            post=posts)
+            # send an email to reboot, and to us as confirmation
+            # use send email functionality
+        else:
+            render_template('index.html',
+                            message='Whoops! Please try again later.',
+                            post=posts)
     return render_template('index.html', posts=posts)
 
 
@@ -1077,12 +1109,12 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(
     report_communication,
     'interval',
-    hours=12
+    minutes=720
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    hours=12
+    minutes=720
 )
 scheduler.start()
 # shut down the scheduler when exiting the app

@@ -29,6 +29,7 @@ is below:
     * KPIs
         * Communication: *Reports communication frequency.*
             * *Needs refactoring.*
+            * *Needs tokenization and normalization.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
             * *Needs refactoring.*
