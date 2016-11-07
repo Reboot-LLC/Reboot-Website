@@ -65,6 +65,7 @@ is below:
             * Autosave
     * Edit Post
     * Delete Post
+    * Search for posts with a fuzzy search 
 6. Databases
     * MongoDB
         * *Create collection to store KPI information.*
