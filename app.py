@@ -44,6 +44,7 @@ if mongo_url:
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
     website_leads = db['website_leads']
+    search = db['search']
     # add kpi collection
 else:
     conn = pymongo.MongoClient()
@@ -52,6 +53,7 @@ else:
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
     website_leads = db['website_leads']
+    search = db['search']
     # add kpi collection
 
 # for local testing #
@@ -62,6 +64,96 @@ else:
 # test = users.find()
 # for i in test:
 #     print(i)
+
+
+# fuzzy search functionality #
+# create ngrams
+def make_ngrams(word, min_size, prefix_only=False):
+    """
+    basestring          word: word to split into ngrams
+           int      min_size: minimum size of ngrams
+          bool   prefix_only: Only return ngrams from start of word
+    """
+    length = len(word)
+    size_range = range(min_size, max(length, min_size) + 1)
+    if prefix_only:
+        return [
+            word[0:size]
+            for size in size_range
+        ]
+    return list(set(
+        word[i:i + size]
+        for size in size_range
+        for i in range(0, max(0, length - size) + 1)
+    ))
+
+
+# this function fires every time someone creates or modifies a blog post.
+# n-grams are created for the title of the blog post, and usec in fuzzy search
+def index_for_search(title, subtitle, authors, body, external_link, external_link_name, username, url, url_new):
+    date_edited = str(datetime.utcnow())
+    search.update(
+        {
+            'post.url': url
+        },
+        {
+            '$set': {
+                # note that for now we are only indexing off the title
+                'post.title': title,
+                'post.subtitle': subtitle,
+                'post.authors': authors,
+                'post.body': body,
+                'post.external_link': external_link,
+                'post.external_link_name': external_link_name,
+                'post.user': username,
+                'post.last_edit_date': date_edited,
+                'post.url': url_new,
+                'post.ngrams': make_ngrams(title, min_size=2),
+                "post.prefix_ngrams": u' '.join(
+                    make_ngrams(title, min_size=2, prefix_only=True)
+                )
+            }
+        },
+        upsert=True
+    )
+
+
+# index the collection for searching
+def index_collection():
+    search.create_index(
+        [
+            ('post.ngrams', 'text'),
+            ("post.prefix_ngrams", "text")
+        ],
+        name='search_blog_ngrams',
+        weights={
+            # these weights adjust how much you value the match of each search attribute
+            'post.ngrams': 100,
+            "post.prefix_ngrams": 200,
+        }
+    )
+
+
+# search the collection and return the results sorted from best match to least match
+def search_collection(query):
+    search_result = []
+    result = search.find(
+        {
+            '$text': {
+                '$search': query
+            }
+        },
+        {
+            'post.title': True,
+            'post.url': True,
+            '$score': {
+                '$meta': "textScore"
+            }
+        }
+    ).sort("score", pymongo.DESCENDING)
+    for doc in result:
+        search_result.append(doc)
+    return search_result
 
 
 # support ticket functionality #
@@ -385,6 +477,17 @@ def home():
     return render_template('index.html', posts=posts)
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def search_page():
+    if request.method == 'POST':
+        query = request.form['query']
+        ngrams = make_ngrams(query, min_size=2)
+        results = search_collection(str(ngrams))
+        return render_template('search.html', results=results)
+    else:
+        return render_template('search.html', results='')
+
+
 @app.route('/support', methods=['GET', 'POST'])
 def support():
     if request.method == 'POST':
@@ -540,6 +643,8 @@ def create_post():
         user = current_user.get_id()
         url = request.form['url']
         publish_post(title, subtitle, authors, body, user, url, True)
+        index_for_search(title, subtitle, authors, body, user, '', '', url, url)
+        index_collection()
         return redirect('/profile')
     else:
         return render_template('create_post.html')
@@ -568,6 +673,8 @@ def edit_post():
         body = request.form['body']
         url_new = request.form['url']
         modify_post(title, subtitle, authors, body, user, url, url_new)
+        index_for_search(title, subtitle, authors, body, user, '', '', url, url_new)
+        index_collection()
         return redirect('/profile')
     else:
         return render_template('edit_post.html', post=post)

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+
+    <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fancybox-thumbs.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.fullPage.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/lightbox.min.css') }}" type="text/css" rel="stylesheet">
+    <!-- google analytics script -->
+</head>
+<body>
+<div class="admin-container" style="overflow-y: scroll;">
+    <div class="title">Search</div>
+    <div class="subtitle" style="margin-left: 3px;">
+        Try searching for a blog post.
+    </div>
+    <br>
+    <div class="error"></div>
+    <form action="" method="post" class="login">
+        <p><input class="post-input" placeholder="search..." type=text name="query" value="" required></p>
+        <div class="menu-container-horizontal">
+            <input id="input-submit" type=submit value="Search">
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% for result in results %}
+        <div class="subtitle" style="margin-left: 3px;"><a href="blog/{{ result.post.url }}">{{ result.post.title }}</a></div>
+    {% endfor %}
+    <br>
+</div>
+</body>
+<!-- javascript -->
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
+<script src="{{ url_for('static', filename='js/responsive-devices.js') }}"></script>
+<script src="{{ url_for('static', filename='js/puzzle.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
+</html>
