@@ -18,23 +18,21 @@
     <!-- google analytics script -->
 </head>
 <body>
-<div class="admin-container" style="overflow-y: scroll;">
-    <div class="title">Search</div>
-    <div class="subtitle" style="margin-left: 3px;">
-        Try searching for a blog post.
-    </div>
+<div class="tertiary-page-container" style="overflow-y: scroll;">
+    <div class="tertiary-title">search</div>
+    <!--<div class="subtitle" style="margin-left: 3px;">-->
+        <!--Try searching for a blog post!-->
+    <!--</div>-->
     <br>
-    <div class="error"></div>
     <form action="" method="post" class="login">
-        <p><input class="post-input" placeholder="search..." type=text name="query" value="" required></p>
+        <p><input class="post-input search-input" placeholder="search here..." type=text name="query" value="" required></p>
+        <br>
         <div class="menu-container-horizontal">
-            <input id="input-submit" type=submit value="Search">
+            <input id="input-submit" class="form-btn semibold" type=submit value="Go, Go, Go!">
         </div>
     </form>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div class="error"></div>
+    <!-- Not sure if the search results should go here or not honestly -->
     {% for result in results %}
         <div class="subtitle" style="margin-left: 3px;"><a href="blog/{{ result.post.url }}">{{ result.post.title }}</a></div>
     {% endfor %}
@@ -49,9 +47,6 @@
 <script src="{{ url_for('static', filename='js/preload.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>
-<script src="{{ url_for('static', filename='js/card.js') }}"></script>
 <script src="{{ url_for('static', filename='js/responsive-devices.js') }}"></script>
-<script src="{{ url_for('static', filename='js/puzzle.js') }}"></script>
 <script src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>
 </html>

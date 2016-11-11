@@ -773,7 +773,6 @@ def report_communication():
         }
         # store in single dict
         all_channels[channel_name] = channel_summary[channel_id]
-
     # get the group ids (private channels) for querying
     group_ids = []
     groups = communication_kpi.groups.list().body['groups']
@@ -1216,12 +1215,12 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=720
+    minutes=360
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=720
+    minutes=360
 )
 scheduler.start()
 # shut down the scheduler when exiting the app
