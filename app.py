@@ -1217,11 +1217,11 @@ scheduler.add_job(
     'interval',
     minutes=360
 )
-scheduler.add_job(
-    report_sentiment,
-    'interval',
-    minutes=360
-)
+# scheduler.add_job(
+#     report_sentiment,
+#     'interval',
+#     minutes=360
+# )
 scheduler.start()
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
