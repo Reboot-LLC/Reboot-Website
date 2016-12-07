@@ -813,7 +813,7 @@ def report_communication():
     }
     # post to slack
     communication_kpi.chat.post_message(
-        '#test',
+        '#kpi',
         'How often are we communicating?',
         attachments=[
             {
@@ -1075,7 +1075,7 @@ def report_sentiment():
     }
     # post to slack
     sentiment_kpi.chat.post_message(
-        '#test',
+        '#kpi',
         'How are we feeling?',
         attachments=[
             {
@@ -1163,12 +1163,12 @@ scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=30
+    minutes=360
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=30
+    minutes=360
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())

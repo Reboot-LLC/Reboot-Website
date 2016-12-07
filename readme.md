@@ -41,7 +41,7 @@ is below:
             * Support
                 * *Report on support ticket frequency, avg response time, etc.*
             * Site Traffic
-                * *Requires Google Analytics API*
+                * *Requires Heap Analytics API*
     * Support Bot
         * *Sends a message on #support if a ticket has been issued or resolved.*
         * *Currently needs completion of urgency evaluation from issue category.*
