@@ -752,66 +752,60 @@ def report_communication():
     channels = communication_kpi.channels.list().body['channels']
     for channel in channels:
         channel_ids.append(channel['id'])
-    # get the information needed from all channels
-    all_channels = dict()
-    for channel_id in channel_ids:
-        channel_summary = dict()
-        channel_name = communication_kpi.channels.info(channel_id).body['channel']['name']
-        # last 24 hours
-        response_last24 = communication_kpi.channels.history(channel_id, oldest=d24, count=1000).body
-        # last 7 days
-        response_last168 = communication_kpi.channels.history(channel_id, oldest=d168, count=1000).body
-        # last 30 days
-        response_last720 = communication_kpi.channels.history(channel_id, oldest=d720, count=1000).body
-        # assemble
-        channel_summary[channel_id] = {
-            'name': channel_name,
-            'id': channel_id,
-            'num_messages_d24': len(response_last24['messages']),
-            'num_messages_d168': len(response_last168['messages']),
-            'num_messages_d720': len(response_last720['messages'])
-        }
-        # store in single dict
-        all_channels[channel_name] = channel_summary[channel_id]
     # get the group ids (private channels) for querying
     group_ids = []
     groups = communication_kpi.groups.list().body['groups']
     for group in groups:
         group_ids.append(group['id'])
+    # get the information needed from all channels
+    all_channels = dict()
     # get the information needed from all groups (private channels)
     all_groups = dict()
-    for group_id in group_ids:
+    for channel_id, group_id in zip(channel_ids, group_ids):
+        channel_summary = dict()
         group_summary = dict()
+        channel_name = communication_kpi.channels.info(channel_id).body['channel']['name']
         group_name = communication_kpi.groups.info(group_id).body['group']['name']
         # last 24 hours
-        response_last24 = communication_kpi.groups.history(group_id, oldest=d24, count=1000).body
+        response_last24_c = communication_kpi.channels.history(channel_id, oldest=d24, count=1000).body
+        response_last24_g = communication_kpi.groups.history(group_id, oldest=d24, count=1000).body
         # last 7 days
-        response_last168 = communication_kpi.groups.history(group_id, oldest=d168, count=1000).body
+        response_last168_c = communication_kpi.channels.history(channel_id, oldest=d168, count=1000).body
+        response_last168_g = communication_kpi.groups.history(group_id, oldest=d168, count=1000).body
         # last 30 days
-        response_last720 = communication_kpi.groups.history(group_id, oldest=d720, count=1000).body
+        response_last720_c = communication_kpi.channels.history(channel_id, oldest=d720, count=1000).body
+        response_last720_g = communication_kpi.groups.history(group_id, oldest=d720, count=1000).body
         # assemble
+        channel_summary[channel_id] = {
+            'name': channel_name,
+            'id': channel_id,
+            'num_messages_d24': len(response_last24_c['messages']),
+            'num_messages_d168': len(response_last168_c['messages']),
+            'num_messages_d720': len(response_last720_c['messages'])
+        }
         group_summary[group_id] = {
             'name': group_name,
             'id': group_id,
-            'num_messages_d24': len(response_last24),
-            'num_messages_d168': len(response_last168),
-            'num_messages_d720': len(response_last720),
+            'num_messages_d24': len(response_last24_g['messages']),
+            'num_messages_d168': len(response_last168_g['messages']),
+            'num_messages_d720': len(response_last720_g['messages']),
         }
-        # store in a signle dict
+        # store in single dict
+        all_channels[channel_name] = channel_summary[channel_id]
         all_groups[group_name] = group_summary[group_id]
     # summarize slack activity
     num_24 = []
     num_168 = []
     num_720 = []
     slack_summary = dict()
-    for channel in all_channels:
+    for channel, group in zip(all_channels, all_groups):
         num_24.append(all_channels[channel]['num_messages_d24'])
-        num_168.append(all_channels[channel]['num_messages_d168'])
-        num_720.append(all_channels[channel]['num_messages_d720'])
-    for group in all_groups:
         num_24.append(all_groups[group]['num_messages_d24'])
+        num_168.append(all_channels[channel]['num_messages_d168'])
         num_168.append(all_groups[group]['num_messages_d168'])
+        num_720.append(all_channels[channel]['num_messages_d720'])
         num_720.append(all_groups[group]['num_messages_d720'])
+
     slack_summary['rolling_avg'] = {
         'avg_num_messages_d24': sum(num_24),
         'avg_num_messages_d168': (sum(num_168) / 7),
@@ -841,6 +835,9 @@ def report_communication():
         ],
         as_user='@communication_kpi'
     )
+
+
+report_communication()
 
 
 # sentiment bot #
@@ -1228,6 +1225,6 @@ atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, threaded=True)
+# if __name__ == '__main__':
+#     port = int(os.environ.get('PORT', 5000))
+#     app.run(host='0.0.0.0', port=port, threaded=True)

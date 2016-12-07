@@ -28,11 +28,10 @@ is below:
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
-            * *Needs refactoring.*
-            * *Needs tokenization and normalization.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
             * *Needs refactoring.*
+            * *Needs tokenization and normalization.*
         * Further Ideas:
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
@@ -75,6 +74,8 @@ is below:
         * Elastic Search
 7. Further Ideas for Core Functionality
     * Prediction API (Pandas + SciPy + *some nice viz library*)
+    * UpWork API (grab and store freelancer/project data, other things)
+    * Xero API (for accounting and transparency)
     
             
 
