@@ -30,8 +30,7 @@ is below:
         * Communication: *Reports communication frequency.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
-            * *Needs refactoring.*
-            * *Needs tokenization and normalization.*
+            * *Compare sentiment classifiers*
         * Further Ideas:
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
