@@ -911,7 +911,7 @@ def report_sentiment():
         '''
         from nltk.sentiment import SentimentIntensityAnalyzer
         from nltk import data as nltk_data
-        nltk_data.path.append('static/data/nltk/')
+        nltk_data.path.append('static/data/nltk')
         # import twython # needed for nltk but not specified as import?
         sid = SentimentIntensityAnalyzer()
         # create a bunch of lists for storage, probably a cleaner way to do this
@@ -1163,12 +1163,12 @@ scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=360
+    minutes=30
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=360
+    minutes=30
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
