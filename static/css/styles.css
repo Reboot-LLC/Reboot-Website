@@ -1134,7 +1134,8 @@ square {
 }
 
 .view p {
-    margin-top: -4px;
+    margin-top: -9px;
+    font-size: 50px;
 }
 
 button.view:focus {
