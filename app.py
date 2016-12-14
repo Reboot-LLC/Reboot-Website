@@ -43,6 +43,8 @@ if mongo_url:
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
+    website_leads = db['website_leads']
+    search = db['search']
     # add kpi collection
 else:
     conn = pymongo.MongoClient()
@@ -50,6 +52,8 @@ else:
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
+    website_leads = db['website_leads']
+    search = db['search']
     # add kpi collection
 
 # for local testing #
@@ -60,6 +64,96 @@ else:
 # test = users.find()
 # for i in test:
 #     print(i)
+
+
+# fuzzy search functionality #
+# create ngrams
+def make_ngrams(word, min_size, prefix_only=False):
+    """
+    basestring          word: word to split into ngrams
+           int      min_size: minimum size of ngrams
+          bool   prefix_only: Only return ngrams from start of word
+    """
+    length = len(word)
+    size_range = range(min_size, max(length, min_size) + 1)
+    if prefix_only:
+        return [
+            word[0:size]
+            for size in size_range
+        ]
+    return list(set(
+        word[i:i + size]
+        for size in size_range
+        for i in range(0, max(0, length - size) + 1)
+    ))
+
+
+# this function fires every time someone creates or modifies a blog post.
+# n-grams are created for the title of the blog post, and usec in fuzzy search
+def index_for_search(title, subtitle, authors, body, external_link, external_link_name, username, url, url_new):
+    date_edited = str(datetime.utcnow())
+    search.update(
+        {
+            'post.url': url
+        },
+        {
+            '$set': {
+                # note that for now we are only indexing off the title
+                'post.title': title,
+                'post.subtitle': subtitle,
+                'post.authors': authors,
+                'post.body': body,
+                'post.external_link': external_link,
+                'post.external_link_name': external_link_name,
+                'post.user': username,
+                'post.last_edit_date': date_edited,
+                'post.url': url_new,
+                'post.ngrams': make_ngrams(title, min_size=2),
+                "post.prefix_ngrams": u' '.join(
+                    make_ngrams(title, min_size=2, prefix_only=True)
+                )
+            }
+        },
+        upsert=True
+    )
+
+
+# index the collection for searching
+def index_collection():
+    search.create_index(
+        [
+            ('post.ngrams', 'text'),
+            ("post.prefix_ngrams", "text")
+        ],
+        name='search_blog_ngrams',
+        weights={
+            # these weights adjust how much you value the match of each search attribute
+            'post.ngrams': 100,
+            "post.prefix_ngrams": 200,
+        }
+    )
+
+
+# search the collection and return the results sorted from best match to least match
+def search_collection(query):
+    search_result = []
+    result = search.find(
+        {
+            '$text': {
+                '$search': query
+            }
+        },
+        {
+            'post.title': True,
+            'post.url': True,
+            '$score': {
+                '$meta': "textScore"
+            }
+        }
+    ).sort("score", pymongo.DESCENDING)
+    for doc in result:
+        search_result.append(doc)
+    return search_result
 
 
 # support ticket functionality #
@@ -341,6 +435,21 @@ def modify_post(title, subtitle, authors, body, username, url, url_new):
         )
 
 
+# other site functionality #
+# web leads from main page
+def record_web_lead(name, email, subject, message):
+    key = hashlib.sha224(str(time.time()).encode('UTF-8')).hexdigest()
+    date_posted = str(datetime.utcnow())
+    post = {
+        'date_posted': date_posted,
+        'name': name,
+        'email': email,
+        'subject': subject,
+        'message': message
+    }
+    website_leads.insert_one({'key': key, 'post': post})
+
+
 ### SAVE FOR LATER ###
 
 ### AUTOSAVE ###
@@ -350,7 +459,33 @@ def modify_post(title, subtitle, authors, body, username, url, url_new):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     posts = blog_posts.find()
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        if record_web_lead(name, email, subject, message) is True:
+            render_template('index.html',
+                            message='Message sent successfully! We will be in touch as soon as possible.',
+                            post=posts)
+            # send an email to reboot, and to us as confirmation
+            # use send email functionality
+        else:
+            render_template('index.html',
+                            message='Whoops! Please try again later.',
+                            post=posts)
     return render_template('index.html', posts=posts)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search_page():
+    if request.method == 'POST':
+        query = request.form['query']
+        ngrams = make_ngrams(query, min_size=2)
+        results = search_collection(str(ngrams))
+        return render_template('search.html', results=results)
+    else:
+        return render_template('search.html', results='')
 
 
 @app.route('/support', methods=['GET', 'POST'])
@@ -508,6 +643,8 @@ def create_post():
         user = current_user.get_id()
         url = request.form['url']
         publish_post(title, subtitle, authors, body, user, url, True)
+        index_for_search(title, subtitle, authors, body, user, '', '', url, url)
+        index_collection()
         return redirect('/profile')
     else:
         return render_template('create_post.html')
@@ -536,6 +673,8 @@ def edit_post():
         body = request.form['body']
         url_new = request.form['url']
         modify_post(title, subtitle, authors, body, user, url, url_new)
+        index_for_search(title, subtitle, authors, body, user, '', '', url, url_new)
+        index_collection()
         return redirect('/profile')
     else:
         return render_template('edit_post.html', post=post)
@@ -613,67 +752,60 @@ def report_communication():
     channels = communication_kpi.channels.list().body['channels']
     for channel in channels:
         channel_ids.append(channel['id'])
-    # get the information needed from all channels
-    all_channels = dict()
-    for channel_id in channel_ids:
-        channel_summary = dict()
-        channel_name = communication_kpi.channels.info(channel_id).body['channel']['name']
-        # last 24 hours
-        response_last24 = communication_kpi.channels.history(channel_id, oldest=d24, count=1000).body
-        # last 7 days
-        response_last168 = communication_kpi.channels.history(channel_id, oldest=d168, count=1000).body
-        # last 30 days
-        response_last720 = communication_kpi.channels.history(channel_id, oldest=d720, count=1000).body
-        # assemble
-        channel_summary[channel_id] = {
-            'name': channel_name,
-            'id': channel_id,
-            'num_messages_d24': len(response_last24['messages']),
-            'num_messages_d168': len(response_last168['messages']),
-            'num_messages_d720': len(response_last720['messages'])
-        }
-        # store in single dict
-        all_channels[channel_name] = channel_summary[channel_id]
-
     # get the group ids (private channels) for querying
     group_ids = []
     groups = communication_kpi.groups.list().body['groups']
     for group in groups:
         group_ids.append(group['id'])
+    # get the information needed from all channels
+    all_channels = dict()
     # get the information needed from all groups (private channels)
     all_groups = dict()
-    for group_id in group_ids:
+    for channel_id, group_id in zip(channel_ids, group_ids):
+        channel_summary = dict()
         group_summary = dict()
+        channel_name = communication_kpi.channels.info(channel_id).body['channel']['name']
         group_name = communication_kpi.groups.info(group_id).body['group']['name']
         # last 24 hours
-        response_last24 = communication_kpi.groups.history(group_id, oldest=d24, count=1000).body
+        response_last24_c = communication_kpi.channels.history(channel_id, oldest=d24, count=1000).body
+        response_last24_g = communication_kpi.groups.history(group_id, oldest=d24, count=1000).body
         # last 7 days
-        response_last168 = communication_kpi.groups.history(group_id, oldest=d168, count=1000).body
+        response_last168_c = communication_kpi.channels.history(channel_id, oldest=d168, count=1000).body
+        response_last168_g = communication_kpi.groups.history(group_id, oldest=d168, count=1000).body
         # last 30 days
-        response_last720 = communication_kpi.groups.history(group_id, oldest=d720, count=1000).body
+        response_last720_c = communication_kpi.channels.history(channel_id, oldest=d720, count=1000).body
+        response_last720_g = communication_kpi.groups.history(group_id, oldest=d720, count=1000).body
         # assemble
+        channel_summary[channel_id] = {
+            'name': channel_name,
+            'id': channel_id,
+            'num_messages_d24': len(response_last24_c['messages']),
+            'num_messages_d168': len(response_last168_c['messages']),
+            'num_messages_d720': len(response_last720_c['messages'])
+        }
         group_summary[group_id] = {
             'name': group_name,
             'id': group_id,
-            'num_messages_d24': len(response_last24),
-            'num_messages_d168': len(response_last168),
-            'num_messages_d720': len(response_last720),
+            'num_messages_d24': len(response_last24_g['messages']),
+            'num_messages_d168': len(response_last168_g['messages']),
+            'num_messages_d720': len(response_last720_g['messages']),
         }
-        # store in a signle dict
+        # store in single dict
+        all_channels[channel_name] = channel_summary[channel_id]
         all_groups[group_name] = group_summary[group_id]
     # summarize slack activity
     num_24 = []
     num_168 = []
     num_720 = []
     slack_summary = dict()
-    for channel in all_channels:
+    for channel, group in zip(all_channels, all_groups):
         num_24.append(all_channels[channel]['num_messages_d24'])
-        num_168.append(all_channels[channel]['num_messages_d168'])
-        num_720.append(all_channels[channel]['num_messages_d720'])
-    for group in all_groups:
         num_24.append(all_groups[group]['num_messages_d24'])
+        num_168.append(all_channels[channel]['num_messages_d168'])
         num_168.append(all_groups[group]['num_messages_d168'])
+        num_720.append(all_channels[channel]['num_messages_d720'])
         num_720.append(all_groups[group]['num_messages_d720'])
+
     slack_summary['rolling_avg'] = {
         'avg_num_messages_d24': sum(num_24),
         'avg_num_messages_d168': (sum(num_168) / 7),
@@ -681,7 +813,7 @@ def report_communication():
     }
     # post to slack
     communication_kpi.chat.post_message(
-        '#test',
+        '#kpi',
         'How often are we communicating?',
         attachments=[
             {
@@ -716,29 +848,54 @@ def report_sentiment():
     # get the channel ids for querying
     channel_ids = []
     channels = sentiment_kpi.channels.list().body['channels']
-    for channel in channels:
+    # get the group ids (private channels) for querying
+    group_ids = []
+    groups = sentiment_kpi.groups.list().body['groups']
+    for channel, group in zip(channels, groups):
         channel_ids.append(channel['id'])
-    # get the information needed from all channels
+        group_ids.append(group['id'])
+    # get the information needed from all channels and groups
     all_channels = dict()
-    for channel_id in channel_ids:
+    all_groups = dict()
+    # iterate
+    for channel_id, group_id in zip(channel_ids, group_ids):
         channel_summary = dict()
+        group_summary = dict()
         channel_name = sentiment_kpi.channels.info(channel_id).body['channel']['name']
+        group_name = sentiment_kpi.groups.info(group_id).body['group']['name']
         # last 24 hours
-        response_last24 = sentiment_kpi.channels.history(channel_id, oldest=d24, count=1000).body
+        response_last24_c = sentiment_kpi.channels.history(channel_id, oldest=d24, count=1000).body
+        response_last24_g = sentiment_kpi.groups.history(group_id, oldest=d24, count=1000).body
         # last 7 days
-        response_last168 = sentiment_kpi.channels.history(channel_id, oldest=d168, count=1000).body
+        response_last168_c = sentiment_kpi.channels.history(channel_id, oldest=d168, count=1000).body
+        response_last168_g = sentiment_kpi.groups.history(group_id, oldest=d168, count=1000).body
         # last 30 days
-        response_last720 = sentiment_kpi.channels.history(channel_id, oldest=d720, count=1000).body
+        response_last720_c = sentiment_kpi.channels.history(channel_id, oldest=d720, count=1000).body
+        response_last720_g = sentiment_kpi.groups.history(group_id, oldest=d720, count=1000).body
         # assemble
-        messages_24 = []
-        messages_168 = []
-        messages_720 = []
-        for text in response_last24['messages']:
-            messages_24.append(text['text'])
-        for text in response_last168['messages']:
-            messages_168.append(text['text'])
-        for text in response_last720['messages']:
-            messages_720.append(text['text'])
+        messages_24_c = []
+        messages_24_g = []
+        messages_168_c = []
+        messages_168_g = []
+        messages_720_c = []
+        messages_720_g = []
+        # we want to filter each message for stop words and remove them
+        from nltk.corpus import stopwords
+        for text_c, text_g in zip(response_last24_c['messages'], response_last24_g['messages']):
+            messages_24_c.append(
+                ' '.join(token for token in text_c['text'].split(' ') if token not in stopwords.words('english')))
+            messages_24_g.append(
+                ' '.join(token for token in text_g['text'].split(' ') if token not in stopwords.words('english')))
+        for text_c, text_g in zip(response_last168_c['messages'], response_last168_g['messages']):
+            messages_168_c.append(
+                ' '.join(token for token in text_c['text'].split(' ') if token not in stopwords.words('english')))
+            messages_168_g.append(
+                ' '.join(token for token in text_g['text'].split(' ') if token not in stopwords.words('english')))
+        for text_c, text_g in zip(response_last720_c['messages'], response_last720_g['messages']):
+            messages_720_c.append(
+                ' '.join(token for token in text_c['text'].split(' ') if token not in stopwords.words('english')))
+            messages_720_g.append(
+                ' '.join(token for token in text_g['text'].split(' ') if token not in stopwords.words('english')))
         # perform sentiment analysis by channel
         '''
         This tool uses the VADER (Valence Aware Dictionary and sentiment Reasoner) sentiment analysis classifier
@@ -749,221 +906,150 @@ def report_sentiment():
         Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
         ------
         NLTK on Heroku: https://stackoverflow.com/questions/13965823/resource-corpora-wordnet-not-found-on-heroku/14869451#14869451
+        ------
+        Nevertheless, it is probably prudent to explore other sentiment analyzers to compare performance.
         '''
         from nltk.sentiment import SentimentIntensityAnalyzer
         from nltk import data as nltk_data
-        nltk_data.path.append('static/data/nltk/')
+        nltk_data.path.append('static/data/nltk')
         # import twython # needed for nltk but not specified as import?
         sid = SentimentIntensityAnalyzer()
         # create a bunch of lists for storage, probably a cleaner way to do this
-        negative_scores_24 = []
-        positive_scores_24 = []
-        neutral_scores_24 = []
-        compound_scores_24 = []
-        negative_scores_168 = []
-        positive_scores_168 = []
-        neutral_scores_168 = []
-        compound_scores_168 = []
-        negative_scores_720 = []
-        positive_scores_720 = []
-        neutral_scores_720 = []
-        compound_scores_720 = []
-        for sentence in messages_24:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_24.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_24.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_24.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_24.append(ss[k])
-        for sentence in messages_168:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_168.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_168.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_168.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_168.append(ss[k])
-        for sentence in messages_720:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_720.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_720.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_720.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_720.append(ss[k])
+        negative_scores_24_c = []
+        negative_scores_24_g = []
+        positive_scores_24_c = []
+        positive_scores_24_g = []
+        neutral_scores_24_c = []
+        neutral_scores_24_g = []
+        compound_scores_24_c = []
+        compound_scores_24_g = []
+        negative_scores_168_c= []
+        negative_scores_168_g = []
+        positive_scores_168_c = []
+        positive_scores_168_g = []
+        neutral_scores_168_c = []
+        neutral_scores_168_g = []
+        compound_scores_168_c = []
+        compound_scores_168_g = []
+        negative_scores_720_c = []
+        negative_scores_720_g = []
+        positive_scores_720_c = []
+        positive_scores_720_g = []
+        neutral_scores_720_c = []
+        neutral_scores_720_g = []
+        compound_scores_720_c = []
+        compound_scores_720_g = []
+        # iterate through the sentences, score them, and store the resulting score
+        for sentence_c, sentence_g in zip(messages_24_c, messages_24_g):
+            ss_c = sid.polarity_scores(sentence_c)
+            ss_g = sid.polarity_scores(sentence_g)
+            compound_scores_24_c.append(ss_c['compound'])
+            compound_scores_24_g.append(ss_g['compound'])
+            negative_scores_24_c.append(ss_c['neg'])
+            negative_scores_24_g.append(ss_g['neg'])
+            positive_scores_24_c.append(ss_c['pos'])
+            positive_scores_24_g.append(ss_g['pos'])
+            neutral_scores_24_c.append(ss_c['neu'])
+            neutral_scores_24_g.append(ss_g['neu'])
+        for sentence_c, sentence_g in zip(messages_168_c, messages_168_g):
+            ss_c = sid.polarity_scores(sentence_c)
+            ss_g = sid.polarity_scores(sentence_g)
+            compound_scores_168_c.append(ss_c['compound'])
+            compound_scores_168_g.append(ss_g['compound'])
+            negative_scores_168_c.append(ss_c['neg'])
+            negative_scores_168_g.append(ss_g['neg'])
+            positive_scores_168_c.append(ss_c['pos'])
+            positive_scores_168_g.append(ss_g['pos'])
+            neutral_scores_168_c.append(ss_c['neu'])
+            neutral_scores_168_g.append(ss_g['neu'])
+        for sentence_c, sentence_g in zip(messages_720_c, messages_720_g):
+            ss_c = sid.polarity_scores(sentence_c)
+            ss_g = sid.polarity_scores(sentence_g)
+            compound_scores_720_c.append(ss_c['compound'])
+            compound_scores_720_g.append(ss_g['compound'])
+            negative_scores_720_c.append(ss_c['neg'])
+            negative_scores_720_g.append(ss_g['neg'])
+            positive_scores_720_c.append(ss_c['pos'])
+            positive_scores_720_g.append(ss_g['pos'])
+            neutral_scores_720_c.append(ss_c['neu'])
+            neutral_scores_720_g.append(ss_g['neu'])
+        # channels
         channel_summary[channel_id] = {
             'name': channel_name,
             'id': channel_id,
             'messages': {
-                'messages_d24': messages_24,
-                'messages_d168': messages_168,
-                'messages_d720': messages_720,
+                'messages_d24': messages_24_c,
+                'messages_d168': messages_168_c,
+                'messages_d720': messages_720_c,
             },
             'sentiment': {
                 'sentiment_d24': {
-                    'count_positive': len(positive_scores_24),
-                    'avg_pos_score': float(sum(positive_scores_24) / (len(positive_scores_24) + 1e-5)),
-                    'count_neutral': len(neutral_scores_24),
-                    'avg_neu_score': float(sum(neutral_scores_24) / (len(neutral_scores_24) + 1e-5)),
-                    'count_negative': len(negative_scores_24),
-                    'avg_neg_score': float(sum(negative_scores_24) / (len(negative_scores_24) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_24) / (len(compound_scores_24) + 1e-5))
+                    'count_positive': len(positive_scores_24_c),
+                    'avg_pos_score': float(sum(positive_scores_24_c) / (len(positive_scores_24_c) + 1e-5)),
+                    'count_neutral': len(neutral_scores_24_c),
+                    'avg_neu_score': float(sum(neutral_scores_24_c) / (len(neutral_scores_24_c) + 1e-5)),
+                    'count_negative': len(negative_scores_24_c),
+                    'avg_neg_score': float(sum(negative_scores_24_c) / (len(negative_scores_24_c) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_24_c) / (len(compound_scores_24_c) + 1e-5))
                 },
                 'sentiment_d168': {
-                    'count_positive': len(positive_scores_168),
-                    'avg_pos_score': float(sum(positive_scores_168) / (len(positive_scores_168) + 1e-5)),
-                    'count_neutral': len(neutral_scores_168),
-                    'avg_neu_score': float(sum(neutral_scores_168) / (len(neutral_scores_168) + 1e-5)),
-                    'count_negative': len(negative_scores_168),
-                    'avg_neg_score': float(sum(negative_scores_168) / (len(negative_scores_168) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_168) / (len(compound_scores_168) + 1e-5))
+                    'count_positive': len(positive_scores_168_c),
+                    'avg_pos_score': float(sum(positive_scores_168_c) / (len(positive_scores_168_c) + 1e-5)),
+                    'count_neutral': len(neutral_scores_168_c),
+                    'avg_neu_score': float(sum(neutral_scores_168_c) / (len(neutral_scores_168_c) + 1e-5)),
+                    'count_negative': len(negative_scores_168_c),
+                    'avg_neg_score': float(sum(negative_scores_168_c) / (len(negative_scores_168_c) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_168_c) / (len(compound_scores_168_c) + 1e-5))
                 },
                 'sentiment_d720': {
-                    'count_positive': len(positive_scores_720),
-                    'avg_pos_score': float(sum(positive_scores_720) / (len(positive_scores_720) + 1e-5)),
-                    'count_neutral': len(neutral_scores_720),
-                    'avg_neu_score': float(sum(neutral_scores_720) / (len(neutral_scores_720) + 1e-5)),
-                    'count_negative': len(negative_scores_720),
-                    'avg_neg_score': float(sum(negative_scores_720) / (len(negative_scores_720) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_720) / (len(compound_scores_720) + 1e-5))
+                    'count_positive': len(positive_scores_720_c),
+                    'avg_pos_score': float(sum(positive_scores_720_c) / (len(positive_scores_720_c) + 1e-5)),
+                    'count_neutral': len(neutral_scores_720_c),
+                    'avg_neu_score': float(sum(neutral_scores_720_c) / (len(neutral_scores_720_c) + 1e-5)),
+                    'count_negative': len(negative_scores_720_c),
+                    'avg_neg_score': float(sum(negative_scores_720_c) / (len(negative_scores_720_c) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_720_c) / (len(compound_scores_720_c) + 1e-5))
                 }
             }
         }
         # store in single dict
         all_channels[channel_name] = channel_summary[channel_id]
-    # get the group ids (private channels) for querying
-    group_ids = []
-    groups = sentiment_kpi.groups.list().body['groups']
-    for group in groups:
-        group_ids.append(group['id'])
-    # get the information needed from all groups (private channels)
-    all_groups = dict()
-    for group_id in group_ids:
-        group_summary = dict()
-        group_name = sentiment_kpi.groups.info(group_id).body['group']['name']
-        # last 24 hours
-        response_last24 = sentiment_kpi.groups.history(group_id, oldest=d24, count=1000).body
-        # last 7 days
-        response_last168 = sentiment_kpi.groups.history(group_id, oldest=d168, count=1000).body
-        # last 30 days
-        response_last720 = sentiment_kpi.groups.history(group_id, oldest=d720, count=1000).body
-        # assemble
-        messages_24 = []
-        messages_168 = []
-        messages_720 = []
-        for text in response_last24['messages']:
-            messages_24.append(text['text'])
-        for text in response_last168['messages']:
-            messages_168.append(text['text'])
-        for text in response_last720['messages']:
-            messages_720.append(text['text'])
-        # perform sentiment analysis by channel
-        '''
-        This tool uses the VADER (Valence Aware Dictionary and sentiment Reasoner) sentiment analysis classifier
-        as published by Hutto and Gilbert in 2014. It is specifically attuned to sentiments expressed in social media,
-        making it ideal for use in Slack. It is freely available for use under the MIT license.
-        ------
-        Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social
-        Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
-        ------
-        NLTK on Heroku: https://stackoverflow.com/questions/13965823/resource-corpora-wordnet-not-found-on-heroku/14869451#14869451
-        '''
-        from nltk.sentiment import SentimentIntensityAnalyzer
-        from nltk import data as nltk_data
-        nltk_data.path.append('static/data/nltk/')
-        # import twython # needed for nltk but not specified as import?
-        sid = SentimentIntensityAnalyzer()
-        # create a bunch of lists for storage, probably a cleaner way to do this
-        negative_scores_24 = []
-        positive_scores_24 = []
-        neutral_scores_24 = []
-        compound_scores_24 = []
-        negative_scores_168 = []
-        positive_scores_168 = []
-        neutral_scores_168 = []
-        compound_scores_168 = []
-        negative_scores_720 = []
-        positive_scores_720 = []
-        neutral_scores_720 = []
-        compound_scores_720 = []
-        for sentence in messages_24:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_24.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_24.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_24.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_24.append(ss[k])
-        for sentence in messages_168:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_168.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_168.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_168.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_168.append(ss[k])
-        for sentence in messages_720:
-            ss = sid.polarity_scores(sentence)
-            for k in sorted(ss):
-                if k == 'compound':
-                    compound_scores_720.append(ss[k])
-                elif k == 'neg':
-                    negative_scores_720.append(ss[k])
-                elif k == 'neu':
-                    neutral_scores_720.append(ss[k])
-                elif k == 'pos':
-                    positive_scores_720.append(ss[k])
+        # groups
         group_summary[group_id] = {
             'name': group_name,
             'id': group_id,
             'messages': {
-                'messages_d24': messages_24,
-                'messages_d168': messages_168,
-                'messages_d720': messages_720,
+                'messages_d24': messages_24_g,
+                'messages_d168': messages_168_g,
+                'messages_d720': messages_720_g,
             },
             'sentiment': {
                 'sentiment_d24': {
-                    'count_positive': len(positive_scores_24),
-                    'avg_pos_score': float(sum(positive_scores_24) / (len(positive_scores_24) + 1e-5)),
-                    'count_neutral': len(neutral_scores_24),
-                    'avg_neu_score': float(sum(neutral_scores_24) / (len(neutral_scores_24) + 1e-5)),
-                    'count_negative': len(negative_scores_24),
-                    'avg_neg_score': float(sum(negative_scores_24) / (len(negative_scores_24) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_24) / (len(compound_scores_24) + 1e-5))
+                    'count_positive': len(positive_scores_24_g),
+                    'avg_pos_score': float(sum(positive_scores_24_g) / (len(positive_scores_24_g) + 1e-5)),
+                    'count_neutral': len(neutral_scores_24_g),
+                    'avg_neu_score': float(sum(neutral_scores_24_g) / (len(neutral_scores_24_g) + 1e-5)),
+                    'count_negative': len(negative_scores_24_g),
+                    'avg_neg_score': float(sum(negative_scores_24_g) / (len(negative_scores_24_g) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_24_g) / (len(compound_scores_24_g) + 1e-5))
                 },
                 'sentiment_d168': {
-                    'count_positive': len(positive_scores_168),
-                    'avg_pos_score': float(sum(positive_scores_168) / (len(positive_scores_168) + 1e-5)),
-                    'count_neutral': len(neutral_scores_168),
-                    'avg_neu_score': float(sum(neutral_scores_168) / (len(neutral_scores_168) + 1e-5)),
-                    'count_negative': len(negative_scores_168),
-                    'avg_neg_score': float(sum(negative_scores_168) / (len(negative_scores_168) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_168) / (len(compound_scores_168) + 1e-5))
+                    'count_positive': len(positive_scores_168_g),
+                    'avg_pos_score': float(sum(positive_scores_168_g) / (len(positive_scores_168_g) + 1e-5)),
+                    'count_neutral': len(neutral_scores_168_g),
+                    'avg_neu_score': float(sum(neutral_scores_168_g) / (len(neutral_scores_168_g) + 1e-5)),
+                    'count_negative': len(negative_scores_168_g),
+                    'avg_neg_score': float(sum(negative_scores_168_g) / (len(negative_scores_168_g) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_168_g) / (len(compound_scores_168_g) + 1e-5))
                 },
                 'sentiment_d720': {
-                    'count_positive': len(positive_scores_720),
-                    'avg_pos_score': float(sum(positive_scores_720) / (len(positive_scores_720) + 1e-5)),
-                    'count_neutral': len(neutral_scores_720),
-                    'avg_neu_score': float(sum(neutral_scores_720) / (len(neutral_scores_720) + 1e-5)),
-                    'count_negative': len(negative_scores_720),
-                    'avg_neg_score': float(sum(negative_scores_720) / (len(negative_scores_720) + 1e-5)),
-                    'compound_score': float(sum(compound_scores_720) / (len(compound_scores_720) + 1e-5))
+                    'count_positive': len(positive_scores_720_g),
+                    'avg_pos_score': float(sum(positive_scores_720_g) / (len(positive_scores_720_g) + 1e-5)),
+                    'count_neutral': len(neutral_scores_720_g),
+                    'avg_neu_score': float(sum(neutral_scores_720_g) / (len(neutral_scores_720_g) + 1e-5)),
+                    'count_negative': len(negative_scores_720_g),
+                    'avg_neg_score': float(sum(negative_scores_720_g) / (len(negative_scores_720_g) + 1e-5)),
+                    'compound_score': float(sum(compound_scores_720_g) / (len(compound_scores_720_g) + 1e-5))
                 }
             }
         }
@@ -974,13 +1060,12 @@ def report_sentiment():
     cs_168 = []
     cs_720 = []
     slack_summary = dict()
-    for channel in all_channels:
+    for channel, group in zip(all_channels, all_groups):
         cs_24.append(all_channels[channel]['sentiment']['sentiment_d24']['compound_score'])
-        cs_168.append(all_channels[channel]['sentiment']['sentiment_d168']['compound_score'])
-        cs_720.append(all_channels[channel]['sentiment']['sentiment_d720']['compound_score'])
-    for group in all_groups:
         cs_24.append(all_groups[group]['sentiment']['sentiment_d24']['compound_score'])
+        cs_168.append(all_channels[channel]['sentiment']['sentiment_d168']['compound_score'])
         cs_168.append(all_groups[group]['sentiment']['sentiment_d168']['compound_score'])
+        cs_720.append(all_channels[channel]['sentiment']['sentiment_d720']['compound_score'])
         cs_720.append(all_groups[group]['sentiment']['sentiment_d720']['compound_score'])
     slack_summary['sentiment'] = {
         'compound_score_24': sum(cs_24) / len(cs_24),
@@ -990,7 +1075,7 @@ def report_sentiment():
     }
     # post to slack
     sentiment_kpi.chat.post_message(
-        '#test',
+        '#kpi',
         'How are we feeling?',
         attachments=[
             {
@@ -1074,17 +1159,17 @@ def report_ticket(id, resolve):
 
 # cron scheduler for functions that fire periodically, like Slack bots #
 scheduler = BackgroundScheduler()
+scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    hours=12
+    minutes=360
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    hours=12
+    minutes=360
 )
-scheduler.start()
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
 

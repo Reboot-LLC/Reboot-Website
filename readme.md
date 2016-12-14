@@ -28,10 +28,9 @@ is below:
 4. Slack Integration
     * KPIs
         * Communication: *Reports communication frequency.*
-            * *Needs refactoring.*
         * Sentiment: *Reports organizational positivity*.
             * *Alpha, in testing.*
-            * *Needs refactoring.*
+            * *Compare sentiment classifiers*
         * Further Ideas:
             * KPI Database: *Capture KPI metrics for later analysis.*
                 * *Easy to do, just question on if its a priority.*
@@ -42,7 +41,7 @@ is below:
             * Support
                 * *Report on support ticket frequency, avg response time, etc.*
             * Site Traffic
-                * *Requires Google Analytics API*
+                * *Requires Heap Analytics API*
     * Support Bot
         * *Sends a message on #support if a ticket has been issued or resolved.*
         * *Currently needs completion of urgency evaluation from issue category.*
@@ -64,6 +63,7 @@ is below:
             * Autosave
     * Edit Post
     * Delete Post
+    * Search for posts with a fuzzy search 
 6. Databases
     * MongoDB
         * *Create collection to store KPI information.*
@@ -73,6 +73,8 @@ is below:
         * Elastic Search
 7. Further Ideas for Core Functionality
     * Prediction API (Pandas + SciPy + *some nice viz library*)
+    * UpWork API (grab and store freelancer/project data, other things)
+    * Xero API (for accounting and transparency)
     
             
 
