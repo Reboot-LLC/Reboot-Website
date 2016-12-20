@@ -688,6 +688,12 @@ def blog_route():
     return render_template('blog_template.html', post=post)
 
 
+# test route
+@app.route('/test')
+def test_route():
+    return render_template('test.html')
+
+
 @app.errorhandler(401)
 def login_failed(e):
     return render_template('401.html'), 401
