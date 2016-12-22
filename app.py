@@ -688,7 +688,7 @@ def blog_route():
     return render_template('blog_template.html', post=post)
 
 
-# test route
+# test route (remove later)
 @app.route('/test')
 def test_route():
     return render_template('test.html')
