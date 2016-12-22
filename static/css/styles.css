@@ -17,6 +17,10 @@ body {
     overflow-x:hidden!important
 }
 
+img {
+    vertical-align: middle;
+}
+
 .loading-gif {
     position: absolute;
     height: 100%;
@@ -235,6 +239,12 @@ button {
     color: #FFF;
     display: table;
 }
+
+.responsive-card {
+    margin: 3%;
+}
+
+/* add rule to remove for mobile */
 
 .welcomeTitle {
     text-align: center;
@@ -961,18 +971,18 @@ square {
     font-size: 4em;
 }
 
-.btn {
-    display: inline-block;
-    border-radius: 3px;
-    background-color: #fff;
-    border: 1px solid #000;
-    padding: 5px 15px;
-    font-weight: bold;
-}
+/*.btn {*/
+    /*display: inline-block;*/
+    /*border-radius: 3px;*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #000;*/
+    /*padding: 5px 15px;*/
+    /*font-weight: bold;*/
+/*}*/
 
-.btn:hover {
-    background-color: #fafafa;
-}
+/*.btn:hover {*/
+    /*background-color: #fafafa;*/
+/*}*/
 
 .about-us {
     padding:50px;

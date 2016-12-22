@@ -283,6 +283,7 @@ textarea {
   }
   .navbar {
     display: none;
+    z-index: 50;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -5734,6 +5735,7 @@ button.close {
   position: relative;
   width: 100%;
   overflow: hidden;
+  max-height: 500px;
 }
 
 .carousel-inner > .carousel-item {
@@ -5921,7 +5923,7 @@ button.close {
 .carousel-caption {
   position: absolute;
   right: 15%;
-  bottom: 20px;
+  bottom: 180px;
   left: 15%;
   z-index: 10;
   padding-top: 20px;
