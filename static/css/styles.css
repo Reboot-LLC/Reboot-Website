@@ -31,8 +31,10 @@ img {
     vertical-align: middle;
     padding-left: 5%;
     padding-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 2em;
-    background-color: #33A2BA;
+    background-color: #607d8b;
 }
 
 .loading-gif {
@@ -1569,4 +1571,7 @@ input {
     z-index: 9999;
 }
 
+.intune {
+    background-color: #17445d !important;
+}
 
