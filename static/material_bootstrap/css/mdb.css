@@ -6918,7 +6918,7 @@ button:focus {
 }
 
 .btn-primary:hover, .btn-primary:focus {
-  background-color: #5a95f5 !important;
+  background-color: #30cfc0 !important;
 }
 
 .btn-primary.active {
@@ -7330,9 +7330,9 @@ textarea.md-textarea {
   border-bottom: 1px solid #ccc;
   border-radius: 0;
   outline: none;
-  height: 2.1rem;
+  height: 1.2rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.2rem;
   box-shadow: none;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;

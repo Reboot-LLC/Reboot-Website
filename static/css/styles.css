@@ -1504,13 +1504,13 @@ button.view:focus {
 }
 
 .form {
-    width: 100%;
+    width: 96%;
     padding: 15px;
     background: #f8f8f8;
     border: 1px solid rgba(0,0,0,0.075);
     margin-bottom: 25px;
     color: #727272 !important;
-    font-size: 13px;
+    font-size: 1rem;
     -webkit-transition: all .4s;
     -moz-transition: all .4s;
     transition: all .4s;
@@ -1527,7 +1527,7 @@ button.view:focus {
 }
 
 .textarea {
-    height: 200px;
+    height: 135px;
     max-height: 200px;
     max-width: 100%;
 }
