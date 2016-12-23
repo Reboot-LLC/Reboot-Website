@@ -21,6 +21,20 @@ img {
     vertical-align: middle;
 }
 
+.material-heading {
+    position: relative;
+    text-transform: lowercase;
+    width: 450px;
+    height: 75px;
+    color: #f8f8f8;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 5%;
+    padding-top: 15px;
+    font-size: 2em;
+    background-color: #33A2BA;
+}
+
 .loading-gif {
     position: absolute;
     height: 100%;
@@ -262,10 +276,13 @@ button {
 }
 
 .polyWorld {
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     background: #ffffff;
+    z-index: 300;
+    box-shadow: #000 0 0 10px;
 }
 
 .particle1 {
@@ -373,6 +390,7 @@ button {
     top: 45%;
     height: 10%;
     width: 100%;
+    background: none !important;
 }
 
 .land {
