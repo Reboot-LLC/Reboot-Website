@@ -1,9 +1,9 @@
 /* Universal */
 html {
-    overflow-x: hidden!important;
+    overflow-x: hidden !important;
 }
 
-body,html {
+body, html {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -11,10 +11,10 @@ body,html {
 }
 
 body {
-    font-family: 'Jura', sans-serif !important; 
+    font-family: 'Jura', sans-serif !important;
     background-color: #f8f8f8;
     visibility: hidden;
-    overflow-x:hidden!important
+    overflow-x: hidden !important
 }
 
 img {
@@ -30,11 +30,22 @@ img {
     text-align: left;
     vertical-align: middle;
     padding-left: 5%;
-    padding-top: 15px;
+    padding-top: 13px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 2em;
     background-color: #607d8b;
+}
+
+.footer {
+    color: #999;
+    font-size: 0.85em;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .loading-gif {
@@ -42,7 +53,7 @@ img {
     height: 100%;
     width: 100%;
     visibility: visible;
-} 
+}
 
 .loader, .loader:before, .loader:after {
     border-radius: 50%;
@@ -95,6 +106,7 @@ img {
         box-shadow: 0 100px 0 0;
     }
 }
+
 @keyframes load7 {
     0%, 80%, 100% {
         box-shadow: 0 100px 0 -50px;
@@ -103,7 +115,6 @@ img {
         box-shadow: 0 100px 0 0;
     }
 }
-
 
 a {
     cursor: pointer;
@@ -134,7 +145,7 @@ a {
 }
 
 @keyframes bounce {
-    0%,20%,50%,80%,100% {
+    0%, 20%, 50%, 80%, 100% {
         -moz-transform: translateX(0);
         -ms-transform: translateX(0);
         -webkit-transform: translateX(0);
@@ -157,7 +168,7 @@ a {
 }
 
 .justify-text {
-    text-align: justify!important;
+    text-align: justify !important;
 }
 
 .spacing-5 {
@@ -209,7 +220,7 @@ a {
 }
 
 button {
-    outline:none!important;
+    outline: none !important;
 }
 
 /* Tertiary Page Elements - aka search, support, resolve, etc. */
@@ -375,11 +386,13 @@ button {
         transform: translateX(100%);
     }
 }
+
 @keyframes orb {
     50% {
         transform: translateY(-10px);
     }
 }
+
 @keyframes orb2 {
     50% {
         transform: translateX(300px);
@@ -412,10 +425,12 @@ button {
         bottom: -55%;
     }
 }
+
 @media screen and ( max-width: 620px) {
     .orb {
         left: 10% !important;
     }
+
     .orb3 {
         left: -2% !important;
     }
@@ -424,7 +439,7 @@ button {
 .intro-title {
     display: table-cell;
     vertical-align: middle;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .logo {
@@ -450,7 +465,7 @@ button {
 
 .polymorph {
     opacity: 0.125;
-    position:fixed;
+    position: fixed;
 }
 
 /* Home Page - About */
@@ -463,15 +478,15 @@ button {
 }
 
 .about-top .fp-controlArrow.fp-next {
-   right:10%; 
+    right: 10%;
 }
 
 .about-top .fp-controlArrow.fp-prev {
-    left:10%;
+    left: 10%;
 }
 
 .square {
-    height:100px;
+    height: 100px;
     width: 100%;
     background: #b0b0b0;
 }
@@ -607,7 +622,7 @@ button {
     min-height: 640px;
     background: #f5f5f5;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .browser.mobile {
@@ -667,10 +682,10 @@ button {
     color: #fff;
     text-decoration: none;
     font-size: 11px;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.1);
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
     padding: 3px 8px;
     border-radius: 3px;
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     transition: background-color .3s ease;
 }
 
@@ -683,7 +698,7 @@ button {
     padding: 5px;
     border-radius: 3px;
     border: none;
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
     outline: none;
     font-size: 9px;
     color: #aaa;
@@ -691,7 +706,7 @@ button {
 }
 
 .portfolioSlider .fp-tableCell {
-    height:100%!important;
+    height: 100% !important;
 }
 
 /* Home Page - Smart Design Animation*/
@@ -702,7 +717,7 @@ button {
 }
 
 .design-section {
-    background:#f5f5f5;
+    background: #f5f5f5;
     font-weight: bold;
     position: absolute;
 }
@@ -711,15 +726,15 @@ button {
     margin-top: 40px;
     margin-left: 30px;
 }
- 
+
 .right {
     margin-top: 40px;
     right: 30px;
 }
-  
+
 .iframe {
     height: 640px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .top-bar {
@@ -930,10 +945,10 @@ square {
     margin: 39.33333333333335px 40px;
 }
 
-.design-section1,.design-section2,.design-section3 {
+.design-section1, .design-section2, .design-section3 {
     width: 100%;
     height: 128.6666666666667px;
-    transition: all .35s!important;
+    transition: all .35s !important;
 }
 
 .canvas {
@@ -969,8 +984,8 @@ square {
 }
 
 #slide2 img {
-    height:40px;
-    margin-top:-10px
+    height: 40px;
+    margin-top: -10px
 }
 
 .win {
@@ -992,22 +1007,21 @@ square {
 }
 
 /*.btn {*/
-    /*display: inline-block;*/
-    /*border-radius: 3px;*/
-    /*background-color: #fff;*/
-    /*border: 1px solid #000;*/
-    /*padding: 5px 15px;*/
-    /*font-weight: bold;*/
+/*display: inline-block;*/
+/*border-radius: 3px;*/
+/*background-color: #fff;*/
+/*border: 1px solid #000;*/
+/*padding: 5px 15px;*/
+/*font-weight: bold;*/
 /*}*/
 
 /*.btn:hover {*/
-    /*background-color: #fafafa;*/
+/*background-color: #fafafa;*/
 /*}*/
 
 .about-us {
-    padding:50px;
+    padding: 50px;
 }
-
 
 /* Home Page - Team Cards */
 .fa {
@@ -1178,7 +1192,7 @@ square {
     bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .layered-content.layeredVC,
@@ -1230,8 +1244,7 @@ square {
     font-size: 12px;
     background: white;
     padding: 2.5px 5px;
-    color: #006691;
-    ;
+    color: #006691;;
     text-decoration: none;
     border-radius: 50px;
     display: inline-block;
@@ -1323,19 +1336,23 @@ square {
     .card-container {
         height: 450px;
     }
+
     .card .name {
         font-size: 35px;
     }
+
     .card .profession {
-        margin-bottom:35px;
+        margin-bottom: 35px;
         font-size: 30px;
         margin-top: 5px;
     }
+
     .card h5 {
         font-size: 25px;
         margin: 5px auto;
     }
-    .skills,.team-bio {
+
+    .skills, .team-bio {
         font-size: 20px
     }
 }
@@ -1352,7 +1369,7 @@ square {
 }
 
 .body-message {
-    padding:25px;
+    padding: 25px;
 }
 
 .modal-dialog.portfolioPopup {
@@ -1376,7 +1393,7 @@ square {
     height: 250px;
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     white-space: nowrap;
     position: relative;
@@ -1405,7 +1422,7 @@ square {
 }
 
 .information h1 {
-    font-family: 'lato','segoe ui regular',arial;
+    font-family: 'lato', 'segoe ui regular', arial;
     font-weight: bolder;
     font-size: 18px;
     position: absolute;
@@ -1414,7 +1431,7 @@ square {
 }
 
 .information h2 {
-    font-family: 'lato','segoe ui light',arial;
+    font-family: 'lato', 'segoe ui light', arial;
     font-size: 16px;
     position: absolute;
     font-weight: 100;
@@ -1482,7 +1499,7 @@ square {
 }
 
 button.view:focus {
-    outline:none!important;
+    outline: none !important;
 }
 
 .modal-slider img {
@@ -1507,7 +1524,7 @@ button.view:focus {
     width: 96%;
     padding: 15px;
     background: #f8f8f8;
-    border: 1px solid rgba(0,0,0,0.075);
+    border: 1px solid rgba(0, 0, 0, 0.075);
     margin-bottom: 25px;
     color: #727272 !important;
     font-size: 1rem;
@@ -1547,9 +1564,9 @@ button.view:focus {
     -moz-transition: all .3s;
     transition: all .3s;
     margin: auto;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
 .form-btn:hover {
