@@ -448,6 +448,8 @@ def record_web_lead(name, email, subject, message):
         'message': message
     }
     website_leads.insert_one({'key': key, 'post': post})
+    return True
+    # note that right now, this function always returns true.
 
 
 ### SAVE FOR LATER ###
@@ -468,8 +470,7 @@ def home():
             render_template('index.html',
                             message='Message sent successfully! We will be in touch as soon as possible.',
                             post=posts)
-            # send an email to reboot, and to us as confirmation
-            # use send email functionality
+            report_lead(name, email, subject, message)
         else:
             render_template('index.html',
                             message='Whoops! Please try again later.',
@@ -743,6 +744,25 @@ def define_color_support_ticket(urgency):
         return "#FFBF00"
     else:
         return "#C0C0BF"
+
+
+# lead bot #
+def report_lead(name, email, subject, message):
+    # token for bot
+    lead_bot = Slacker('xoxb-120556026706-4IFLfzIy7cYWoD42yRIGvGFi')
+    # post to slack
+    lead_bot.chat.post_message(
+        '#web-site',
+        'New website lead from ' + name + '!',
+        attachments=[
+            {
+                'subject': subject,
+                'text': message + '\n\nEmail: ' + email,
+                'color': '#3BBCD0'
+            }
+        ],
+        as_user='@lead_bot'
+    )
 
 
 # communication bot #
@@ -1169,12 +1189,12 @@ scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=360
+    minutes=60
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=360
+    minutes=60
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
