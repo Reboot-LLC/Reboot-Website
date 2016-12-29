@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <title>Reboot | Logic Made Beautiful</title>
     <!-- css and other styling -->
-    <link href="https://fonts.googleapis.com/css?family=Jura:400,600" rel="stylesheet">
-    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
-    <!--<link href="{{ url_for('static', filename='css/jquery.fancybox.css') }}" type="text/css" rel="stylesheet">-->
-    <!--<link href="{{ url_for('static', filename='css/jquery.fancybox-thumbs.css') }}" type="text/css" rel="stylesheet">-->
-    <!--<link href="{{ url_for('static', filename='css/jquery.fullPage.css') }}" type="text/css" rel="stylesheet">-->
-    <!--<link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">-->
-    <!--<link href="{{ url_for('static', filename='css/lightbox.min.css') }}" type="text/css" rel="stylesheet">-->
     <!-- json objects -->
     <!--<script src="{{ url_for('static', filename='data/display_github.json') }}"></script>-->
     <!-- heap analytics script -->
@@ -41,7 +35,8 @@
 <body>
 <!-- Polymorph Background -->
 <div class="polymorph"></div>
-<nav class="navbar navbar-dark bg-primary scooter" style="position: fixed; width: 100%; z-index: 500;">
+<!--end poly-->
+<nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
     <!-- Collapse button-->
     <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
         <i class="fa fa-bars"></i>
@@ -49,31 +44,22 @@
     <div class="container">
         <!--Collapse content-->
         <div class="collapse navbar-toggleable-xs" id="collapseEx2">
-            <!-- Navbar Logo -->
-            <!-- place logo here -->
-            <!--Navbar Brand-->
-            <a class="navbar-brand">[company name]</a>
+            <a class="navbar-brand mont" style="color:#1AADC1">[company name]</a>
             <!--Links-->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav mont" style="margin-left:-5px;">
                 <li class="nav-item active">
-                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link">Home/ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Portfolio</a>
+                    <a class="nav-link">Team/</a>
                 </li>
                 <!-- uncomment once we complete blog and populate with content -->
                 <!--<li class="nav-item">-->
                 <!--<a class="nav-link">Blog</a>-->
                 <!--</li>-->
-                <lu class="nav-item">
-                    <a class="nav-link" href="/support">Support</a>
-                </lu>
+                <li class="nav-item">
+                    <a class="nav-link" href="/support">Contact/</a>
+                </li>
                 <!--<li class="nav-item btn-group">-->
                 <!--<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
                 <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
@@ -83,7 +69,7 @@
                 <!--</div>-->
                 <!--</li>-->
             </ul>
-            <ul class="nav navbar-nav nav-flex-icons">
+            <ul class="nav navbar-nav nav-flex-icons mont">
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">
                         {% if current_user.is_authenticated %}
@@ -122,213 +108,147 @@
 
 <!-- Polyworld-->
 <div class="fullpage">
-    <div class="polyWorld">
-        <div class="particle1"></div>
-        <div class="particle2"></div>
-        <div class="particle2 next"></div>
-        <div class="blue">
-            <h1 class="welcomeTitle">[company name]</h1>
-            <h1 class="welcomeTag">Logic Made Beautiful</h1>
+    <div class="polyContainer">
+        <div class="polyWorld">
+            <div class="particle1"></div>
+            <div class="particle2"></div>
+            <div class="particle2 next"></div>
+            <div class="innerCircle"><div class="innerTag"></div></div>
+            <div class="orb"></div>
+            <div class="orb1 orb2">
+                <img src="static/images/orb.png">
+            </div>
+            <div class="orb1 orb3">
+                <img src="static/images/orb.png">
+            </div>
+            <div class="land">
+                <img src="static/images/land.png">
+            </div>
         </div>
-        <div class="orb"></div>
-        <div class="orb1 orb2">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/orb.png">
-        </div>
-        <div class="orb1 orb3">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/orb.png">
-        </div>
-        <div class="land">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/land.png">
-        </div>
+        <div class="spacing-25"></div>
+        <h1 class="homeHeading">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br> 
+            Vestibulum consectetur nisi a dolor iaculis id viverra lectus facilisis.
+        </h1>
     </div>
-
-    <br>
-
-    <div>we are a collection of creative individuals that love problem solving and stuff</div>
-
-    <div class="material-heading">What we do</div>
-
-
-    <div class="row responsive-card">
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header cyan darken-2 white-text">
-                    Modern Web Applications
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeading mont">What we do</div>
+                <div class="spacing-5"></div>
+                <p class="bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur nisi a dolor iaculis id viverra lectus facilisis.</p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/webapps.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Web Apps</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                    </div>
                 </div>
-                <div class="card-block">
-                    <!--<h4 class="card-title">Intune Health</h4>-->
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.
-                    </p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/analytics.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Analytics & Machine Learning</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/consulting.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Consulting</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header cyan darken-2 white-text">
-                    Analytics and Machine Learning
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeading mont">What we've done</div>
+                <div class="spacing-5"></div>
+                <p class="bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur nisi a dolor iaculis id viverra lectus facilisis.</p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/keti.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">OptiEd</h4>
+                        <h4 class="card-title subTitle">Web App, Optimization</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <a class="btn rebootB">Visit Site</a>
+                    </div>
                 </div>
-                <div class="card-block">
-                    <!--<h4 class="card-title">Intune Health</h4>-->
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.
-                    </p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/intune.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Intune Health</h4>
+                        <h4 class="card-title subTitle">Web App, Sentiment Analysis</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <a class="btn rebootB">Visit Site</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <img class="img-fluid" src="static/images/yourscreen.jpg" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Coming Soon</h4>
+                        <h4 class="card-title subTitle">Your Great Idea...</h4>
+                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <a class="btn rebootB">Get in Touch</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header cyan darken-2 white-text">
-                    Small Business Consulting
-                </div>
-                <div class="card-block">
-                    <!--<h4 class="card-title">Intune Health</h4>-->
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
 
-
-
-
-
-    <!-- Mikey to add rotation to personnel cards -->
-
-    <div class="material-heading">Meet the Team</div>
-    <div class="row responsive-card">
-        <div class="col-sm-6 col-md-3">
-            <!--Card-->
-            <div class="card">
-                <img class="img-fluid" src="https://s3.amazonaws.com/rebootimgs/mikey.jpg" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Michael</h4>
-                    <p class="card-text">Philadelphia, PA</p>
-                    <br>
-                    <p class="card-text"><b>Hi, I'm [CompanyName’s] UI/UX expert.</b> I build captivating and efficient
-                        experiences with robust front-end frameworks.<br><br></p>
-                    <a href="#" class="btn btn-primary">Craft</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="card">
-                <img class="img-fluid" src="https://s3.amazonaws.com/rebootimgs/sammy.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Sammy</h4>
-                    <p class="card-text">Knoxville, TN</p>
-                    <br>
-                    <p class="card-text"><b>I’m [CompanyName’s] strategic analyst.</b> I spend my time finding the most
-                        efficient, no-nonsense solutions to difficult problems.</p>
-                    <a href="#" class="btn btn-primary">Strategize</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="card">
-                <img class="img-fluid" src="https://s3.amazonaws.com/rebootimgs/taylor.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Taylor</h4>
-                    <p class="card-text">Pasadena, CA</p>
-                    <br>
-                    <p class="card-text"><b>Hi, I'm [CompanyName’s] UI/UX expert.</b> I build captivating and efficient
-                        experiences with robust front-end frameworks.<br><br></p>
-                    <a href="#" class="btn btn-primary">Develop</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="card">
-                <img class="img-fluid" src="{{ url_for('static', filename='images/val.jpg') }}" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Valentino</h4>
-                    <p class="card-text">Los Angeles, CA</p>
-                    <br>
-                    <p class="card-text"><b>Hey! I’m [CompanyName’s] Data Scientist.</b> You’ll find me wrangling messy
-                        datasets, building predictive models, and crafting visualizations.</p>
-                    <a href="#" class="btn btn-primary">Predict</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="material-heading">Portfolio Highlights</div>
-
-
-    <div class="row responsive-card">
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header deep-purple white-text">
-                    Web App, Optimization
-                </div>
-                <div class="card-block">
-                    <h4 class="card-title">Opti-Ed</h4>
-                    <p class="card-text">Efficient classroom scheduling through the web using by linear
-                        optimization.</p>
-                    <a class="btn deep-purple ">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header intune white-text">
-                    Web App, Sentiment Analysis
-                </div>
-                <div class="card-block">
-                    <h4 class="card-title">Intune Health</h4>
-                    <p class="card-text">A proactive mental health journal that enables users to better their
-                        livelihoods.</p>
-                    <a class="btn intune" href="https://intune-health-dev.herokuapp.com/">Visit Site</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <div class="card-header amber accent-4 white-text">
-                    Coming Soon
-                </div>
-                <div class="card-block">
-                    <h4 class="card-title">Your great idea...</h4>
-                    <p class="card-text">Let's work together to create a product we can proud of. Start a
-                        conversation.</p>
-                    <a class="btn amber accent-4">Get in Touch</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="material-heading">Get in Touch</div>
-
-
-    <!-- Need to connect this via Slack -->
-    <div class="row responsive-card">
-        <div class="inner contact">
-            <div class="contact-form">
-                <form action="#" id="contact-us" method="post" name="contact-us">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="card">
-                            <div class="card-header cyan darken-2 white-text">
-                                Get In Touch
-                            </div>
-                            <div class="card-block">
-                                <input class="form" id="name" name="name" placeholder="Name" required="required" type="text">
-                                <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
-                                <input class="form" id="subject" name="subject" placeholder="Subject" required="required" type="text">
-                                <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
-                                <input id="input-submit" type=submit class="btn cyan darken-2" value="Get In Touch">
-                            </div>
+        <div class="row">
+            <div class="col-md-6 spacing-5">
+                <div class="col-sm-12 col-md-6 spacing-5">
+                    <div class="card">
+                        <div class="card-block spacing-25">
+                            <h4 class="card-title bottom">Meet The Team</h4>
+                            <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl.</p>
                         </div>
                     </div>
-                </form>
+                </div>                
+                <div class="col-sm-12 col-md-6 spacing-5">
+                    <div class="card">
+                        <img class="img-fluid" src="static/images/team.jpg" alt="Card image cap">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 spacing-5">
+                <div class="col-sm-12 col-md-6 spacing-5">
+                    <div class="card">
+                        <div class="card-block spacing-25">
+                            <h4 class="card-title bottom">Ask Us Questions</h4>
+                            <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl.</p>
+                        </div>
+                    </div>
+                </div>                
+                <div class="col-sm-12 col-md-6 spacing-5">
+                    <div class="card">
+                        <img class="img-fluid" src="static/images/ask.jpg" alt="Card image cap">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    <div class="spacing-50"></div>
     <!-- footer -->
     <div class="footer">
         © 2017 Reboot, LLC dba [company name].
@@ -339,598 +259,6 @@
 
 </body>
 
-
-<!--<body>-->
-<!--<div class="polymorph"></div>-->
-<!--<div id="fullpage">-->
-<!--<div class="section" id="section0">-->
-<!--<div class="polyWorld">-->
-<!--<div class="particle1"></div>-->
-<!--<div class="particle2"></div>-->
-<!--<div class="particle2 next"></div>-->
-<!--<div class="blue">-->
-<!--<h1 class="welcomeTitle">[CompanyName]</h1>-->
-<!--<h1 class="welcomeTag">Logic Made Beautiful</h1>-->
-<!--</div>-->
-<!--<div class="orb"></div>-->
-<!--<div class="orb1 orb2">-->
-<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/orb.png">-->
-<!--</div>-->
-<!--<div class="orb1 orb3">-->
-<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/orb.png">-->
-<!--</div>-->
-<!--<div class="land">-->
-<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/land.png">-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="section" id="section1">-->
-<!--<div class="about-top">-->
-<!--<div class="slide active" id="slide1" data-anchor="who">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">What's Reboot?</h2>-->
-<!--</div>                    -->
-<!--<div class="text-left">-->
-<!--<div class="col-md-4">-->
-<!--<p class="about-us">-->
-<!--<p><b>We do this.</b></p>-->
-<!--<div class="spacing-15"></div>-->
-<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.-->
-<!--</p>-->
-<!--</div>-->
-<!--<div class="col-md-4">-->
-<!--<p class="about-us">-->
-<!--<p><b>And we do this.</b></p>-->
-<!--<div class="spacing-15"></div>-->
-<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.-->
-<!--</p>-->
-<!--</div>-->
-<!--<div class="col-md-4">-->
-<!--<p class="about-us">-->
-<!--<p><b>We do this as well.</b></p>-->
-<!--<div class="spacing-15"></div>-->
-<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis. Nam scelerisque nulla eu auctor vehicula. Etiam auctor dui at dignissim pretium. Nunc nec hendrerit nisl.-->
-<!--</p> -->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="slide" id="slide2" data-anchor="what" style="text-align:center;">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">Problem Solving</h2>-->
-<!--</div>-->
-<!--<div class="spacing-15"></div>-->
-
-<!--</div>-->
-<!--<div class="slide" id="slide3" data-anchor="why">-->
-<!--<div class="row text-center">-->
-<!--<div class="spacing-15"></div>-->
-<!--<h2 class="title">Smart Design</h2>-->
-<!--<div class="spacing-15"></div>-->
-<!--<p><b>Click devices.</b></p>-->
-<!--<div class="spacing-15"></div>-->
-<!--<div class="devices">-->
-<!--<a href="#" class="mobile"></a>-->
-<!--<a href="#" class="tablet"></a>-->
-<!--</div>-->
-<!--<div class="spacing-5"></div>-->
-<!--<div class="browser mobile">-->
-<!--<div class="searchbar">-->
-<!--<form>-->
-<!--<input type="url" class="url" value="http://www.reboot.com" />-->
-<!--<button class="btn">Browse</button>-->
-<!--</form>-->
-<!--</div>-->
-<!--<div class="iframe">-->
-<!--<div class="top-bar">-->
-<!--<div class="top-in"></div>-->
-<!--<div class="top-in"></div>-->
-<!--<div class="top-in"></div>-->
-<!--<div class="top-in"></div>-->
-<!--</div>-->
-<!--<div class="design-slide">-->
-<!--<slider>-->
-<!--<slide></slide>-->
-<!--<slide></slide>-->
-<!--<slide></slide>-->
-<!--<slide></slide>-->
-<!--</slider>-->
-<!--</div>-->
-<!--<div class="design-section2">-->
-<!--<div class="square-container">-->
-<!--<square></square>-->
-<!--<square></square>-->
-<!--<square></square>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="design-section left">-->
-<!--<div>Responsive<br>Placement</div>-->
-<!--<i class="fa fa-arrow-right"></i>-->
-<!--</div>-->
-<!--<div class="square-container">-->
-<!--<squareo1></squareo1>-->
-<!--</div>-->
-<!--<div class="design-section right">-->
-<!--<div>Responsive<br>Placement</div>-->
-<!--<i class="fa fa-arrow-left"></i>-->
-<!--</div>-->
-<!--<div class="square-container">-->
-<!--<squareo2></squareo2>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div> -->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="section fp-table" id="section2">-->
-<!--<div class="team-desktop fp-tableCell">-->
-<!--<div class="container">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">Meet The Team</h2>-->
-<!--</div>-->
-<!--<div class="row text-center">-->
-<!--<div class="materialTeam">-->
-<!--<h2>Valentino Constantinou</h2>-->
-<!--<div class="img-wrapper"><img alt="location" src="https://s3.amazonaws.com/rebootimgs/chicago.jpg"></div>-->
-<!--<div class="detail">-->
-<!--<p class="profession">Data Science & UI/UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Chicago, IL</h5>-->
-<!--</div>-->
-<!--<div class="button-wrapper wrapVC">-->
-<!--<div class="layer"></div>-->
-<!--<button class="main-button btnVC fa fa-info">-->
-<!--<div class="ripple rippleVC"></div>-->
-<!--</button>-->
-<!--</div>-->
-<!--<div class="layered-content layeredVC">-->
-<!--<button class="close-button closeVC fa fa-times ihn"></button>-->
-<!--<div class="content">-->
-<!--<img alt="faces" src="https://s3.amazonaws.com/rebootimgs/val.jpg">-->
-<!--<p>-->
-<!--<b>Hey! I’m [CompanyName’s] Data Monkey.</b> You’ll find me wrangling messy datasets, building predictive models, or crafting beautiful visualizations.-->
-<!--<br>-->
-<!--<b>Ask Me About:</b> Machine Learning, Data Visualization, Big Data.-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="materialTeam">-->
-<!--<h2>Sammy Thomas</h2>-->
-<!--<div class="img-wrapper"><img alt="location" src="https://s3.amazonaws.com/rebootimgs/knoxville.jpg"></div>-->
-<!--<div class="detail">-->
-<!--<p class="profession">Strategic Planning</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Knoxville, TN</h5>-->
-<!--</div>-->
-<!--<div class="button-wrapper wrapST">-->
-<!--<div class="layer"></div>-->
-<!--<button class="main-button btnST fa fa-info">-->
-<!--<div class="ripple rippleST"></div>-->
-<!--</button>-->
-<!--</div>-->
-<!--<div class="layered-content layeredST">-->
-<!--<button class="close-button closeST fa fa-times ihn"></button>-->
-<!--<div class="content">-->
-<!--<img alt="faces" src="https://s3.amazonaws.com/rebootimgs/sammy.png">-->
-<!--<p>-->
-<!--<b>I’m [CompanyName’s] strategic analyst.</b> I spend my time finding the most efficient, no-nonsense solutions to difficult problems.-->
-<!--<br>-->
-<!--<b>Ask Me About:</b> Financial Structures, Company Culture, Company Systems, or any near impossible math problem.-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="row text-center">                 -->
-<!--<div class="materialTeam">-->
-<!--<h2>Taylor Stevens</h2>-->
-<!--<div class="img-wrapper"><img alt="location" src="https://s3.amazonaws.com/rebootimgs/pasadena.jpg"></div>-->
-<!--<div class="detail">-->
-<!--<p class="profession">Back-End & UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Pasadena, CA</h5>-->
-<!--</div>-->
-<!--<div class="button-wrapper wrapTS">-->
-<!--<div class="layer"></div>-->
-<!--<button class="main-button btnTS fa fa-info">-->
-<!--<div class="ripple rippleTS"></div>-->
-<!--</button>-->
-<!--</div>-->
-<!--<div class="layered-content layeredTS">-->
-<!--<button class="close-button closeTS fa fa-times ihn"></button>-->
-<!--<div class="content">-->
-<!--<img alt="faces" src="https://s3.amazonaws.com/rebootimgs/taylor.png">-->
-<!--<p>-->
-<!--<b>Hi, I'm [CompanyName’s] UI/UX expert.</b> I build captivating and efficient experiences with robust front-end frameworks.-->
-<!--<br>-->
-<!--<b>Ask Me About:</b> User Experience, Design, Scaling Ideas, Music.-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="materialTeam">-->
-<!--<h2>Michael Thompson</h2>-->
-<!--<div class="img-wrapper"><img alt="location" src="https://s3.amazonaws.com/rebootimgs/Philadelphia.jpg"></div>-->
-<!--<div class="detail">-->
-<!--<p class="profession">Front-End & UI/UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Philadelphia, PA</h5>-->
-<!--</div>-->
-<!--<div class="button-wrapper wrapMT">-->
-<!--<div class="layer"></div>-->
-<!--<button class="main-button btnMT fa fa-info">-->
-<!--<div class="ripple rippleMT"></div>-->
-<!--</button>-->
-<!--</div>-->
-<!--<div class="layered-content layeredMT">-->
-<!--<button class="close-button closeMT fa fa-times ihn"></button>-->
-<!--<div class="content">-->
-<!--<img alt="faces" src="https://s3.amazonaws.com/rebootimgs/mikey.jpg">-->
-<!--<p>-->
-<!--<b>Hi, I'm [CompanyName’s] UI/UX expert.</b> I build captivating and efficient experiences with robust front-end frameworks.-->
-<!--<br>-->
-<!--<b>Ask Me About:</b> User Experience, Design, Scaling Ideas, Music.-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="team-mobile">-->
-<!--<div class="mobile-title text-center">-->
-<!--<h2 class="title">Meet The Team</h2>-->
-<!--<p class="mobile-subtitle">Tap cards to read more.</p>-->
-<!--</div>-->
-<!--<div class="mobile-slides"> -->
-<!--<div class="slide active" id="slide1" data-anchor="Valentino">-->
-<!--<section class="card-container">-->
-<!--<div class="card card-v" onclick="flipV()">-->
-<!--<div class="front">-->
-<!--<div class="cover cover-v"></div>-->
-<!--<div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/val.jpg"></div>-->
-<!--<div class="content">-->
-<!--<div class="main">-->
-<!--<h3 class="name">Valentino Constantinou</h3>-->
-<!--<p class="profession">Data Science & UI/UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Chicago, IL</h5>-->
-<!--<h5><i class="fa fa-envelope-o fa-fw text-muted"></i> valentino@reboot.com</h5>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="back">-->
-<!--<div class="content">-->
-<!--<p class="profession">About</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="team-bio">Valentino Constantinou is a student at Northwestern University's Master of Science in Analytics program. He is a graduate of the University of Tennessee’s Haslam College of Business, where he studied Economics. In his spare time, Valentino enjoys reading, spending time outdoors, and working on extracurricular projects such as analysis of medical data for the Chicago Marathon. He has accepted a 2016 summer internship position at the Jet Propulsion Laboratory, a joint facility between NASA and Caltech in Pasadena, California, as an IT Data Scientist. Valentino will be graduating from the MSiA program in December 2016.</p>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p class="profession">Skills</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="skills">Machine Learning</p>-->
-<!--<p class="skills">Deep Learning</p>-->
-<!--<p class="skills">Data Visualization</p>-->
-<!--<p class="skills">Data Mining</p>-->
-<!--<p class="skills">Text Analytics</p>-->
-<!--<p class="skills">Predictive Analytics</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!--</div>-->
-<!--<div class="slide" id="slide2" data-anchor="Sammy">-->
-<!--<section class="card-container">-->
-<!--<div class="card card-s" onclick="flipS()">-->
-<!--<div class="front">-->
-<!--<div class="cover cover-s"></div>-->
-<!--<div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/sammy.png"></div>-->
-<!--<div class="content">-->
-<!--<div class="main">-->
-<!--<h3 class="name">Sammy Thomas</h3>-->
-<!--<p class="profession">Strategic Planning</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Knoxville, TN</h5>-->
-<!--<h5><i class="fa fa-envelope-o fa-fw text-muted"></i> sammy@reboot.com</h5>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="back">-->
-<!--<div class="content">-->
-<!--<p class="profession">About</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="team-bio">Sammmmmmmyyyyyyyyyyyyy</p>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p class="profession">Skills</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="skills">Making</p>-->
-<!--<p class="skills">Shit</p>-->
-<!--<p class="skills">Work</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!--</div>-->
-<!--<div class="slide" id="slide3" data-anchor="Taylor">-->
-<!--<section class="card-container">-->
-<!--<div class="card card-t" onclick="flipT()">-->
-<!--<div class="front">-->
-<!--<div class="cover cover-t"></div>-->
-<!--<div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/taylor.png"></div>-->
-<!--<div class="content">-->
-<!--<div class="main">-->
-<!--<h3 class="name">Taylor Stevens</h3>-->
-<!--<p class="profession">Back-End & UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Pasadena, CA</h5>-->
-<!--<h5><i class="fa fa-envelope-o fa-fw text-muted"></i> taylor@reboot.com</h5>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="back">-->
-<!--<div class="content">-->
-<!--<p class="profession">About</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="team-bio">Taylor is a currently a PhD student in Biochemistry and Molecular Biophysics at Caltech. Taylor received his Bachelor's degree in Biochemistry, Cellular and Molecular Biology at the University of Tennessee. As the result of being immersed in computational and experimental biochemistry research, Taylor is equipped with a strong set of problem solving skills. Taylor's strong attention to detail paired with his training in scientific programming led him to become strongly involved in web development while still a student at the University of Tennessee.</p>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p class="profession">Skills</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="skills">JavaScript</p>-->
-<!--<p class="skills">Python</p>-->
-<!--<p class="skills">PHP</p>-->
-<!--<p class="skills">Golang</p>-->
-<!--<p class="skills">System Administration Tasks</p>-->
-<!--<p class="skills">Front-End Web Applications</p>-->
-<!--<p class="skills">Numerical Algorithms</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!--</div>  -->
-<!--<div class="slide" id="slide4" data-anchor="Michael">-->
-<!--<section class="card-container">-->
-<!--<div class="card card-m" onclick="flipM()">-->
-<!--<div class="front">-->
-<!--<div class="cover cover-m"></div>-->
-<!--<div class="team-member"><img class="img-circle" src="https://s3.amazonaws.com/rebootimgs/mikey.jpg"></div>-->
-<!--<div class="content">-->
-<!--<div class="main">-->
-<!--<h3 class="name">Michael Thompson</h3>-->
-<!--<p class="profession">Front-End & UI/UX</p>-->
-<!--<h5><i class="fa fa-map-marker fa-fw text-muted"></i>Philadelphia, PA</h5>-->
-<!--<h5><i class="fa fa-envelope-o fa-fw text-muted"></i> michael@reboot.com</h5>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="back">-->
-<!--<div class="content">-->
-<!--<p class="profession">About</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="team-bio">Michael Thompson is an alum of UNC-Chapel Hill and Duke University, where he double majored in History and Journalism, with a minor in PPE (Politics, Philosophy, Economics). In his second year of college, Michael took interest in programming - specifically web development - and spent the next few semesters finding time between classes to travel the country on a tour of Hackathons (24-hour programming competitions). By his third year, Michael co-founded a full-stack development firm with friends. Currently, Michael has ownership in several tech-related companies, in addition to a working partnership with a number of others. When he's not in front of a screen, Michael enjoys music production and triathlons.-->
-<!--</p>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p class="profession">Skills</p>-->
-<!--<div class="spacing-5"></div>-->
-<!--<p class="skills">HTML/HTML5</p>-->
-<!--<p class="skills">CSS/CSS3</p>-->
-<!--<p class="skills">AngularJs</p>-->
-<!--<p class="skills">Adobe Photoshop/Illustrator</p>-->
-<!--<p class="skills">Graphic Design</p>-->
-<!--<p class="skills">Copywriting</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="mobile-swipe">-->
-<!--<div class="swipe"><img src="https://s3.amazonaws.com/rebootimgs/swipe.png"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="section fp-table" id="section3">-->
-<!--<div class="container fp-tableCell">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">Stuff We've Done</h2>-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--<div class="col-md-4 text-center">-->
-<!--<div class="websitedisplay">-->
-<!--<div class="information">-->
-<!--<h1>KETI OptiEd</h1>-->
-<!--<h2>Web App</h2>-->
-<!--</div>-->
-<!--<div class="laptop">-->
-<!--<img src="../static/pre-s3/keti.jpg">-->
-<!--</div>-->
-<!--<button class="view" data-target=".portfolioModalOne" data-toggle="modal" type="button"><p>+</p></button>-->
-<!--</div>-->
-<!--<div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalOne" role="dialog" tabindex="-1">-->
-<!--<div class="modal-dialog modal-lg portfolioPopup">-->
-<!--<div class="modal-content">-->
-<!--<div class="modal-header justify-text">-->
-<!--<button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>-->
-<!--<h3 class="modal-title">KETI OptiEd</h3>-->
-<!--</div>-->
-<!--<div class="modal-body">-->
-<!--<div class="body-message">-->
-<!--<div class="row">-->
-<!--<div class="col-md-12">-->
-<!--<div class="modal-slider">-->
-<!--<div class="about-top portfolioSlider">-->
-<!--<div class="slide active" id="slide1a" data-anchor="KETI/laptop">-->
-<!--<a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>-->
-<!--</div>-->
-<!--<div class="slide" id="slide2a" data-anchor="KETI/tablet">-->
-<!--<a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>-->
-<!--</div>-->
-<!--<div class="slide" id="slide3a" data-anchor="KETI/mobile">-->
-<!--<a href="../static/pre-s3/keti.jpg" data-lightbox="ketiLightbox"><img src="../static/pre-s3/keti.jpg"></a>-->
-<!--</div> -->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="spacing-15"></div>-->
-<!--<div class="row">-->
-<!--<div class="col-md-6 justify-text">-->
-<!--<h4><b>Concept</b></h4>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>-->
-<!--<div class="spacing-15"></div>-->
-<!--</div>-->
-<!--<div class="col-md-6 justify-text">-->
-<!--<h4><b>Materials</b></h4>-->
-<!--<div class="spacing-10"></div>-->
-<!--<ul class="skillsList">-->
-<!--<li>AngularJs</li>-->
-<!--<li>Python</li>-->
-<!--<li>Django</li>-->
-<!--<li>PostgreSQL</li>-->
-<!--<li>HTML</li>-->
-<!--<li>CSS</li>-->
-<!--</ul>-->
-<!--<div class="spacing-15"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="modal-footer">-->
-<!--<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-4 text-center">-->
-<!--<div class="websitedisplay">-->
-<!--<div class="information">-->
-<!--<h1>Project Two</h1>-->
-<!--<h2>Web App</h2>-->
-<!--</div>-->
-<!--<div class="laptop">-->
-<!--<img src="http://dizin.x10.bz/images/smilesofboisecp.png">-->
-<!--</div>-->
-<!--<button class="view" data-target=".portfolioModalTwo" data-toggle="modal" type="button"><p>+</p></button>-->
-<!--</div>-->
-<!--<div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalTwo" role="dialog" tabindex="-1">-->
-<!--<div class="modal-dialog modal-lg portfolioPopup">-->
-<!--<div class="modal-content">-->
-<!--<div class="modal-header">-->
-<!--<button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>-->
-<!--<h4 class="modal-title" id="gridSystemModalLabel">title</h4>-->
-<!--</div>-->
-<!--<div class="modal-body">-->
-<!--<div class="body-message">-->
-<!--<div class="row">-->
-<!--<div class="col-md-6 justify-text">-->
-<!--<h4>The Purpose</h4>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>-->
-<!--</div>-->
-<!--<div class="col-md-6 justify-text">-->
-
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="modal-footer">-->
-<!--<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-4 text-center">-->
-<!--<div class="websitedisplay">-->
-<!--<div class="information">-->
-<!--<h1>Project Three</h1>-->
-<!--<h2>Web App</h2>-->
-<!--</div>-->
-<!--<div class="laptop">-->
-<!--<img src="http://dizin.x10.bz/images/smilesofboisecp.png">-->
-<!--</div>-->
-<!--<button class="view" data-target=".portfolioModalTreeFiddy" data-toggle="modal" type="button"><p>+</p></button>-->
-<!--</div>-->
-<!--<div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade portfolioModalTreeFiddy" role="dialog" tabindex="-1">-->
-<!--<div class="modal-dialog modal-lg portfolioPopup">-->
-<!--<div class="modal-content">-->
-<!--<div class="modal-header">-->
-<!--<button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>-->
-<!--<h4 class="modal-title" id="gridSystemModalLabel">title</h4>-->
-<!--</div>-->
-<!--<div class="modal-body">-->
-<!--<div class="body-message">-->
-<!--<div class="row">-->
-<!--<div class="col-md-6 justify-text">-->
-<!--<h4>The Purpose</h4>-->
-<!--<div class="spacing-10"></div>-->
-<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis nulla non tellus rutrum, quis faucibus nisl dictum. Quisque auctor, risus sed varius varius, ex est congue eros, eu lobortis augue mauris id ante. Fusce ornare semper dolor, et eleifend ante tristique vel. Nullam viverra laoreet tortor luctus consequat. </p>-->
-<!--</div>-->
-<!--<div class="col-md-6 justify-text">-->
-
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="modal-footer">-->
-<!--<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="section" id="section4">-->
-<!--<div class="container">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">Our Blog</h2>-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--<div class="col-md-12">-->
-<!--<div class="" id="blog">-->
-<!--<div class="title"></div>-->
-<!--<br>-->
-<!--{% for post in posts %}-->
-<!--{% if post.post.published == True %}-->
-<!--<div class="blog-title" style="margin-left: 3px;"><a href="/blog/{{ post.post.url }}">{{ post.post.title }}</a></div>-->
-<!--<div class="subtitle" style="margin-left: 3px;">{{ post.post.subtitle }}</div>-->
-<!--<br>-->
-<!--{% endif %}-->
-<!--{% endfor %}-->
-<!--</div>-->
-<!--&lt;!&ndash; news reel with latest commits from github and/or some other information. &ndash;&gt;-->
-<!--<div class="news-feed">-->
-<!--<p class="css-typing" id="css-typing-container"><a id="css-typing" href="https://www.github.com/vc1492a" target="_blank">see what I've been developing lately</a></p>-->
-<!--</div>-->
-<!--</div> -->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="section" id="section5">-->
-<!--<div class="container">-->
-<!--<div class="row text-center">-->
-<!--<h2 class="title">Let's Talk</h2>-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--<div class="inner contact">-->
-<!--<div class="contact-form">-->
-<!--<form action="#" id="contact-us" method="post" name="contact-us">-->
-<!--<div class="col-md-6 col-xs-12">-->
-<!--<input class="form" id="name" name="name" placeholder="Name" required="required" type="text"> -->
-<!--<input class="form" id="mail" name="mail" placeholder="Email" required="required" type="email"> -->
-<!--<input class="form" id="subject" name="subject" placeholder="Subject" required="required" type="text">-->
-<!--</div>-->
-<!--<div class="col-md-6 col-xs-12">-->
-<!--<textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>-->
-<!--</div>-->
-<!--<div class="relative fullwidth col-xs-12">-->
-<!--<button class="form-btn semibold" id="submit" name="submit" type="submit">Send Message</button>-->
-<!--</div>-->
-<!--<div class="clear"></div>-->
-<!--</form>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-</body>
 <!-- javascript -->
 <!--<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>-->
 <!--<script src="{{ url_for('static', filename='js/styles.js') }}"></script>-->
@@ -940,12 +268,6 @@
 <script src="{{ url_for('static', filename='material_bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='material_bootstrap/js/mdb.min.js') }}"></script>
 <script src="https://use.fontawesome.com/65276217d5.js"></script>
-<!--<script src="{{ url_for('static', filename='js/jquery.slimscroll.min.js') }}"></script>-->
-<!--<script src="{{ url_for('static', filename='js/jquery.fullPage.min.js') }}"></script>-->
-<!--<script src="{{ url_for('static', filename='js/side-timeline.js') }}"></script>-->
-<!--<script src="{{ url_for('static', filename='js/card.js') }}"></script>-->
 <script src="{{ url_for('static', filename='js/responsive-devices.js') }}"></script>
 <script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
-<!--<script src="{{ url_for('static', filename='js/materialTeam.js') }}"></script>-->
-<!--<script src="{{ url_for('static', filename='js/lightbox.min.js') }}"></script>-->
 </html>
