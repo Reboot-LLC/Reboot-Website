@@ -6,18 +6,33 @@ html {
 body, html {
     width: 100%;
     padding: 0;
-    margin: 0; 
+    margin: 0;
 }
 
 body {
     font-family: 'Jura', sans-serif !important;
     background-color: #f8f8f8;
     visibility: hidden;
-    overflow-x: hidden !important
+    overflow-x: hidden !important;
+    text-shadow: 1px 1px #f8f8f8;
 }
 
 img {
     vertical-align: middle;
+}
+
+nav {
+    text-shadow: none;
+}
+
+.btn {
+    text-shadow: none;
+}
+
+.image-container {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
 }
 
 .material-heading {
@@ -65,7 +80,7 @@ img {
 }
 
 .loader {
-    color: #000;
+    color: #1AADC1;
     font-size: 10px;
     margin: auto;
     position: fixed;
@@ -318,7 +333,7 @@ button {
 .bodyHeading {
     text-transform: uppercase;
     font-weight: bold;
-    color: #353c3e;
+    color: #1AADC1;
     font-size: 25px;
 }
 
@@ -336,7 +351,7 @@ button {
     margin-top: 100px;
     border:15px solid #ffffff;
     position: relative;
-    width: 75%;
+    width: 94%;
     height: 65vh;
     overflow: hidden;
     background: #ffffff;
@@ -548,6 +563,11 @@ button {
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     line-height: 50px;
+    margin-bottom: 40px;
+}
+
+.headingText {
+    margin-right: 25px;
 }
 
 .card-title {
@@ -567,7 +587,7 @@ button {
 }
 
 .rebootB {
-    background-color: #1AADC1!important;
+    background-color: #1AADC1 !important;
 }
 
 .card-title.bottom {
@@ -576,6 +596,14 @@ button {
 
 .card img {
     border-bottom: 5px solid #1AADC1;
+}
+
+.card:hover img {
+    transition: 0.25s ease-out;
+    border-bottom: 5px solid #ffb81e;
+    -moz-transform: scale(1.1) translateY(-6px);
+    -webkit-transform: scale(1.1) translateY(-6px);
+    transform: scale(1.1) translateY(-6px);
 }
 
 /* Home Page - Contact Form */
