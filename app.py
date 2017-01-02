@@ -461,6 +461,16 @@ def record_web_lead(name, email, subject, message):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     posts = blog_posts.find()
+    return render_template('index.html', posts=posts)
+
+
+@app.route('/team')
+def team():
+    return render_template('team.html')
+
+
+@app.route('/contact')
+def contact():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
@@ -475,16 +485,6 @@ def home():
             render_template('index.html',
                             message='Whoops! Please try again later.',
                             post=posts)
-    return render_template('index.html', posts=posts)
-
-
-@app.route('/team')
-def team():
-    return render_template('team.html')
-
-
-@app.route('/contact')
-def contact():
     return render_template('contact.html')
 
 
@@ -1193,12 +1193,12 @@ scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=60
+    minutes=360
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=60
+    minutes=360
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
