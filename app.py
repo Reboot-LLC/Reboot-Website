@@ -478,6 +478,16 @@ def home():
     return render_template('index.html', posts=posts)
 
 
+@app.route('/team')
+def team():
+    return render_template('team.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search_page():
     if request.method == 'POST':
@@ -687,12 +697,6 @@ def blog_route():
     post = blog_posts.find_one({'post.url': url})
     session['blog_url'] = url
     return render_template('blog_template.html', post=post)
-
-
-# test route (remove later)
-@app.route('/test')
-def test_route():
-    return render_template('test.html')
 
 
 @app.errorhandler(401)

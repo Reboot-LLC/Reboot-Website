@@ -12,7 +12,6 @@ body, html {
 body {
     font-family: 'Jura', sans-serif !important;
     background-color: #f8f8f8;
-    visibility: hidden;
     overflow-x: hidden !important;
     text-shadow: 1px 1px #f8f8f8;
 }
@@ -25,14 +24,12 @@ nav {
     text-shadow: none;
 }
 
-.btn {
-    text-shadow: none;
+.hide {
+    visibility: hidden;
 }
 
-.image-container {
-    overflow: hidden;
-    width: 100%;
-    height: auto;
+.btn {
+    text-shadow: none;
 }
 
 .material-heading {
@@ -521,6 +518,9 @@ button {
     .polyWorld {
         width:85%;
     }
+    .image-container {
+        max-height: none;
+    }
 }
 
 .intro-title {
@@ -594,16 +594,38 @@ button {
     min-height: 50px;
 }
 
-.card img {
+.image-container {
+    overflow: hidden;
+    height: auto;
+    width: 100%;
     border-bottom: 5px solid #1AADC1;
+}
+
+.image-ht-restrict {
+    max-height: 235px;
+}
+
+.card img {
+    height: auto;
 }
 
 .card:hover img {
     transition: 0.25s ease-out;
-    border-bottom: 5px solid #ffb81e;
     -moz-transform: scale(1.1) translateY(-6px);
     -webkit-transform: scale(1.1) translateY(-6px);
     transform: scale(1.1) translateY(-6px);
+}
+
+.card:hover .image-container {
+    transition: 0.25s ease-out;
+    border-bottom: 5px solid #ffb81e;
+}
+
+.img-desaturate {
+    -webkit-filter: grayscale(1);
+    -webkit-filter: grayscale(100%);
+    filter: gray;
+    filter: grayscale(100%);
 }
 
 /* Home Page - Contact Form */
