@@ -3,8 +3,8 @@ jQuery(document).ready(function(){
 });
  
 function delayShow() {
-	var secs = 2000; 
-	var secs2 = 2100;
+	var secs = 500; 
+	var secs2 = 600;
 	setTimeout('jQuery(".loading-gif").css("visibility","hidden");', secs);
 	setTimeout('jQuery("body").css("visibility","visible");', secs2);
 }

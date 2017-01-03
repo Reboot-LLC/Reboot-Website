@@ -113,7 +113,7 @@
 
 
 <div class="fullpage">
-    <div class="container">
+    <div class="container homeContainer">
         <br>
         <br>
         <br>
@@ -131,7 +131,7 @@
 <br>
 <br>
 <div class="fullpage">
-    <div class="container">
+    <div class="container homeContainer">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                 <div class="bodyHeading mont">East & West Coast</div>
@@ -143,7 +143,7 @@
                     <div class="card-block">
                         <h4 class="card-title">Los Angeles, CA</h4>
                         <h4 class="card-title subTitle">
-                            (123) 456-7890
+                            <a href="tel:123-456-7890">(123) 456-7890</a>
                         </h4>
                         <p class="card-text bold">Web Apps, Data Science</p>
                     </div>
@@ -154,7 +154,7 @@
                     <div class="card-block">
                         <h4 class="card-title">Philadelphia, PA</h4>
                         <h4 class="card-title subTitle">
-                            (123) 456-7890
+                            <a href="tel:123-456-7890">(123) 456-7890</a>
                         </h4>
                         <p class="card-text bold">Web Apps</p>
                     </div>
@@ -165,7 +165,7 @@
                     <div class="card-block">
                         <h4 class="card-title">Knoxville, TN</h4>
                         <h4 class="card-title subTitle">
-                            (123) 456-7890
+                            <a href="tel:123-456-7890">(123) 456-7890</a>
                         </h4>
                         <p class="card-text bold">Strategic Planning</p>
                     </div>
@@ -175,7 +175,6 @@
 
         <div class="spacing-25"></div>
         <div class="spacing-5"></div>
-
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                 <div class="bodyHeading mont">Send a Message</div>
@@ -186,9 +185,23 @@
                 <div class="card">
                     <div class="card-block">
                         {{ message }}
+                        <div class="spacing-5"></div>
+                        <h4 class="card-title">Let's Talk About:</h4>
+
+                        <label class="chkLabel noselect spacing-10" for="apps">
+                        <input type="checkbox" id="apps" name="contactCategory" value="apps" class="materialChk">Web Apps & Software</label>
+
+                        <label class="chkLabel noselect spacing-10" for="data">
+                        <input type="checkbox" id="data" name="contactCategory" value="data" class="materialChk">Data Science & Analytics</label>
+
+                        <label class="chkLabel noselect spacing-10" for="consulting">
+                        <input type="checkbox" id="consulting" name="contactCategory" value="consulting" class="materialChk">Small Business Consulting</label>
+
+                        <div class="spacing-25"></div>
+                        <h4 class="card-title">Your Details:</h4>
                         <input class="form" id="name" name="name" placeholder="Name" required="required" type="text">
                         <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
-                        <input class="form" id="subject" name="subject" placeholder="Subject" required="required" type="text">
+                        <!--<input class="form" id="subject" name="subject" placeholder="Subject" required="required" type="text">-->
                         <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
                         <input class="btn rebootB contactB" id="input-submit" type=submit value="Send Message">
                     </div>

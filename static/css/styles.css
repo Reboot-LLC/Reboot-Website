@@ -24,6 +24,14 @@ nav {
     text-shadow: none;
 }
 
+.noselect {
+  -webkit-touch-callout: none!important;
+    -webkit-user-select: none!important;
+       -moz-user-select: none!important;
+        -ms-user-select: none!important;
+            user-select: none!important;
+}
+
 .hide {
     visibility: hidden;
 }
@@ -521,6 +529,10 @@ button {
     .image-container {
         max-height: none;
     }
+    .homeContainer {
+        zoom: 1.85;
+        padding: 0 25px;
+    }
 }
 
 .intro-title {
@@ -608,22 +620,31 @@ button {
 }
 
 .image-ht-restrict {
-    max-height: 235px;
+    max-width: 100%;
 }
+
+.image-ht-restrict img {
+    min-width: 100%;
+    min-height: 275px;
+}
+
+.card * {
+   transition: all 0.25s ease;
+} 
 
 .card img {
     height: auto;
 }
 
 .card:hover img {
-    transition: 0.25s ease-out;
+    transition: 0.25s ease-in-out;
     -moz-transform: scale(1.1) translateY(-6px);
     -webkit-transform: scale(1.1) translateY(-6px);
     transform: scale(1.1) translateY(-6px);
 }
 
 .card:hover .image-container {
-    transition: 0.25s ease-out;
+    transition: 0.25s ease-in-out;
     border-bottom: 5px solid #ffb81e;
 }
 
@@ -719,3 +740,95 @@ input {
     background-color: #17445d !important;
 }
 
+/* Contact Page */
+
+/* making the copyright label on the map less intense. kinda ruins the asethetic of the dark map, I think*/
+.leaflet-control-attribution.leaflet-control {
+    opacity:0.25;
+}
+.leaflet-control-attribution.leaflet-control:hover {
+    opacity:0.75;
+}
+/*end*/
+
+.chkLabel {
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+input.materialChk {
+    cursor: pointer; 
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font: inherit;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background: #fff;
+    border-radius: .125em;
+    box-sizing: border-box;
+    border: 0.125em solid #1AADC1;
+    box-shadow: inset 0 0 0 0 #1AADC1;
+    position: relative;
+    -webkit-transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s;
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+}
+
+input.materialChk:focus {
+    outline: none;
+}
+
+input.materialChk:checked {
+    border-color: #1AADC1;
+    box-shadow: inset 0 0 0 0.5em #1AADC1;
+    -webkit-transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s;
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+}
+
+input.materialChk:before,
+input.materialChk:after {
+    content: '';
+    background: #fff;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    -webkit-transform: translate(0.2728em, 0.4279em) rotate(44.91deg) scale(0.3411, 0.1);
+    transform: translate(0.2728em, 0.4279em) rotate(44.91deg) scale(0.3411, 0.1);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transition: opacity 0.3s cubic-bezier(0.2, 0.3, 0, 1), -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: opacity 0.3s cubic-bezier(0.2, 0.3, 0, 1), -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), opacity 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), opacity 0.3s cubic-bezier(0.2, 0.3, 0, 1), -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
+    top: -0.125em;
+    left: -0.125em;
+}
+
+input.materialChk:after {
+    -webkit-transform: translate(0.8494em, 0.35em) rotate(135.22deg) scale(0.5612, 0.1);
+    transform: translate(0.8494em, 0.35em) rotate(135.22deg) scale(0.5612, 0.1);
+}
+
+input.materialChk:not(:checked):before {
+    -webkit-transform: translate(0.505em, 0.455em) rotate(44.91deg) scale(0.1, 0.1);
+    transform: translate(0.505em, 0.455em) rotate(44.91deg) scale(0.1, 0.1);
+}
+
+input.materialChk:not(:checked):after {
+    -webkit-transform: translate(0.575em, 0.525em) rotate(135.22deg) scale(0.1, 0.1);
+    transform: translate(0.575em, 0.525em) rotate(135.22deg) scale(0.1, 0.1);
+}
+
+input.materialChk {
+    font-size: 20px;
+    margin-right: 10px;
+}

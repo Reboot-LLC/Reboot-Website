@@ -9,20 +9,20 @@ var geojson = [
         properties: {
             title: 'Los Angeles, CA',
             description: 'Valentino Constantinou<br> Rustam Mirzaev<br> Taylor Stevens',
-            'marker-color': '#1AADC1',
+            'marker-color': '#029CB2',
             'marker-size': 'large'
         }
     },
     {
         type: 'Feature',
         geometry: {
-            type: 'Point',
-            coordinates: [-75.2581184, 40.0049314]
+            type: 'Point', 
+            coordinates: [-75.167473, 39.951852]
         },
         properties: {
             title: 'Philadelphia, PA',
             description: 'Michael Thompson',
-            'marker-color': '#1AADC1',
+            'marker-color': '#029CB2',
             'marker-size': 'large'
         }
     },
@@ -35,7 +35,7 @@ var geojson = [
         properties: {
             title: 'Knoxville, TN',
             description: 'Sammy Thomas',
-            'marker-color': '#1AADC1',
+            'marker-color': '#029CB2',
             'marker-size': 'large'
         }
     }
