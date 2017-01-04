@@ -158,7 +158,7 @@ def search_collection(query):
 
 # support ticket functionality #
 # submit ticket
-def submit_ticket(product_name, contact_name, email, phone, description, urgent):
+def submit_ticket(product_name, contact_name, email, phone, description, category, urgent):
     session['support_ticket_id'] = int(support_tickets.count()) + 1
     support_ticket = {
         'id': int(support_tickets.count()) + 1,
@@ -168,6 +168,7 @@ def submit_ticket(product_name, contact_name, email, phone, description, urgent)
         'email': email,
         'phone': phone,
         'description': description,
+        'category': category,
         'status': False,
         'urgent': urgent,
         'resolve_date': None
@@ -481,11 +482,11 @@ def contact():
         message = form['message'][0]
         category = form['category']
         if record_web_lead(name, email, subject, message, category) is True:
-            render_template('index.html',
+            render_template('contact.html',
                             message='Message sent successfully! We will be in touch as soon as possible.')
             report_lead(name, email, subject, message, category)
         else:
-            render_template('index.html',
+            render_template('contact.html',
                             message='Whoops! Please try again later.')
     return render_template('contact.html')
 
@@ -504,20 +505,27 @@ def search_page():
 @app.route('/support', methods=['GET', 'POST'])
 def support():
     if request.method == 'POST':
-        product_name = request.form['product_name']
-        contact_name = request.form['contact_name']
-        email = request.form['email']
-        phone = request.form['phone']
-        description = request.form['description']
-        # define some of the check box options for description as urgent
-        # if its one of those, then mark as urgent
-        # if blah then urgent = True, else urgency is False
-        if submit_ticket(product_name, contact_name, email, phone, description, False) is True:
+        form = dict(request.form)
+        print(form)
+        product_name = form['product_name'][0]
+        contact_name = form['contact_name'][0]
+        email = form['email'][0]
+        phone = form['phone'][0]
+        description = form['message'][0]
+        category = form['category']
+        # define urgent categories
+        if 'App Not Loading' in category:
+            urgency = True
+        else:
+            urgency = False
+        if submit_ticket(product_name, contact_name, email, phone, description, category, urgency) is True:
+            render_template('support.html',
+                            message='Message sent successfully! We will be in touch as soon as possible.')
             report_ticket(session['support_ticket_id'], False)
             # confirm_ticket() # sends out an email confirmation
         else:
-            return abort(401)
-
+            render_template('support.html',
+                            message='Whoops! Please try again later.')
     return render_template('support.html')
 
 
@@ -744,6 +752,7 @@ def define_color_sentiment(amount):
 
 # color definition for support bot
 def define_color_support_ticket(urgency):
+    print(urgency)
     if urgency is True:
         return "#F64744"
     elif urgency is False:
@@ -1162,6 +1171,11 @@ def report_ticket(id, resolve):
                     'text': ticket['description'],
                     'fields': [
                         {
+                            "title": "Topic(s)",
+                            "value": ', '.join(item for item in ticket['category']),
+                            "short": False
+                        },
+                        {
                             "title": "Email",
                             "value": ticket['email'],
                             "short": True
@@ -1180,7 +1194,7 @@ def report_ticket(id, resolve):
     elif resolve is True:
         forms_of_gratitude = ['Thanks, guys!', 'Cool support system.', 'That was fast!']
         support_helper.chat.post_message(
-            '#test',
+            '#support',
             'Support ticket #' + str(id) + ' has been resolved!',
             attachments=[
                 {

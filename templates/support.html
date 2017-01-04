@@ -183,34 +183,37 @@
             </div>
             <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
                 <div class="card">
-                    <div class="card-block">
-                        {{ message }}
-                        <div class="spacing-5"></div>
-                        <h4 class="card-title">Describe Your Issue:</h4>
+                    <form action="" method="post">
+                        <div class="card-block">
+                            <div class="spacing-5"></div>
+                            <h4 class="card-title">Describe Your Issue:</h4>
 
-                        <label class="chkLabel noselect spacing-10" for="login">
-                            <input type="checkbox" id="login" name="contactCategory" value="data" class="materialChk">Login</label>
+                            <label class="chkLabel noselect spacing-10" for="login">
+                                <input type="checkbox" id="login" name="category" value="Login" class="materialChk">Login</label>
 
-                        <label class="chkLabel noselect spacing-10" for="loadtimes">
-                            <input type="checkbox" id="loadtimes" name="contactCategory" value="consulting" class="materialChk">Load Times</label>
+                            <label class="chkLabel noselect spacing-10" for="loadtimes">
+                                <input type="checkbox" id="loadtimes" name="category" value="Load Times" class="materialChk">Load Times</label>
 
-                        <label class="chkLabel noselect spacing-10" for="notloading">
-                            <input type="checkbox" id="notloading" name="contactCategory" value="consulting" class="materialChk">App Not Loading</label>
+                            <label class="chkLabel noselect spacing-10" for="notloading">
+                                <input type="checkbox" id="notloading" name="category" value="App Not Loading" class="materialChk">App Not Loading</label>
 
-                        <label class="chkLabel noselect spacing-10" for="mobile">
-                            <input type="checkbox" id="mobile" name="contactCategory" value="consulting" class="materialChk">Mobile</label>
+                            <label class="chkLabel noselect spacing-10" for="mobile">
+                                <input type="checkbox" id="mobile" name="category" value="Mobile" class="materialChk">Mobile</label>
 
-                        <label class="chkLabel noselect spacing-10" for="noupdates">
-                            <input type="checkbox" id="noupdates" name="contactCategory" value="apps" class="materialChk">No Updates</label>
+                            <label class="chkLabel noselect spacing-10" for="noupdates">
+                                <input type="checkbox" id="noupdates" name="category" value="No Updates" class="materialChk">No Updates</label>
 
-                        <div class="spacing-25"></div>
-                        <h4 class="card-title">Your Details:</h4>
-                        <input class="form" id="name" name="name" placeholder="Name" required="required" type="text">
-                        <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
-                        <input class="form" id="subject" name="browser" placeholder="Browser Used" required="required" type="text">
-                        <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
-                        <input class="btn rebootB contactB" id="input-submit" type=submit value="Contact Support">
-                    </div>
+                            <div class="spacing-25"></div>
+                            <h4 class="card-title">Your Details:</h4>
+                            <input class="form" id="contact_name" name="contact_name" placeholder="Contact Name" required="required" type="text">
+                            <input class="form" id="product_name" name="product_name" placeholder="Product Name" required="required" type="text">
+                            <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
+                            <input class="form" id="phone" name="phone" placeholder="Phone Number" type="tel">
+                            <input class="form" id="subject" name="browser" placeholder="Browser Used" type="text">
+                            <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
+                            <input class="btn rebootB contactB" id="input-submit" type=submit value="Contact Support">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
