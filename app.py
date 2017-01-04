@@ -1137,7 +1137,7 @@ def report_ticket(id, resolve):
     # post to slack
     if resolve is False:
         support_helper.chat.post_message(
-            '#test',
+            '#support',
             'Support ticket #' + str(id) + ' has been issued. To resolve, visit /support/resolve.',
             attachments=[
                 {
