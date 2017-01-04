@@ -437,7 +437,7 @@ def modify_post(title, subtitle, authors, body, username, url, url_new):
 
 # other site functionality #
 # web leads from main page
-def record_web_lead(name, email, subject, message):
+def record_web_lead(name, email, subject, message, category):
     key = hashlib.sha224(str(time.time()).encode('UTF-8')).hexdigest()
     date_posted = str(datetime.utcnow())
     post = {
@@ -445,7 +445,8 @@ def record_web_lead(name, email, subject, message):
         'name': name,
         'email': email,
         'subject': subject,
-        'message': message
+        'message': message,
+        'category': category
     }
     website_leads.insert_one({'key': key, 'post': post})
     return True
@@ -469,22 +470,23 @@ def team():
     return render_template('team.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        subject = request.form['subject']
-        message = request.form['message']
-        if record_web_lead(name, email, subject, message) is True:
+        form = dict(request.form)
+        name = form['name'][0]
+        email = form['email'][0]
+        # we removed the subject line from the form for now
+        subject = None
+        message = form['message'][0]
+        category = form['category']
+        if record_web_lead(name, email, subject, message, category) is True:
             render_template('index.html',
-                            message='Message sent successfully! We will be in touch as soon as possible.',
-                            post=posts)
-            report_lead(name, email, subject, message)
+                            message='Message sent successfully! We will be in touch as soon as possible.')
+            report_lead(name, email, subject, message, category)
         else:
             render_template('index.html',
-                            message='Whoops! Please try again later.',
-                            post=posts)
+                            message='Whoops! Please try again later.')
     return render_template('contact.html')
 
 
@@ -751,7 +753,7 @@ def define_color_support_ticket(urgency):
 
 
 # lead bot #
-def report_lead(name, email, subject, message):
+def report_lead(name, email, subject, message, category):
     # token for bot
     lead_bot = Slacker('xoxb-120556026706-4IFLfzIy7cYWoD42yRIGvGFi')
     # post to slack
@@ -760,9 +762,24 @@ def report_lead(name, email, subject, message):
         'New website lead from ' + name + '!',
         attachments=[
             {
-                'subject': subject,
-                'text': message + '\n\nEmail: ' + email,
-                'color': '#3BBCD0'
+                'color': '#3BBCD0',
+                "fields": [
+                    {
+                        "title": "Contact Details",
+                        "value": 'Email: ' + email,
+                        "short": False
+                    },
+                    {
+                        "title": "Topic(s)",
+                        "value": ', '.join(item for item in category),
+                        "short": False
+                    },
+                    {
+                        "title": "Message",
+                        "value": message,
+                        "short": False
+                    }
+                ]
             }
         ],
         as_user='@lead_bot'

@@ -4,3 +4,5 @@
 *.csr
 *.key
 xero_oauth.txt
+*.idea
+*.iml
