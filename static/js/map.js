@@ -1,3 +1,14 @@
+var zoomLevel;
+var w = window.innerWidth;
+var h = window.innerHeight;
+if (w < 1086) {
+    // set the zoom level to 4
+    zoomLevel = 4;
+}  else {
+    // set the zoom level to 5
+    zoomLevel = 5;
+}
+
 L.mapbox.accessToken = 'pk.eyJ1IjoicmVib290IiwiYSI6ImNpeGdiaXl0MDAwMXkyeW52NTJjMm1jMHIifQ.IwhmgHr1XEF2iNDo5_eXDA';
 var geojson = [
     {
@@ -41,7 +52,7 @@ var geojson = [
     }
 ];
 var map = L.mapbox.map('map')
-    .setView([37.8, -96], 5);
+    .setView([37.8, -96], zoomLevel);
 L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map);
 map.scrollWheelZoom.disable();
 var styleLayer = L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').addTo(map);
