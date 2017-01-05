@@ -602,6 +602,11 @@ button {
     background-color: #1AADC1 !important;
 }
 
+.internalB {
+    margin: 0 !important;
+    width: 200px !important;
+}
+
 .contactB {
     font-style: normal !important;
     font-size: 1.1rem;

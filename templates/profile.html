@@ -128,8 +128,12 @@
                     <br>
                     email: {{ user.profile.email }}
                 </p>
-                <div class="btn rebootB" style="margin: 0;">
+                <div class="btn rebootB internalB">
                     <a href="/edit_profile" target="" class="" style="color: #fff;">edit profile</a>
+                </div>
+                <div class="spacing-5"></div>
+                <div class="btn rebootB internalB">
+                    <a href="/change_password" target="" class="" style="color: #fff;">change password</a>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
@@ -140,12 +144,14 @@
                             <h4 class="card-title">My Blog Posts:</h4>
                             {% for post in posts %}
                                 {% if post.post.user == current_user.id %}
-                                    <h4 class="card-title subTitle">
+                                    <h4 class="card-title subTitle" style="min-height: 0 !important;">
                                         <a href="blog/{{ post.post.url }}">{{ post.post.title }}</a>
                                     </h4>
+                                    <p class="card-text bold">{{ post.post.subtitle }}</p>
+                                    <div class="spacing-25"></div>
                                 {% endif %}
                             {% endfor %}
-                            <div class="spacing-25"></div>
+                            <div class="spacing-5"></div>
                             <div class="btn rebootB" style="margin: 0;">
                                 <a href="/create_post" target="" class="" style="color: #fff;">new blog post</a>
                             </div>

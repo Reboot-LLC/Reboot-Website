@@ -702,7 +702,7 @@ def edit_post():
 
 
 @app.route('/blog/<url>', methods=['GET', 'POST'])
-def blog_route():
+def blog_route(url):
     url = request.path.split('/')[-1]
     post = blog_posts.find_one({'post.url': url})
     session['blog_url'] = url
