@@ -128,6 +128,10 @@
                     <br>
                     email: {{ user.profile.email }}
                 </p>
+                <div class="btn rebootB internalB" style="margin: 0;">
+                    <a href="/create_post" target="" class="" style="color: #fff;">new blog post</a>
+                </div>
+                <div class="spacing-5"></div>
                 <div class="btn rebootB internalB">
                     <a href="/edit_profile" target="" class="" style="color: #fff;">edit profile</a>
                 </div>
@@ -151,10 +155,6 @@
                                     <div class="spacing-25"></div>
                                 {% endif %}
                             {% endfor %}
-                            <div class="spacing-5"></div>
-                            <div class="btn rebootB" style="margin: 0;">
-                                <a href="/create_post" target="" class="" style="color: #fff;">new blog post</a>
-                            </div>
                         </div>
                     </form>
                 </div>

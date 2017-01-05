@@ -631,15 +631,16 @@ def edit_profile():
 @fresh_login_required
 def change_password():
     user = current_user.get_id()
+    user_profile = users.find_one({'username': user})
     if request.method == 'POST':
         current_password = request.form['currentpassword']
         new_password = request.form['newpassword']
         new_password_confirm = request.form['newpasswordconfirm']
         if modify_user_password(user, current_password, new_password, new_password_confirm) is True:
-            return render_template('change_password.html', user=user, message='your password has been changed')
+            return render_template('change_password.html', user=user_profile, message='your password has been changed')
         else:
-            return render_template('change_password.html', user=user, message='old password incorrect or new passwords do not match')
-    return render_template('change_password.html', user=user, message='')
+            return render_template('change_password.html', user=user_profile, message='old password incorrect or new passwords do not match')
+    return render_template('change_password.html', user=user_profile, message='')
 
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
