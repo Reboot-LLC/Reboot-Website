@@ -657,6 +657,8 @@ def forgot_password():
 @app.route('/create_post', methods=['GET', 'POST'])
 @login_required
 def create_post():
+    user = current_user.get_id()
+    user_profile = users.find_one({'username': user})
     if request.method == 'POST':
         title = request.form['title']
         subtitle = request.form['subtitle']
@@ -669,7 +671,7 @@ def create_post():
         index_collection()
         return redirect('/profile')
     else:
-        return render_template('create_post.html')
+        return render_template('create_post.html', user=user_profile)
 
 
 @app.route('/delete_post', methods=['GET', 'POST'])
@@ -686,6 +688,7 @@ def delete_post():
 def edit_post():
     url = session['blog_url']
     user = current_user.get_id()
+    user_profile = users.find_one({'username': user})
     if blog_posts.find_one({'post.url': url, 'post.user': user}) is not None:
         post = blog_posts.find_one({'post.url': url, 'post.user': user})
     if request.method == 'POST':
@@ -699,7 +702,7 @@ def edit_post():
         index_collection()
         return redirect('/profile')
     else:
-        return render_template('edit_post.html', post=post)
+        return render_template('edit_post.html', post=post, user=user_profile)
 
 
 @app.route('/blog/<url>', methods=['GET', 'POST'])

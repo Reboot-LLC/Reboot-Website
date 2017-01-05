@@ -2,37 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Post</title>
-
+    <title>Reboot | Logic Made Beautiful</title>
     <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
-
+    <!-- json objects -->
+    <!--<script src="{{ url_for('static', filename='data/display_github.json') }}"></script>-->
     <!-- heap analytics script -->
     <script type="text/javascript">
-        window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
-          heap.load("1573873728");
+        window.heap = window.heap || [], heap.load = function (e, t) {
+            window.heap.appid = e, window.heap.config = t = t || {};
+            var r = t.forceSSL || "https:" === document.location.protocol, a = document.createElement("script");
+            a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
+            var n = document.getElementsByTagName("script")[0];
+            n.parentNode.insertBefore(a, n);
+            for (var o = function (e) {
+                return function () {
+                    heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                }
+            }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c])
+        };
+        heap.load("1573873728");
     </script>
-
 </head>
 <body>
-<div class="admin-container">
-    <div class="title">Create Post</div>
-        <div class="subtitle" style="margin-left: 3px;">
-            {% if current_user.is_authenticated %}
-                Hi {{ current_user.first_name }}! Write and publish a blog post below.
-            {% endif %}
-            <br>
-            <a class="subtitle" href="/profile">back to profile</a>
+
+<!-- Polymorph Background -->
+<div class="polymorph"></div>
+<!--end poly-->
+<nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
+    <!-- Collapse button-->
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+        <i class="fa fa-bars"></i>
+    </button>
+    <div class="container">
+        <!--Collapse content-->
+        <div class="collapse navbar-toggleable-xs" id="collapseEx2">
+            <a class="navbar-brand mont" style="color:#1AADC1" href="/">[company name]</a>
+            <!--Links-->
+            <ul class="nav navbar-nav mont" style="margin-left:-5px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Team/</a>
+                </li>
+                <!-- uncomment once we complete blog and populate with content -->
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link">Blog</a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact/</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/support">Support/</a>
+                </li>
+                <!--<li class="nav-item btn-group">-->
+                <!--<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
+                <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                <!--<a class="dropdown-item">Action</a>-->
+                <!--<a class="dropdown-item">Another action</a>-->
+                <!--<a class="dropdown-item">Something else here</a>-->
+                <!--</div>-->
+                <!--</li>-->
+            </ul>
+            <ul class="nav navbar-nav nav-flex-icons mont">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">
+                        {% if current_user.is_authenticated %}
+                        Hi {{ current_user.first_name }}!
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <!-- Eventually we can replace the user icon with a particular user's photo -->
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="dropdownMenu1"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i
+                            class="fa fa-user-circle"></i></a>
+                    <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1"
+                         data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        {% if not current_user.is_authenticated %}
+                        <a class="dropdown-item waves-effect waves-light" href="/login">Login</a>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                        <a class="dropdown-item waves-effect waves-light" href="/profile">My Profile</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/create_post">New Blog Post</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/logout">Logout</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+            <!--Search form-->
+            <!-- uncomment and connect once blog is live -->
+            <!--<form class="form-inline">-->
+            <!--<input class="form-control" type="text" placeholder="Search">-->
+            <!--</form>-->
+        </div>
+        <!--/.Collapse content-->
     </div>
-    <br>
-    <form action="" method="post" class="login">
-        <p><input class="post-input" placeholder="title" type=text name="title" required></p>
-        <p><input class="post-input" placeholder="subtitle" type=text name="subtitle" required></p>
-        <p><input class="post-input" placeholder="authors (e.g. John Doe, Jane Doe)" type=text name="authors" required></p>
-        <p><textarea class="post-input-large" placeholder="let your creative juices flow..." name="body" required></textarea></p>
-        <p><input class="post-input" placeholder="desired url (e.g. whyimawesome, trumpsucks)" type=text name="url" required></p>
-        <p><input id="input-submit" type=submit value=Publish></p>
-    </form>
+</nav>
+
+
+<div class="fullpage">
+    <div class="container homeContainer">
+        <div class="spacing-50"></div>
+        <div class="row">
+            <h1 class="homeHeading">
+                {% if current_user.is_authenticated %}
+                Create a Blog Post
+                {% endif %}
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeading mont">My Info</div>
+                <div class="spacing-5"></div>
+                <p class="bold headingText">
+                    username: {{ user.username }}
+                    <br>
+                    first name: {{ user.profile.first_name }}
+                    <br>
+                    last name: {{ user.profile.last_name }}
+                    <br>
+                    email: {{ user.profile.email }}
+                </p>
+                <div class="btn rebootB internalB" style="margin: 0;">
+                    <a href="/create_post" target="" class="" style="color: #fff;">new blog post</a>
+                </div>
+                <div class="spacing-5"></div>
+                <div class="btn rebootB internalB">
+                    <a href="/edit_profile" target="" class="" style="color: #fff;">edit profile</a>
+                </div>
+                <div class="spacing-5"></div>
+                <div class="btn rebootB internalB">
+                    <a href="/change_password" target="" class="" style="color: #fff;">change password</a>
+                </div>
+            </div>
+
+            <!--<div class="admin-container">-->
+    <!--<div class="title">Create Post</div>-->
+        <!--<div class="subtitle" style="margin-left: 3px;">-->
+            <!--{% if current_user.is_authenticated %}-->
+                <!--Hi {{ current_user.first_name }}! Write and publish a blog post below.-->
+            <!--{% endif %}-->
+            <!--<br>-->
+            <!--<a class="subtitle" href="/profile">back to profile</a>-->
+    <!--</div>-->
+    <!--<br>-->
+    <!--<form action="" method="post" class="login">-->
+        <!--<p><input class="post-input" placeholder="title" type=text name="title" required></p>-->
+        <!--<p><input class="post-input" placeholder="subtitle" type=text name="subtitle" required></p>-->
+        <!--<p><input class="post-input" placeholder="authors (e.g. John Doe, Jane Doe)" type=text name="authors" required></p>-->
+        <!--<p><textarea class="post-input-large" placeholder="let your creative juices flow..." name="body" required></textarea></p>-->
+        <!--<p><input class="post-input" placeholder="desired url (e.g. whyimawesome, trumpsucks)" type=text name="url" required></p>-->
+        <!--<p><input id="input-submit" type=submit value=Publish></p>-->
+    <!--</form>-->
+
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <form action="" method="post">
+                        <div class="card-block">
+                            <div class="spacing-5"></div>
+                            <h4 class="card-title">New Blog Post:</h4>
+                            <div class="spacing-5"></div>
+                            <input class="form" placeholder="title" type=text name="title" required>
+                            <input class="form" placeholder="subtitle" type=text name="subtitle" required>
+                            <input class="form" placeholder="authors (e.g. John Doe, Jane Doe)" type=text name="authors" required>
+                            <textarea class="form textarea" placeholder="let your creative juices flow..." name="body" required></textarea>
+                            <input class="form" placeholder="desired url (e.g. whyimawesome, trumpsucks)" type=text name="url" required>
+                            <div class="spacing-5"></div>
+                            <input class="btn rebootB contactB" id="input-submit" type=submit value="Publish">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="spacing-50"></div>
+        <!-- footer -->
+        <div class="footer">
+            © 2017 Reboot, LLC dba [company name].
+        </div>
+    </div>
 </div>
 </body>
+
+<!-- javascript -->
+<script src="{{ url_for('static', filename='material_bootstrap/js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/mdb.min.js') }}"></script>
+<script src="https://use.fontawesome.com/65276217d5.js"></script>
+<script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
 </html>
