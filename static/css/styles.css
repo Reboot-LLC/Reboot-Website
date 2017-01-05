@@ -836,3 +836,10 @@ input.materialChk {
     font-size: 20px;
     margin-right: 10px;
 }
+
+/* Blog Styling */
+.blog-body {
+    white-space: pre-line;
+    text-align: justify;
+    font-size: 1.2rem;
+}
