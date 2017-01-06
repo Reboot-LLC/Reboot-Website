@@ -13,7 +13,7 @@ body {
     font-family: 'Jura', sans-serif !important;
     background-color: #f8f8f8;
     overflow-x: hidden !important;
-    text-shadow: 1px 1px #f8f8f8;
+    /*text-shadow: 1px 1px #f8f8f8;*/
 }
 
 img {
@@ -842,4 +842,355 @@ input.materialChk {
     white-space: pre-line;
     text-align: justify;
     font-size: 1.2rem;
+}
+
+/* Support Page Dropdown */
+.support * {
+    transition: all .25s ease
+}
+
+.support ul {
+    padding: 0;
+    margin: 0;
+}
+
+.support li {
+    list-style-type: none;
+}
+
+.support input[type='checkbox'] {
+    display: none;
+}
+
+.support label {
+    cursor: pointer;
+}
+
+.support {
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.support {
+    width: 100%;
+    height: auto;
+}
+
+.support-title {
+    float: right;
+    text-align: left;
+    width: 400px;
+    color: white;
+    position: relative;
+    top: 70px;
+}
+
+.support-title-social a {
+    position: relative;
+    overflow: hidden;
+    width: 140px;
+    margin-right: 15px;
+    text-decoration: none;
+    padding: 0px 0px 5px 0px;
+    height: 40px;
+    border: 2px solid white;
+    float: left;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.support-title-social a .slide {
+    height: 45px;
+    width: 100px;
+    float: left;
+    position: absolute;
+    -webkit-transform: skew(20deg);
+    transform: skew(20deg);
+    left: -120px;
+    -webkit-transition-property: left;
+    transition-property: left;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+    background: white;
+}
+
+.support-title-social a .slide .arrow {
+    position: absolute;
+    right: 31px;
+    top: 24px;
+    opacity: 0;
+    -webkit-transform: skew(-20deg);
+    transform: skew(-20deg);
+}
+
+.support-title-social a .slide .arrow .stem {
+    width: 10px;
+    height: 2px;
+    background: #858490;
+}
+
+.support-title-social a .slide .arrow .point {
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #858490;
+    top: -3px;
+    right: 1px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border-top: 2px solid #858490;
+}
+
+.support-title-social a img {
+    width: 16px;
+    margin-left: 10px;
+    position: relative;
+    margin-right: 8px;
+    -webkit-transition-property: margin-left;
+    transition-property: margin-left;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+    margin-top: 10px;
+    top: 4px;
+}
+
+.support-title-social a:hover>.slide {
+    left: -70px;
+    -webkit-transition-property: left;
+    transition-property: left;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+}
+
+.support-title-social a:hover>img {
+    margin-left: 40px;
+    -webkit-transition-property: margin-left;
+    transition-property: margin-left;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+}
+
+.support-title-social a:hover>.slide .arrow {
+    right: 11px;
+    opacity: 1;
+    -webkit-transition-property: right, opacity;
+    transition-property: right, opacity;
+    -webkit-transition-delay: .07s;
+    transition-delay: .07s;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+}
+
+.support .intro {
+    float: right;
+    color: white;
+    width: 370px;
+    top: 50px;
+    position: relative;
+}
+
+.support .intro h1 {
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.26);
+}
+
+.support .intro p {
+    line-height: 20px;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.26);
+}
+
+.support-wrapper {
+    height: auto;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.support-wrapper label {
+    padding: 25px;
+    float: left;
+    height: 100px;
+    line-height: 55px;
+    border-bottom: 1px solid #293649;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    color: #eff4fa;
+    -webkit-transition: text-indent .15s, height .3s;
+    transition: text-indent .15s, height .3s;
+    box-sizing: border-box;
+}
+
+.support-wrapper label img {
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+    width: 16px;
+}
+
+.support-wrapper label span {
+    position: relative;
+    top: -3px;
+}
+
+.support-wrapper label:hover .bodyHeading {
+    text-indent: 4px;
+}
+
+.support-wrapper label:hover .bar {
+    width: 100%;
+}
+
+.support-wrapper label .bar {
+    width: 0px;
+    -webkit-transition: width .15s;
+    transition: width .15s;
+    height: 3.5px;
+    position: absolute;
+    display: block;
+    background: #ffb81e;
+    bottom: 0;
+    left: 0;
+}
+
+.support-wrapper label .lil-arrow {
+    width: 5px;
+    height: 5px;
+    -webkit-transition: transform 0.8s;
+    -webkit-transition: -webkit-transform 0.8s;
+    transition: -webkit-transform 0.8s;
+    transition: transform 0.8s;
+    transition: transform 0.8s, -webkit-transform 0.8s;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-top: 2px solid #1AADC1;
+    border-right: 2px solid #1AADC1;
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.support-wrapper-content {
+    position: absolute;
+    display: none;
+    overflow: hidden;
+    left: 0;
+    width: 100%;
+    font-size: 1.25em;
+}
+
+.support-wrapper-content li {
+    width: 100%;
+    opacity: 0;
+    left: -100%;
+    padding: 25px;
+    box-shadow: 0px 0px #126CA1 inset;
+    -webkit-transition: box-shadow .3s, text-indent .3s;
+    transition: box-shadow .3s, text-indent .3s;
+    position: relative;
+}
+
+.support-wrapper-content li:hover {
+    -webkit-transition: box-shadow .3s linear, text-indent .3s linear;
+    transition: box-shadow .3s linear, text-indent .3s linear;
+}
+
+.support-wrapper-content .clear {
+    clear: both;
+}
+
+input[type='checkbox']+label {
+    transition: background .25s ease
+}
+
+input[type='checkbox']:checked+label .support-wrapper-content {
+    display: block;
+    top: 68px;
+}
+
+input[type="checkbox"]:checked+label>.lil-arrow {
+    -webkit-transition: -webkit-transform 0.8s;
+    transition: -webkit-transform 0.8s;
+    transition: transform 0.8s;
+    transition: transform 0.8s, -webkit-transform 0.8s;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    border-top: 2px solid #212e41;
+    border-right: 2px solid #212e41;
+}
+
+input[type='checkbox']:checked+label {
+    height: 350px;
+    background: #212e41;
+    border-bottom: 3.5px solid #ffb81e;
+    text-indent: 4px;
+    -webkit-transition-property: height;
+    transition-property: height;
+    -webkit-transition-duration: .6s;
+    transition-duration: .6s;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+input[type='checkbox']:checked+label .bar {
+    width: 0;
+}
+
+input[type='checkbox']:checked+label li:nth-of-type(1) {
+    -webkit-animation: in 0.15s 0.575s forwards;
+    animation: in 0.15s 0.575s forwards;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-animation: in 0.15s 0.575s forwards;
+    -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+input[type='checkbox']:checked+label li:nth-of-type(2) {
+    -webkit-animation: in 0.15s 0.7s forwards;
+    animation: in 0.15s 0.7s forwards;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-animation: in 0.15s 0.7s forwards;
+    -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+input[type='checkbox']:checked+label li:nth-of-type(3) {
+    -webkit-animation: in 0.15s 0.825s forwards;
+    animation: in 0.15s 0.825s forwards;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-animation: in 0.15s 0.825s forwards;
+    -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+input[type='checkbox']:checked+label li:nth-of-type(4) {
+    -webkit-animation: in 0.15s 0.95s forwards;
+    animation: in 0.15s 0.95s forwards;
+    -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-animation: in 0.15s 0.95s forwards;
+    -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@-webkit-keyframes in {
+    from {
+        left: -100%;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes in {
+    from {
+        left: -100%;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
 }
