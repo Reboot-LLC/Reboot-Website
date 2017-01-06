@@ -705,6 +705,12 @@ def edit_post():
         return render_template('edit_post.html', post=post, user=user_profile)
 
 
+@app.route('/blog', methods=['GET', 'POST'])
+def blog():
+    posts = blog_posts.find()
+    return render_template('blog.html', posts=posts)
+
+
 @app.route('/blog/<url>', methods=['GET', 'POST'])
 def blog_route(url):
     url = request.path.split('/')[-1]
