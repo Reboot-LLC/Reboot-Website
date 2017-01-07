@@ -1234,12 +1234,12 @@ scheduler.start()
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=360
+    minutes=1440
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=360
+    minutes=1440
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
