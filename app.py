@@ -145,6 +145,9 @@ def search_collection(query):
         },
         {
             'post.title': True,
+            'post.subtitle': True,
+            'post.authors': True,
+            'post.body': True,
             'post.url': True,
             '$score': {
                 '$meta': "textScore"
@@ -708,7 +711,14 @@ def edit_post():
 @app.route('/blog', methods=['GET', 'POST'])
 def blog():
     posts = blog_posts.find()
-    return render_template('blog.html', posts=posts)
+    if request.method == 'POST':
+        query = request.form['query']
+        ngrams = make_ngrams(query, min_size=2)
+        results = search_collection(str(ngrams))
+        return render_template('blog.html', posts=results)
+    else:
+        return render_template('blog.html', posts=posts)
+    #return render_template('blog.html', posts=posts)
 
 
 @app.route('/blog/<url>', methods=['GET', 'POST'])
