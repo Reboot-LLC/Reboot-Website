@@ -359,7 +359,7 @@ button {
 }
 
 .polyWorld {
-    margin-top: 100px;
+    margin-top: 200px;
     border:15px solid #ffffff;
     position: relative;
     width: 94%;
@@ -519,8 +519,14 @@ button {
 }
 
 @media screen and ( max-device-width: 620px) {
+    .polyWorld {
+        margin-top: 250px;
+    }
     .orb3 {
         left: -2% !important;
+    }
+    .innerCircle {
+        background-color: rgba(255,255,255,0.5);
     }
     nav {
         zoom:2;
