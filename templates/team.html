@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Reboot | Logic Made Beautiful</title>
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- css and other styling -->
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
@@ -34,20 +42,20 @@
 <!--end poly-->
 <nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
     <!-- Collapse button-->
-    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
         <i class="fa fa-bars"></i>
     </button>
     <div class="container">
         <!--Collapse content-->
-        <div class="collapse navbar-toggleable-xs" id="collapseEx2">
-            <a class="navbar-brand mont" style="color:#1AADC1" href="/">[company name]</a>
+        <div class="collapse navbar-toggleable-md" id="collapseEx2">
+            <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [name]</a>
             <!--Links-->
             <ul class="nav navbar-nav mont" style="margin-left:-5px;">
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link">Team/</a>
+                    <a class="nav-link" href="/team">Team/</a>
                 </li>
                 <!-- uncomment once we complete blog and populate with content -->
                 <!--<li class="nav-item">-->
@@ -109,14 +117,8 @@
     <div class="container homeContainer">
         <div class="spacing-50"></div>
         <div class="row">
-            <h1 class="homeHeading">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                Vestibulum consectetur nisi a dolor iaculis id viverra lectus facilisis.
-            </h1>
-        </div>
-        <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="bodyHeading mont">Meet Our Team</div>
+                <div class="bodyHeading mont weHelpTop">Meet Our Team</div>
                 <div class="spacing-5"></div>
                 <p class="bold headingText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur nisi a dolor iaculis id viverra lectus facilisis.</p>
             </div>
@@ -138,8 +140,12 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            Ask Me About: Machine Learning, Data Visualization, Big Data, Star Trek.
+                        </p>
+                        <h4 class="card-title subTitle rebootB2">
+                            Ask Me About:
+                        </h4>
+                        <p class="card-text bold askList">
+                            Machine learning, data visualization, big data, Star Trek.
                         </p>
                     </div>
                 </div>
@@ -161,8 +167,14 @@
                             <br>
                             <br>
                             <br>
-                            Ask Me about: how to enhance and simplify applications with social media API integration.
                         </p>
+                        <h4 class="card-title subTitle rebootB2">
+                            Ask Me About:
+                        </h4>
+                        <p class="card-text bold askList">
+                            How to enhance and simplify applications with social media API integration.
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -182,8 +194,15 @@
                             I’m [company name's] strategic analyst. I spend my time finding the most efficient, no-nonsense solutions to difficult problems. If I'm not working, I'm either meditating or somewhere in the deep backcountry.
                             <br>
                             <br>
-                            Ask me about: financial structures, company culture, company systems, or any near impossible math problem.
+                            <br>
                         </p>
+                        <h4 class="card-title subTitle rebootB2">
+                            Ask Me About:
+                        </h4>
+                        <p class="card-text bold askList">
+                            Financial structures, company culture & systems, or any math problem.
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -210,8 +229,15 @@
                             Hi, I'm [Company Name’s] UI/UX expert. I build captivating and efficient experiences with robust front-end frameworks. I'm usually writing, reading, or laughing in my spare time.
                             <br>
                             <br>
-                            Ask Me About: User Experience, Design, Scaling ideas, Music.
+                            <br>
                         </p>
+                        <h4 class="card-title subTitle rebootB2">
+                            Ask Me About:
+                        </h4>
+                        <p class="card-text bold askList">
+                            User experience/interfaces, design, scaling ideas, music.
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -223,7 +249,7 @@
                     <div class="card-block">
                         <h4 class="card-title">Rustam Mirzaev</h4>
                         <h4 class="card-title subTitle">Back-End Engineer</h4>
-                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <p class="card-text bold askList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
                     </div>
                 </div>
             </div>
@@ -237,7 +263,8 @@
                         <h4 class="card-title subTitle">
                             Front-End Engineer
                         </h4>
-                        <p class="card-text bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <p class="card-text bold askList">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id fringilla nisl. Quisque pretium viverra posuere. Aenean ultricies semper dui, ac finibus felis ultrices ut. Morbi vitae aliquam lectus. In vitae orci mi. In convallis hendrerit lectus vel mollis.</p>
+                        <a href="/contact" class="btn rebootB">Let's Talk</a>
                     </div>
                 </div>
             </div>

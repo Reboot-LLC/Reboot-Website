@@ -22,6 +22,12 @@ img {
 
 nav {
     text-shadow: none;
+    z-index: 9999!important
+}
+
+.navbar-brand img {
+    max-height: 30px;
+    margin-right: 5px;
 }
 
 .noselect {
@@ -512,13 +518,88 @@ button {
     }
 }
 
-@media screen and ( max-width: 620px) {
+@media screen and ( max-device-width: 620px) {
     .orb {
         left: 10% !important;
     }
-
     .orb3 {
         left: -2% !important;
+    }
+    nav {
+        zoom:2;
+    }
+    .homeHeading {
+        font-size: 2.5rem!important
+    }
+    .bodyHeading {
+        font-size: 4rem
+    }
+    .headingText {
+        font-size: 2.5rem
+    }
+    .card-title {
+        font-size: 3rem!important
+    }
+    .card-text {
+        font-size: 2.5rem
+    }
+    .card-title.subTitle {
+        font-size: 2rem
+    }
+    .card-block .btn {
+        font-size: 2rem
+    }
+    .footer {
+        font-size: 2rem;
+    }
+    input.materialChk {
+        font-size: 30px!important
+    }
+    .chkLabel {
+        font-size: 2.5rem!important;
+        width: 100%;
+    }
+    .weHelp {
+        text-align: left!important;
+    }
+    .weHelp.weHelpTop {
+        margin-top: 50px
+    }
+    .weHelpTop {
+        margin-top: 50px
+    }
+    input.form {
+        font-size:2rem;
+    }
+    .support-wrapper .bodyHeading {
+        font-size: 2.5rem;
+    }
+    .support-wrapper label {
+        height: auto!important
+    }    
+    .support-wrapper .headingText {
+        margin-top: 65px;
+    }
+    .support-wrapper .supportOne .headingText {
+        margin-top: 125px;
+    }
+    input[type='checkbox']:checked+.supportOne {
+        height: 800px!important;
+    }
+    input[type='checkbox']:checked+.supportTwo {
+        height: 1075px!important;
+    }
+    input[type='checkbox']:checked+.supportThree {
+        height: 650px!important;
+    }
+    .weHelp {
+        margin-top: 50px
+    }
+    .askList {
+        margin-bottom: 75px!important
+    }
+    .navbar-dark .navbar-nav a.nav-link {
+        font-size: 1.5rem!important
     }
 }
 
@@ -530,8 +611,7 @@ button {
         max-height: none;
     }
     .homeContainer {
-        zoom: 1.85;
-        padding: 0 25px;
+
     }
 }
 
@@ -600,6 +680,10 @@ button {
 
 .rebootB {
     background-color: #1AADC1 !important;
+}
+
+.rebootB2 {
+    color: #1AADC1 !important
 }
 
 .internalB {

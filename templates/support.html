@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Reboot | Logic Made Beautiful</title>
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- css and other styling -->
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
@@ -34,16 +42,16 @@
 <!--end poly-->
 <nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
     <!-- Collapse button-->
-    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
         <i class="fa fa-bars"></i>
     </button>
     <div class="container">
         <!--Collapse content-->
-        <div class="collapse navbar-toggleable-xs" id="collapseEx2">
-            <a class="navbar-brand mont" style="color:#1AADC1" href="/">[company name]</a>
+        <div class="collapse navbar-toggleable-md" id="collapseEx2">
+            <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [name]</a>
             <!--Links-->
             <ul class="nav navbar-nav mont" style="margin-left:-5px;">
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -57,7 +65,7 @@
                     <a class="nav-link" href="/contact">Contact/</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link">Support/</a>
+                    <a class="nav-link" href="/support">Support/</a>
                 </li>
                 <!--<li class="nav-item btn-group">-->
                 <!--<a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
@@ -109,7 +117,7 @@
     <div class="container homeContainer">
         <div class="spacing-50"></div>
         <div class="row">
-            <h1 class="homeHeading">
+            <h1 class="homeHeading weHelp weHelpTop">
                 Have an issue? We're here to help!
             </h1>
         </div>
@@ -118,7 +126,7 @@
                 <div class="support">
                     <div class="support-wrapper">
                         <input id="updates" name="update" type="checkbox">
-                        <label for="updates">
+                        <label for="updates" class="supportOne">
                             <span><div class="bodyHeading mont">My web application was updated but I can't see the changes.</div></span>
                             <div class="lil-arrow"></div>
                             <div class="bar"></div>
@@ -136,7 +144,7 @@
                             </div>
                         </label>
                         <input id="loading" name="load" type="checkbox">
-                        <label for="loading">
+                        <label for="loading" class="supportTwo">
                             <span><div class="bodyHeading mont">My web application is loading slowly.</div></span>
                             <div class="lil-arrow"></div>
                             <div class="bar"></div>
@@ -156,7 +164,7 @@
                             </div>
                         </label>
                         <input id="logging" name="login" type="checkbox">
-                        <label for="logging">
+                        <label for="logging" class="supportThree">
                             <span><div class="bodyHeading mont">I can't login to my web application.</div></span>
                             <div class="lil-arrow"></div>
                             <div class="bar"></div>
@@ -180,7 +188,7 @@
         <div class="spacing-5"></div>
         <div class="spacing-5"></div>
         <div class="row">
-            <h1 class="homeHeading">
+            <h1 class="homeHeading weHelp">
                 Need one-on-one help?<br>Send us a message using the form below and we'll contact you as soon as possible.
             </h1>
         </div>

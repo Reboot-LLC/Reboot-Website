@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Reboot | Logic Made Beautiful</title>
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- css and other styling -->
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
@@ -34,20 +42,20 @@
 <!--end poly-->
 <nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
     <!-- Collapse button-->
-    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
         <i class="fa fa-bars"></i>
     </button>
     <div class="container">
         <!--Collapse content-->
-        <div class="collapse navbar-toggleable-xs" id="collapseEx2">
-            <a class="navbar-brand mont" style="color:#1AADC1" href="/">[company name]</a>
+        <div class="collapse navbar-toggleable-md" id="collapseEx2">
+            <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [name]</a>
             <!--Links-->
             <ul class="nav navbar-nav mont" style="margin-left:-5px;">
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Team/</a>
+                    <a class="nav-link" href="/team">Team/</a>
                 </li>
                 <!-- uncomment once we complete blog and populate with content -->
                 <!--<li class="nav-item">-->
@@ -103,6 +111,7 @@
         <!--/.Collapse content-->
     </div>
 </nav>
+
 
 <div class="fullpage">
     <div class="container homeContainer">
