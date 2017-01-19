@@ -519,9 +519,6 @@ button {
 }
 
 @media screen and ( max-device-width: 620px) {
-    .orb {
-        left: 10% !important;
-    }
     .orb3 {
         left: -2% !important;
     }
