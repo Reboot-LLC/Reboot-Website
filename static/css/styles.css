@@ -1161,16 +1161,16 @@ input.materialChk {
 }
 
 .support-wrapper label .lil-arrow {
-    width: 5px;
-    height: 5px;
+    width: 15px;
+    height: 15px;
     -webkit-transition: transform 0.8s;
     -webkit-transition: -webkit-transform 0.8s;
     transition: -webkit-transform 0.8s;
     transition: transform 0.8s;
     transition: transform 0.8s, -webkit-transform 0.8s;
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    border-top: 2px solid #1AADC1;
-    border-right: 2px solid #1AADC1;
+    border-top: 5px solid #1AADC1;
+    border-right: 5px solid #1AADC1;
     float: right;
     position: absolute;
     top: 50%;
