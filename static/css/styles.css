@@ -1,6 +1,39 @@
 /* Universal */
 html {
     overflow-x: hidden !important;
+    font-size: 100%
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5),
+(min-resolution: 120dpi) {
+    html {
+        overflow-x: hidden !important;
+        font-size: 105%
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    html {
+        overflow-x: hidden !important;
+        font-size: 110%
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3),
+(min-resolution: 288dpi) {
+    html {
+        overflow-x: hidden !important;
+        font-size: 115%
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 4),
+(min-resolution: 384dpi) {
+    html {
+        overflow-x: hidden !important;
+        font-size: 120%
+    }
 }
 
 body, html {
@@ -535,7 +568,7 @@ button {
         font-size: 2.75rem!important
     }
     .bodyHeading {
-        font-size: 4rem
+        font-size: 3.5rem
     }
     .headingText {
         font-size: 2.75rem
@@ -560,7 +593,7 @@ button {
         font-size: 40px!important
     }
     .chkLabel {
-        font-size: 2.75rem!important;
+        font-size: 2.5rem!important;
         width: 100%;
     }
     .weHelp {
@@ -598,10 +631,10 @@ button {
         height: 875px!important;
     }
     input[type='checkbox']:checked+.supportTwo {
-        height: 1100px!important;
+        height: 1275px!important;
     }
     input[type='checkbox']:checked+.supportThree {
-        height: 650px!important;
+        height: 725px!important;
     }
     .weHelp {
         margin-top: 50px
@@ -610,7 +643,7 @@ button {
         margin-bottom: 75px!important
     }
     .custom-spacing {
-        padding:45px!important;
+        padding:65px!important;
     }
     .map {
         height: 400px!important;
