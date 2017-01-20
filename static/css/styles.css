@@ -519,44 +519,48 @@ button {
 }
 
 @media screen and ( max-device-width: 620px) {
+    nav {
+        zoom:2;
+    }
+    .navbar-dark .navbar-nav a.nav-link, .navbar.navbar-dark .navbar-toggler i {
+        font-size: 2rem!important
+    }
     .polyWorld {
         margin-top: 250px;
     }
     .innerCircle {
         background-color: rgba(255,255,255,0.5);
     }
-    nav {
-        zoom:2;
-    }
     .homeHeading {
-        font-size: 2.5rem!important
+        font-size: 2.75rem!important
     }
     .bodyHeading {
         font-size: 4rem
     }
     .headingText {
-        font-size: 2.5rem
+        font-size: 2.75rem
     }
     .card-title {
-        font-size: 3rem!important
+        font-size: 3.75rem!important
     }
     .card-text {
-        font-size: 2.5rem
+        font-size: 2.75rem
     }
     .card-title.subTitle {
-        font-size: 2rem
+        font-size: 3rem!important
     }
     .card-block .btn {
-        font-size: 2rem
+        font-size: 2.5rem
     }
     .footer {
         font-size: 2rem;
+        margin-bottom:25px;
     }
     input.materialChk {
-        font-size: 30px!important
+        font-size: 40px!important
     }
     .chkLabel {
-        font-size: 2.5rem!important;
+        font-size: 2.75rem!important;
         width: 100%;
     }
     .weHelp {
@@ -568,9 +572,15 @@ button {
     .weHelpTop {
         margin-top: 50px
     }
-    input.form {
-        font-size:2rem;
-    }
+    input.form, textarea.form  {
+        font-size: 2.75rem;
+        margin-bottom: 50px;
+        padding: 25px 15px;
+    }     
+    textarea.form  {
+        height: 500px;
+        max-height: 750px
+    }    
     .support-wrapper .bodyHeading {
         font-size: 2.5rem;
     }
@@ -578,16 +588,17 @@ button {
         height: auto!important
     }    
     .support-wrapper .headingText {
-        margin-top: 65px;
+        margin-top: 80px;
+        font-size: 2.5rem;
     }
     .support-wrapper .supportOne .headingText {
         margin-top: 125px;
     }
     input[type='checkbox']:checked+.supportOne {
-        height: 800px!important;
+        height: 875px!important;
     }
     input[type='checkbox']:checked+.supportTwo {
-        height: 1075px!important;
+        height: 1100px!important;
     }
     input[type='checkbox']:checked+.supportThree {
         height: 650px!important;
@@ -598,9 +609,18 @@ button {
     .askList {
         margin-bottom: 75px!important
     }
-    .navbar-dark .navbar-nav a.nav-link {
-        font-size: 1.5rem!important
+    .custom-spacing {
+        padding:45px!important;
     }
+    .map {
+        height: 400px!important;
+        border-top: 10px solid #1AADC1!important;
+        border-bottom: 10px solid #1AADC1!important;
+    }
+}
+
+.custom-spacing {
+    padding:28px;
 }
 
 @media screen and ( max-width: 991px) {
