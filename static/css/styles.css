@@ -40,6 +40,9 @@ html {
     .card-block {
         padding: 2.5rem;
     }
+    .card-team {
+        height: 1400px !important;
+    }
 }
 
 body, html {
@@ -293,6 +296,10 @@ button {
 
 .bold {
     font-weight: bold;
+}
+
+.nav-item {
+    margin-top: 3px !important;
 }
 
 .navbar.navbar-dark .navbar-nav .nav-item.active,
@@ -1360,4 +1367,16 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
         left: 0;
         opacity: 1;
     }
+}
+
+/* team page specific */
+
+.card-team {
+    //height: 750px !important;
+}
+
+.bottom-card-container {
+    //position: absolute;
+    bottom: 0;
+    //margin-bottom: 1rem;
 }
