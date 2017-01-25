@@ -26,6 +26,9 @@ html {
         overflow-x: hidden !important;
         font-size: 115%
     }
+    .card-block {
+        padding: 2.25rem;
+    }
 }
 
 @media (-webkit-min-device-pixel-ratio: 4),
@@ -33,6 +36,9 @@ html {
     html {
         overflow-x: hidden !important;
         font-size: 120%
+    }
+    .card-block {
+        padding: 2.5rem;
     }
 }
 
@@ -571,7 +577,8 @@ button {
         font-size: 3.5rem
     }
     .headingText {
-        font-size: 2.75rem
+        font-size: 2.75rem;
+        padding: 1rem;
     }
     .card-title {
         font-size: 3.75rem!important
@@ -613,7 +620,10 @@ button {
     textarea.form  {
         height: 500px;
         max-height: 750px
-    }    
+    }
+    .bodyHeading {
+        padding: 1rem;
+    }
     .support-wrapper .bodyHeading {
         font-size: 2.5rem;
     }
@@ -628,13 +638,13 @@ button {
         margin-top: 125px;
     }
     input[type='checkbox']:checked+.supportOne {
-        height: 875px!important;
+        height: 1050px!important;
     }
     input[type='checkbox']:checked+.supportTwo {
-        height: 1275px!important;
+        height: 1325px!important;
     }
     input[type='checkbox']:checked+.supportThree {
-        height: 725px!important;
+        height: 825px!important;
     }
     .weHelp {
         margin-top: 50px
