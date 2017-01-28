@@ -7,7 +7,6 @@ html {
 @media (-webkit-min-device-pixel-ratio: 1.5),
 (min-resolution: 120dpi) {
     html {
-        overflow-x: hidden !important;
         font-size: 105%
     }
 }
@@ -15,7 +14,6 @@ html {
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
     html {
-        overflow-x: hidden !important;
         font-size: 110%
     }
 }
@@ -23,7 +21,6 @@ html {
 @media (-webkit-min-device-pixel-ratio: 3),
 (min-resolution: 288dpi) {
     html {
-        overflow-x: hidden !important;
         font-size: 115%
     }
     .card-block {
@@ -34,14 +31,10 @@ html {
 @media (-webkit-min-device-pixel-ratio: 4),
 (min-resolution: 384dpi) {
     html {
-        overflow-x: hidden !important;
         font-size: 120%
     }
     .card-block {
         padding: 2.5rem;
-    }
-    .card-team {
-        height: 1400px !important;
     }
 }
 
@@ -284,6 +277,14 @@ a {
 
 .margin-auto {
     margin: 0 auto;
+}
+
+.margin-zero {
+    margin: 0 !important;
+}
+
+.min-height {
+    min-height: 0 !important;
 }
 
 button {
@@ -790,6 +791,10 @@ button {
 .card * {
    transition: all 0.25s ease;
 } 
+
+.card {
+    padding-bottom: 3em;
+}
 
 .card img {
     height: auto;
