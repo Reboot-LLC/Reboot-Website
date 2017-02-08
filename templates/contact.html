@@ -135,34 +135,34 @@
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                 <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Los Angeles, CA</h4>
+                    <div class="card-block numbers">
+                        <h4 class="card-title mont">Los Angeles, CA</h4>
                         <h5 class="card-title subTitle">
-                            <a href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
                         </h5>
-                        <p class="card-text bold">Web Apps, Data Science</p>
+                        <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, Data Science</span></div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="card">
+                    <div class="card-block numbers">
+                        <h4 class="card-title mont">Philadelphia, PA</h4>
+                        <h5 class="card-title subTitle">
+                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                        </h5>
+                        <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, UI/UX</span></div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                 <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Philadelphia, PA</h4>
+                    <div class="card-block numbers">
+                        <h4 class="card-title mont">Knoxville, TN</h4>
                         <h5 class="card-title subTitle">
-                            <a href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
                         </h5>
-                        <p class="card-text bold">Web Apps, UI/UX</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Knoxville, TN</h4>
-                        <h5 class="card-title subTitle">
-                            <a href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
-                        </h5>
-                        <p class="card-text bold">Small Business Consulting</p>
+                        <div class="heightctrl"><span class="card-text bold mont 1rem">Small Business Consulting</span></div>
                     </div>
                 </div>
             </div>
@@ -180,19 +180,19 @@
                     <form action="" method="post">
                         <div class="card-block">
                             <div class="spacing-5"></div>
-                            <h4 class="card-title">Let's Talk About:</h4>
+                            <h4 class="card-title mont">Let's Talk About:</h4>
 
-                            <label class="chkLabel noselect spacing-10" for="apps">
+                            <label class="chkLabel noselect spacing-10 h5" for="apps">
                             <input type="checkbox" id="apps" name="category" value="Web Applications" class="materialChk">Web Apps & Software</label>
 
-                            <label class="chkLabel noselect spacing-10" for="data">
+                            <label class="chkLabel noselect spacing-10 h5" for="data">
                             <input type="checkbox" id="data" name="category" value="Data Science" class="materialChk">Data Science & Analytics</label>
 
-                            <label class="chkLabel noselect spacing-10" for="consulting">
+                            <label class="chkLabel noselect spacing-10 h5" for="consulting">
                             <input type="checkbox" id="consulting" name="category" value="Consulting" class="materialChk">Small Business Consulting</label>
 
                             <div class="spacing-25"></div>
-                            <h4 class="card-title">Your Details:</h4>
+                            <h4 class="card-title mont">Your Details:</h4>
                             <input class="form" id="name" name="name" placeholder="Name" required="required" type="text">
                             <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
                             <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
@@ -219,5 +219,28 @@
 <script src="https://use.fontawesome.com/65276217d5.js"></script>
 <script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-
+<script type="text/javascript">
+function setEqualHeight(selector, triggerOnInput) {
+    if (screen.width >= 992) {
+        var elements = $(selector)
+        elements.css("height", "auto")
+        var max = Number.NEGATIVE_INFINITY;
+        $.each(elements, function(index, item) {
+            if ($(item).height() > max) {
+                max = $(item).height()
+            }
+        })
+        $(selector).css("height", max + "px")
+        if (!!triggerOnInput) {
+            $(document).on("input", selector, function() {
+                setEqualHeight(selector, false)
+            })
+        }
+        $(window).resize(function() {
+            setEqualHeight(selector, false)
+        })
+    }
+}
+setEqualHeight(".heightctrl", true)
+</script>
 </html>

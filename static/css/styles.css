@@ -298,6 +298,10 @@ button {
     font-family: 'Montserrat', sans-serif;
 }
 
+.jura {
+    font-family: 'Jura', sans-serif !important;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -522,22 +526,26 @@ polyWorld {
 
 .headingText {
     margin-right: 25px;
-    line-height: 1.25;
+    line-height: 1.5;
 }
 
 .card-title {
     margin-bottom: 0.75rem;
-    color: #ffb81e;
     min-height: 70px;
     font-weight: bold;
 }
 
 .card-title.subTitle {
     min-height: 40px;
-    color: #353c3e;
+    color: #1AADC1;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.25rem
+    font-style: italic;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+}
+
+.card-title.subTitle.rebootB2 {
+    font-style: normal;
 }
 
 .rebootB {
@@ -582,6 +590,14 @@ polyWorld {
 .card * {
    transition: all 0.25s ease;
 } 
+
+.1rem {
+    font-size: 1rem
+}
+
+.card-block p {
+    font-size: 1.15em;
+}
 
 .card.team-cards {
     padding-bottom: 3em;
@@ -711,8 +727,11 @@ input {
 
 .chkLabel {
     font-weight: bold;
-    font-size: 1em;
     cursor: pointer;
+}
+
+.fa.fa-phone {
+    color: #1AADC1
 }
 
 input.materialChk {
@@ -730,8 +749,8 @@ input.materialChk {
     background: #fff;
     border-radius: .125em;
     box-sizing: border-box;
-    border: 0.125em solid #1AADC1;
-    box-shadow: inset 0 0 0 0 #1AADC1;
+    border: 0.125em solid #ffb81e;
+    box-shadow: inset 0 0 0 0 #ffb81e;
     position: relative;
     -webkit-transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
     transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s linear 0.17s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
@@ -744,8 +763,8 @@ input.materialChk:focus {
 }
 
 input.materialChk:checked {
-    border-color: #1AADC1;
-    box-shadow: inset 0 0 0 0.5em #1AADC1;
+    border-color: #ffb81e;
+    box-shadow: inset 0 0 0 0.5em #ffb81e;
     -webkit-transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
     transition: box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s, -webkit-transform 0.3s cubic-bezier(0.2, 0.3, 0, 1);
     transition: transform 0.3s cubic-bezier(0.2, 0.3, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0.3, 0, 1), border-color 0s;
@@ -1060,6 +1079,10 @@ input.materialChk {
     left: 0;
     width: 100%;
     font-size: 1.25em;
+}
+
+.support-wrapper-content p {
+    line-height: 2
 }
 
 .support-wrapper-content li {
