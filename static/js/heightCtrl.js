@@ -22,4 +22,3 @@
 setEqualHeight(".card-team", true) 
 setEqualHeight(".card-text", true) 
 setEqualHeight(".bottom-card-container", true)
-setEqualHeight(".img-fluid", true)

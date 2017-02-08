@@ -4,7 +4,7 @@ html {
     font-size: 100%
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.5),
+/*@media (-webkit-min-device-pixel-ratio: 1.5),
 (min-resolution: 120dpi) {
     html {
         font-size: 105%
@@ -36,7 +36,7 @@ html {
     .card-block {
         padding: 2.5rem;
     }
-}
+}*/
 
 body, html {
     width: 100%;
@@ -48,7 +48,6 @@ body {
     font-family: 'Jura', sans-serif !important;
     background-color: #f8f8f8;
     overflow-x: hidden !important;
-    /*text-shadow: 1px 1px #f8f8f8;*/
 }
 
 img {
@@ -63,6 +62,10 @@ nav {
 .navbar-brand img {
     max-height: 30px;
     margin-right: 5px;
+}
+
+.navbar-brand {
+    line-height: 37px;
 }
 
 .noselect {
@@ -392,29 +395,46 @@ button {
     text-transform: uppercase;
     font-weight: bold;
     color: #1AADC1;
-    font-size: 25px;
 }
 
 .responsive-card {
     margin: 3%;
 }
 
-/* add rule to remove for mobile */
 .polyContainer {
-    text-align: center;
-    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: inline-block;
+}
+
+polyWorld {
+    position: absolute;
+    top:0;
+    max-height: 65vh;
+    overflow: hidden;
+    margin-top: 54px;
 }
 
 .polyWorld {
-    margin-top: 200px;
-    border:15px solid #ffffff;
+    margin-top: 54px;
     position: relative;
-    width: 94%;
-    height: 65vh;
+    width: 100%;
+    height: 65vh;    
     overflow: hidden;
-    background: #ffffff;
-    z-index: 300;
-    box-shadow: inset #999999 0 0 10px;
+    background-color: #193c6d;
+    filter: progid: DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#003073', endColorstr='#66CBD9');
+    background-image: url(img.alicdn.com/tps/TB1d.u8MXXXXXXuXFXXXXXXXXXX-1900-790.jpg);
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, #003073), color-stop(100%, #66CBD9));
+    background-image: -webkit-linear-gradient(135deg, #003073, #66CBD9);
+    background-image: -moz-linear-gradient(45deg, #003073, #66CBD9);
+    background-image: -ms-linear-gradient(45deg, #003073 0, #66CBD9 100%);
+    background-image: -o-linear-gradient(45deg, #003073, #66CBD9);
+    background-image: linear-gradient(135deg, #003073, #66CBD9);
+    text-align: center;
+    overflow: hidden;
+    //box-shadow: inset #999999 0 0 10px;
     display: inline-block;
 }
 
@@ -426,14 +446,10 @@ button {
     left: 0;
     right: 0;
     margin: auto;
-    border: 15px solid #f6f6f6;
-    background-color: #ffffff;
     height: 550px;
     width: 550px;
     max-width: 90%;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
+    max-height: 90%;
 }
 
 .innerTag {
@@ -445,244 +461,20 @@ button {
     padding: 5px;
 }
 
-.particle1 {
-    width: 200vw;
-    height: 100vh;
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/particles2.png");
-    transform: translateZ(0);
-    perspective: 1000;
-    backface-visibility: hidden;
-    position: absolute;
-    z-index: 1000;
-    opacity: 0.45;
-    overflow: hidden;
-    animation: particleOne 200s linear infinite;
-    filter: blur(4px) brightness(0.9);
-    -webkit-filter: blur(4px) brightness(0.9);
-}
-
-.particle2 {
-    width: 100vw;
-    height: 100vh;
-    filter: blur(1px) hue-rotate(-8deg);
-    -webkit-filter: blur(1px) hue-rotate(-8deg);
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/particles3.png");
-    transform: translateZ(0);
-    perspective: 1000;
-    backface-visibility: hidden;
-    position: absolute;
-    z-index: 1000;
-    opacity: 0.45;
-    overflow: hidden;
-    animation: particleOne 460s linear infinite;
-}
-
-.orb {
-    background: url(../images/orb.png);
-    background-size: contain;
-    width: 500px;
-    height: 356px;
-    position: absolute;
-    transform: translateZ(0);
-    perspective: 1000;
-    backface-visibility: hidden;
-    left: 65%;
-    opacity: 0.8;
-    z-index: 50;
-    animation: orb 2s ease infinite;
-}
-
-.orb1 {
-    transform: translateZ(0);
-    perspective: 1000;
-    backface-visibility: hidden;
-    position: absolute;
-}
-
-.orb2 {
-    top: 30%;
-    left: 10%;
-    opacity: 0.85;
-    z-index: 50;
-    filter: blur(1px) hue-rotate(-8deg);
-    -webkit-filter: blur(1px) hue-rotate(-8deg);
-    animation: orb2 70s ease-out infinite;
-}
-
-.orb2 img {
-    width: 40%;
-    height: auto;
-}
-
-.orb3 {
-    top: 4%;
-    left: 80%;
-    opacity: 0.6;
-    z-index: 20;
-    filter: blur(2px) hue-rotate(15deg);
-    -webkit-filter: blur(2px) hue-rotate(15deg);
-    animation: orb2 70s ease-out infinite;
-}
-
-.orb3 img {
-    width: 30%;
-    height: auto;
-}
-
-@keyframes particleOne {
-    50% {
-        transform: translateX(100%);
-    }
-}
-
-@keyframes orb {
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes orb2 {
-    50% {
-        transform: translateX(300px);
-    }
-}
-
-.land {
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    position: absolute;
-}
-
-.land img {
-    width: 100%;
-    height: auto;
-}
-
-@media screen and ( max-height: 400px) {
-    .land {
-        bottom: -55%;
-    }
-}
-
-@media screen and ( max-device-width: 620px) {
-    nav {
-        zoom:2;
-    }
-    .navbar-dark .navbar-nav a.nav-link, .navbar.navbar-dark .navbar-toggler i {
-        font-size: 2rem!important
-    }
-    .polyWorld {
-        margin-top: 250px;
-    }
-    .innerCircle {
-        background-color: rgba(255,255,255,0.5);
-    }
-    .homeHeading {
-        font-size: 2.75rem!important
-    }
-    .bodyHeading {
-        font-size: 3.5rem
-    }
-    .headingText {
-        font-size: 2.75rem;
-        padding: 1rem;
-    }
-    .card-title {
-        font-size: 3.75rem!important
-    }
-    .card-text {
-        font-size: 2.75rem
-    }
-    .card-title.subTitle {
-        font-size: 3rem!important
-    }
-    .card-block .btn {
-        font-size: 2.5rem
-    }
-    .footer {
-        font-size: 2rem;
-        margin-bottom:25px;
-    }
-    input.materialChk {
-        font-size: 40px!important
-    }
-    .chkLabel {
-        font-size: 2.5rem!important;
-        width: 100%;
-    }
-    .weHelp {
-        text-align: left!important;
-    }
-    .weHelp.weHelpTop {
-        margin-top: 50px
-    }
-    .weHelpTop {
-        margin-top: 50px
-    }
-    input.form, textarea.form  {
-        font-size: 2.75rem;
-        margin-bottom: 50px;
-        padding: 25px 15px;
-    }     
-    textarea.form  {
-        height: 500px;
-        max-height: 750px
-    }
-    .bodyHeading {
-        padding: 1rem;
-    }
-    .support-wrapper .bodyHeading {
-        font-size: 2.5rem;
-    }
-    .support-wrapper label {
-        height: auto!important
-    }    
-    .support-wrapper .headingText {
-        margin-top: 80px;
-        font-size: 2.5rem;
-    }
-    .support-wrapper .supportOne .headingText {
-        margin-top: 125px;
-    }
-    input[type='checkbox']:checked+.supportOne {
-        height: 1050px!important;
-    }
-    input[type='checkbox']:checked+.supportTwo {
-        height: 1325px!important;
-    }
-    input[type='checkbox']:checked+.supportThree {
-        height: 825px!important;
-    }
-    .weHelp {
-        margin-top: 50px
-    }
-    .askList {
-        margin-bottom: 75px!important
-    }
-    .custom-spacing {
-        padding:65px!important;
-    }
-    .map {
-        height: 400px!important;
-        border-top: 10px solid #1AADC1!important;
-        border-bottom: 10px solid #1AADC1!important;
-    }
-}
-
 .custom-spacing {
     padding:28px;
 }
 
-@media screen and ( max-width: 991px) {
-    .polyWorld {
-        width:85%;
+@media all and ( max-width: 991px) {
+    polyWorld, polyWorld canvas {
+        position: relative;
+        display: none;
     }
     .image-container {
         max-height: none;
     }
-    .homeContainer {
-
+    .mobile-hide {
+        display: none
     }
 }
 
@@ -724,19 +516,18 @@ button {
     text-align: center;
     color: #353c3e;
     font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
     line-height: 50px;
     margin-bottom: 40px;
 }
 
 .headingText {
     margin-right: 25px;
+    line-height: 1.25;
 }
 
 .card-title {
     margin-bottom: 0.75rem;
     color: #ffb81e;
-    font-size: 25px;
     min-height: 70px;
     font-weight: bold;
 }
@@ -745,8 +536,8 @@ button {
     min-height: 40px;
     color: #353c3e;
     font-weight: bold;
-    font-size: 17px;
     font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem
 }
 
 .rebootB {
@@ -792,7 +583,7 @@ button {
    transition: all 0.25s ease;
 } 
 
-.card {
+.card.team-cards {
     padding-bottom: 3em;
 }
 
@@ -818,6 +609,11 @@ button {
     filter: gray;
     filter: grayscale(100%);
 }
+
+.btn.rebootB {
+    font-size: 1.15em
+}
+
 
 /* Home Page - Contact Form */
 #contact {
@@ -864,7 +660,6 @@ button {
 .form-btn {
     width: 180px;
     display: block;
-    font-size: 20px;
     height: auto;
     padding: 15px;
     color: #fff;
@@ -916,7 +711,7 @@ input {
 
 .chkLabel {
     font-weight: bold;
-    font-size: 17px;
+    font-size: 1em;
     cursor: pointer;
 }
 
@@ -1191,8 +986,6 @@ input.materialChk {
 .support-wrapper label {
     padding: 25px;
     float: left;
-    height: 100px;
-    line-height: 55px;
     border-bottom: 1px solid #293649;
     position: relative;
     width: 100%;
@@ -1217,6 +1010,12 @@ input.materialChk {
 
 .support-wrapper label:hover .bodyHeading {
     text-indent: 4px;
+}
+
+.support-wrapper label .bodyHeading {
+    font-size: 1.5em;
+    line-height: 1em;
+    max-width: 90%;
 }
 
 .support-wrapper label:hover .bar {
@@ -1248,14 +1047,14 @@ input.materialChk {
     border-right: 5px solid #1AADC1;
     float: right;
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 25px;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
 
 .support-wrapper-content {
-    position: absolute;
+    position: relative;
     display: none;
     overflow: hidden;
     left: 0;
@@ -1264,10 +1063,11 @@ input.materialChk {
 }
 
 .support-wrapper-content li {
+    margin: 15px;
+    text-indent: 0;
     width: 100%;
     opacity: 0;
     left: -100%;
-    padding: 25px;
     box-shadow: 0px 0px #126CA1 inset;
     -webkit-transition: box-shadow .3s, text-indent .3s;
     transition: box-shadow .3s, text-indent .3s;
@@ -1289,7 +1089,6 @@ input[type='checkbox']+label {
 
 input[type='checkbox']:checked+label .support-wrapper-content {
     display: block;
-    top: 68px;
 }
 
 input[type="checkbox"]:checked+label>.lil-arrow {
@@ -1305,7 +1104,7 @@ input[type="checkbox"]:checked+label>.lil-arrow {
 }
 
 input[type='checkbox']:checked+label {
-    height: 350px;
+    height: auto;
     background: #212e41;
     border-bottom: 3.5px solid #ffb81e;
     text-indent: 4px;
@@ -1374,8 +1173,20 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
     }
 }
 
-/* team page specific */
 
+@media all and (max-width: 525px) {
+    .support-wrapper label {
+        height: auto
+    }
+}
+
+@media all and (max-width: 992px) {
+    .chkLabel {
+        width: 100%;
+    }
+}
+
+/* team page specific */
 .card-team {
     //height: 750px !important;
 }
