@@ -532,7 +532,7 @@ polyWorld {
 .card-title {
     margin-bottom: 0.75rem;
     min-height: 70px;
-    font-weight: bold;
+    font-weight: 300;
 }
 
 .card-title.subTitle {
