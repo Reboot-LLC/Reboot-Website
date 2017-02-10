@@ -55,4 +55,4 @@ var map = L.mapbox.map('map')
     .setView([37.8, -96], zoomLevel);
 L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map);
 map.scrollWheelZoom.disable();
-var styleLayer = L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').addTo(map);
+var styleLayer = L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v9').addTo(map);

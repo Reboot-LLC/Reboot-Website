@@ -12,6 +12,7 @@
     <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
     <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
@@ -139,7 +140,7 @@
                     </div>
                     <div class="card-block">
                         <h4 class="card-title weDo mont">Web Applications & Software</h4>
-                        <p class="card-text bold weDo">
+                        <p class="card-text  weDo">
                             We build modern, mobile-ready web applications that incorporate beautiful & functional user interfaces (UI), efficient & scalable code, and a holistic focus on the application's user-experience (UX) and purpose. Our web applications exceed client expectations.
                         </p>
                     </div>
@@ -152,7 +153,7 @@
                     </div>
                     <div class="card-block">
                         <h4 class="card-title weDo mont">Data Science & Analytics</h4>
-                        <p class="card-text bold weDo">
+                        <p class="card-text  weDo">
                             We provide data science & analytics capability. Our web applications often include complex machine learning and analysis techniques, from clustering to text analysis to deep learning. We also offer project-based data science consulting services on a case-by-case basis.
                         </p>
                     </div>
@@ -165,7 +166,7 @@
                     </div>
                     <div class="card-block">
                         <h4 class="card-title weDo mont">Small Business Consulting</h4>
-                        <p class="card-text bold weDo">
+                        <p class="card-text  weDo">
                             Our consulting and strategy team transforms small businesses by taking a long-term, balanced approach to company operations, mindset, & culture. We focus on cultivating a culture and work-flow that's inclusive, balanced, hard-working, and efficient.
                         </p>
                     </div>
@@ -190,7 +191,7 @@
                     <div class="card-block">
                         <h4 class="card-title mont">OptiEd</h4>
                         <h5 class="card-title subTitle">Web App, Optimization</h5>
-                        <p class="card-text bold folio">
+                        <p class="card-text  folio">
                             Opti-Ed, originally aimed at Northwestern University Kellogg Executive MBA students, brings clarity and transparency to course scheduling. Courses are scheduled quickly and efficiently using an optimization algorithm designed to minimize overall preference loss.
                         </p>
                         <a class="btn rebootB waves-button-input">View</a>
@@ -205,7 +206,7 @@
                     <div class="card-block">
                         <h4 class="card-title mont">Intune Health</h4>
                         <h5 class="card-title subTitle">Web App, Sentiment Analysis</h5>
-                        <p class="card-text bold folio">
+                        <p class="card-text  folio">
                             Intune Health allows users and their wellness managers (nutritionists, trainers, doctors, psychiatrists, psychologists) to track how they feel in a wellness journal, using text and emojis. Journal entries are translated to a sentiment score, providing information on a user's well-being.
                         </p>
                         <a class="btn rebootB waves-button-input">View</a>
@@ -220,7 +221,7 @@
                     <div class="card-block">
                         <h4 class="card-title mont">Coming Soon</h4>
                         <h5 class="card-title subTitle">Your Great Idea!</h5>
-                        <p class="card-text bold folio">
+                        <p class="card-text  folio">
                             Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
 
                         </p>
@@ -231,6 +232,15 @@
         </div>
 
         <div class="spacing-25"></div>
+        <div class="spacing-5"></div>  
+
+        <div class="rotateContainer">
+            
+
+        </div>
+
+
+        <div class="spacing-25"></div>
         <div class="spacing-5"></div>
 
         <div class="row">
@@ -239,7 +249,7 @@
                     <div class="card">
                         <div class="card-block spacing-25">
                             <h4 class="card-title bottom mont">Meet Our Team</h4>
-                            <p class="card-text bold">Our team spans three American cities and multiple fields of focus.</p>
+                            <p class="card-text ">Our team spans three American cities and multiple fields of focus.</p>
                         </div>
                     </div>
                 </div>                
@@ -256,7 +266,7 @@
                     <div class="card">
                         <div class="card-block spacing-25">
                             <h4 class="card-title bottom mont">Ask Us Questions</h4>
-                            <p class="card-text bold">Reach out for questions on availability, pricing, or our services.</p>
+                            <p class="card-text ">Reach out for questions on availability, pricing, or our services.</p>
                         </div>
                     </div>
                 </div>                
@@ -293,7 +303,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/Projector.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/CanvasRenderer.js"></script>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     if (screen.width >= 991) {
         (function() {
             'use strict';
@@ -453,7 +463,7 @@
 
         })();
     }
-</script>
+</script>-->
 <script type="text/javascript">
 function setEqualHeight(selector, triggerOnInput) {
     if (screen.width >= 992) {
@@ -477,8 +487,8 @@ function setEqualHeight(selector, triggerOnInput) {
     }
 }
 setEqualHeight(".card-title.weDo", true) 
-setEqualHeight(".card-text.bold.weDo", true) 
-setEqualHeight(".card-text.bold.folio", true) 
+setEqualHeight(".card-text.weDo", true) 
+setEqualHeight(".card-text.folio", true) 
 setEqualHeight(".card-title.subTitle", true) 
 </script>
 </html>
