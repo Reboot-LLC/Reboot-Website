@@ -532,7 +532,6 @@ polyWorld {
 .card-title {
     margin-bottom: 0.75rem;
     min-height: 70px;
-    font-weight: 300;
 }
 
 .card-title.subTitle {
@@ -1209,31 +1208,29 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
     }
 }
 
-/* team page specific */
-.card-team {
-    //height: 750px !important;
-}
+/*rotating text*/
 
-.bottom-card-container {
-    //position: absolute;
-    bottom: 0;
-    //margin-bottom: 1rem;
-}
-
-/* home rotating words */
 .rotateContainer {
-    height: 400px;
-    background-color: #193c6d;
-    filter: progid: DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#003073', endColorstr='#66CBD9');
-    background-image: url(img.alicdn.com/tps/TB1d.u8MXXXXXXuXFXXXXXXXXXX-1900-790.jpg);
-    background-size: 100%;
-    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, #003073), color-stop(100%, #66CBD9));
-    background-image: -webkit-linear-gradient(135deg, #003073, #66CBD9);
-    background-image: -moz-linear-gradient(45deg, #003073, #66CBD9);
-    background-image: -ms-linear-gradient(45deg, #003073 0, #66CBD9 100%);
-    background-image: -o-linear-gradient(45deg, #003073, #66CBD9);
-    background-image: linear-gradient(135deg, #003073, #66CBD9);
+    padding: 50px 0;
+    width: 100%;
     text-align: center;
     overflow: hidden;
     display: inline-block;
 }
+
+.rotateContainer h1 {
+    font-weight: bold;
+    color:#000;
+}
+
+.rotateContainer h1 span:nth-child(1),
+.rotateContainer h1 span:nth-child(4) {
+    color:#fdb71c;
+    padding: 0 5px
+}
+
+.rotateContainer h1 span:nth-child(2) {
+    color:#3dbacb;
+}
+
+    
