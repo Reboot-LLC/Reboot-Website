@@ -19,8 +19,8 @@ var geojson = [
         },
         properties: {
             title: 'Los Angeles, CA',
-            description: 'Valentino Constantinou<br> Rustam Mirzaev<br> Taylor Stevens',
-            'marker-color': '#ffb81e',
+            description: 'Valentino Constantinou<br> Taylor Stevens',
+            'marker-color': '#1AADC1',
             'marker-size': 'large'
         }
     },
@@ -33,7 +33,7 @@ var geojson = [
         properties: {
             title: 'Philadelphia, PA',
             description: 'Michael Thompson',
-            'marker-color': '#ffb81e',
+            'marker-color': '#1AADC1',
             'marker-size': 'large'
         }
     },
@@ -46,13 +46,13 @@ var geojson = [
         properties: {
             title: 'Knoxville, TN',
             description: 'Sammy Thomas',
-            'marker-color': '#ffb81e',
+            'marker-color': '#1AADC1',
             'marker-size': 'large'
         }
     }
 ];
 var map = L.mapbox.map('map')
-    .setView([37.8, -96], zoomLevel);
+.setView([37.8, -96], zoomLevel);
 L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map);
 map.scrollWheelZoom.disable();
-var styleLayer = L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v9').addTo(map);
+var styleLayer = L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v9').addTo(map);

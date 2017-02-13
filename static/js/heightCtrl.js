@@ -20,5 +20,5 @@
     }
 }
 setEqualHeight(".card-team", true) 
-setEqualHeight(".card-text", true) 
+setEqualHeight(".card-text.team-text", true) 
 setEqualHeight(".bottom-card-container", true)
