@@ -5338,6 +5338,7 @@ button.close {
   z-index: 1050;
   display: none;
   overflow: hidden;
+  padding: 0!important;
   outline: 0;
 }
 
@@ -5368,7 +5369,7 @@ button.close {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px;
+  margin-top: 65px;
 }
 
 .modal-content {
@@ -5447,7 +5448,7 @@ button.close {
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 600px;
-    margin: 30px auto;
+    margin: 115px auto;
   }
   .modal-sm {
     max-width: 300px;

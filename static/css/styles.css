@@ -279,6 +279,14 @@ a {
     padding: 250px;
 }
 
+.spacing-bottom {
+    padding-bottom: 10px;
+}
+
+.spacing-tb {
+    padding: 10px 0;
+}
+
 .margin-5 {
     margin: 5px;
 }
@@ -1209,6 +1217,11 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
     }
 }
 
+@media all and (max-width: 375px) {
+    .col-md-6.mobile-right {
+        padding-right: 0px;
+    }
+}
 
 @media all and (max-width: 525px) {
     .support-wrapper label {
@@ -1247,4 +1260,38 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
     color:#3dbacb;
 }
 
-    
+/* read more shit */
+.info-dropdown {
+    width:100%;
+}
+
+.info-tab {
+    position:relative;
+    width:100%;
+}
+
+.info-tab i {
+    color: #ffb81e;
+    padding-right:5px;
+}
+
+.info-tab input {
+    display: none!important;
+}
+
+.info-tab label {
+    cursor: pointer;
+    line-height: 3;
+    display: block;
+    margin-bottom: 0.5em;
+    transition: all 0.30s;
+    border-radius: 3px;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #1AADC1;
+    text-indent: 0!important;
+    background:none!important;
+    border:none!important;
+}
+
+
