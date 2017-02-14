@@ -117,21 +117,40 @@
 <div class="fullpage">
     <div class="container homeContainer">
         <div class="spacing-50"></div>
-        <div class="row">
-            <!--<h1 class="homeHeading">-->
-                <!--[company name] Blog-->
-            <!--</h1>-->
-            <form action="" method="post" class="login">
-                <div class="col-sm-12 col-md-12 col-lg-12 spacing-5">'
-                    <div class="search-container">
-                        <i class="fa fa-search" aria-hidden="true" style="transform: translateY(2px); color: #999;"></i>
-                        <input class="post-input search-input" placeholder="search blog posts" type=text name="query" value="" autofocus required>
+        <div class="row blogHead-desktop">
+            <div class="col-md-8">
+                <form action="" method="post" class="login">
+                    <div class="col-sm-12 col-md-12 col-lg-12 spacing-5">
+                        <div class="search-container">
+                            <i class="fa fa-search" aria-hidden="true" style="transform: translateY(2px); color: #999;"></i>
+                            <input class="post-input search-input" placeholder="search blog posts" type=text name="query" value="" autofocus required>
+                        </div>
                     </div>
-                </div>
-                <!--<div class="col-12 col-md-2 col-lg-2 spacing-5">-->
-                    <!--<input class="btn rebootB contactB" id="input-submit" type=submit value="search">-->
-                <!--</div>-->
-            </form>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h1 class="homeHeading">
+                    <span class="bold mont">[re:boot]</span> <span class="bold rebootB2">Blog</span>
+                </h1>   
+            </div>
+        </div>
+        <div class="row blogHead-mobile">
+            <div class="col-md-4">
+                <h1 class="homeHeading">
+                    <span class="bold mont">[re:boot]</span> <span class="bold rebootB2">Blog</span>
+                </h1>  
+                <div class="spacing-5"></div> 
+            </div>
+            <div class="col-md-8">
+                <form action="" method="post" class="login">
+                    <div class="col-sm-12 col-md-12 col-lg-12 spacing-5">
+                        <div class="search-container">
+                            <i class="fa fa-search" aria-hidden="true" style="transform: translateY(2px); color: #999;"></i>
+                            <input class="post-input search-input" placeholder="search blog posts" type=text name="query" value="" autofocus required>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 spacing-5">
@@ -140,8 +159,11 @@
                         {% for post in posts %}
                         <input id="{{ post.post.url }}" name="{{ post.post.url }}" type="checkbox">
                         <label for="{{ post.post.url }}">
-                            <span><div class="bodyHeading mont">{{ post.post.title }}</div></span>
-                            <p class="headingText mont authors">by {{ post.post.authors }}</p>
+                            <span>
+                                <div class="bodyHeading mont">{{ post.post.title }}</div>
+                                <div class="spacing-5"></div>
+                                <p class="headingText mont authors">{{ post.post.publish_date.split(' ')[0] }} | {{ post.post.authors }}</p>
+                            </span>
                             <div class="lil-arrow"></div>
                             <div class="bar"></div>
                             <div class="support-wrapper-content">

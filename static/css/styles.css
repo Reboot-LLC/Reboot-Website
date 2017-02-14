@@ -395,16 +395,6 @@ button {
     font-weight: bold;
 }
 
-.search-input {
-    width: 65%;
-    min-width: 350px;
-    padding: 7px;
-    border-radius: 5px;
-    border: none;
-    color: #333;
-    font-size: 17px;
-}
-
 /* Home Page */
 .homescreen {
     background: url(https://s3.amazonaws.com/rebootimgs/bg1.jpg) no-repeat center;
@@ -839,10 +829,11 @@ input.materialChk {
 }
 
 .authors {
-    margin-top: -35px;
     color: #999;
     font-size: 0.8rem;
     font-style: italic;
+    text-indent: 10px;
+    margin: 0;
 }
 
 .blogB {
@@ -853,9 +844,45 @@ input.materialChk {
 .search-container {
     margin-left: auto;
     margin-right: auto;
-    padding-left: 25px;
+    padding-left: 5px;
     padding-right: 5px;
     margin-bottom: 10px;
+}
+
+.search-input {
+    max-width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+    color: #333;
+    font-size: 17px;
+    display: inline-block;
+}
+
+
+@media all and ( max-width: 991px) {
+    .authors {
+        text-indent: 0px;
+    }
+}
+
+.blogHead-mobile {
+    display: none;
+}
+
+@media all and ( max-width: 767px) {
+    .blogHead-mobile {
+        display: block;
+    }    
+    .blogHead-desktop {
+        display: none;
+    }
+}
+
+@media all and ( max-width: 575px) {
+    .search-input {
+        width: auto!important
+    }    
 }
 
 /* Support Page Dropdown */
