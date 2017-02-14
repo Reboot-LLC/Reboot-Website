@@ -885,6 +885,84 @@ input.materialChk {
     }    
 }
 
+.box {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+
+.right-col {
+    position: relative;
+    width: 65%;
+    float: right;
+}
+
+.left-col {
+    position: fixed;
+    left: 0px;
+    right: 400px;
+}
+
+@media all and (min-width: 1024px) {
+    .left-col {
+        left: -512px;
+        right: initial;
+        margin-left: 45%;
+    }
+}
+
+.italics {
+    font-style: italic;
+}
+
+.subColor {
+    color:#898989;
+}
+
+a.share-link {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 20%;
+    display: inline-block;
+}
+
+.share-button {
+  outline:none;
+  height: 40px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  border-radius:3px;
+  background: none;
+  border: 2px solid #fff;
+  letter-spacing:1px;
+  text-shadow:0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+   transition: all 0.3s;
+}
+
+.share-button i {
+    color: #1AADC1 !important;
+    line-height: 40px;
+}
+
+.share-button:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.share-button:hover{
+    background: #026F7E;
+    border: 2px #1AADC1 solid;
+    cursor: pointer;
+}
+
 /* Support Page Dropdown */
 .support * {
     transition: all .25s ease

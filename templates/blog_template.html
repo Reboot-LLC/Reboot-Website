@@ -114,20 +114,50 @@
 <div class="fullpage">
     <div class="container homeContainer">
         <div class="spacing-50"></div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="bodyHeading mont">{{ post.post.title }}</div>
+        <div class="box">
+
+            <div class="left-col spacing-5">
+                <h4 class="bodyHeading mont">{{ post.post.title }}<hr></h4>
                 <div class="spacing-5"></div>
-                <p class="bold headingText">
-                    {{ post.post.subtitle }}
-                    <br>
-                    <br>
-                    by: {{ post.post.authors }}
-                    <br>
-                    published: {{ post.post.publish_date.split(' ')[0] }}
-                </p>
+                <h5 class="bold headingText">
+                    <span class="italics">{{ post.post.subtitle }}</span>
+                    <div class="spacing-15"></div>
+                    <span class="subColor">
+                        {{ post.post.authors }}
+                        <br>
+                        {{ post.post.publish_date.split(' ')[0] }}
+                        <br>
+                    </span>
+                    <hr>
+                </h5>
                 <div class="spacing-5"></div>
-                <div class="spacing-5"></div>
+
+                <!-- Twitter -->
+                <a class="share-link" href="https://twitter.com/intent/tweet?text={{ post.post.title }}&url={{ post.post.url }}&via=RebootLLC" target="_blank">
+                    <div class="share-button">
+                        <i class="fa fa-twitter"></i>
+                    </div>
+                </a>
+                <!-- Facebook -->
+                <a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ post.post.url }}" target="_blank">
+                    <div class="share-button">
+                        <i class="fa fa-facebook"></i>
+                    </div>
+                </a>
+                <!-- Google+ -->
+                <a class="share-link" href="https://plus.google.com/share?url={{ post.post.url }}" target="_blank">
+                    <div class="share-button">
+                        <i class="fa fa-google"></i>
+                    </div>
+                </a>
+                <!-- Linkedin -->
+                <a class="share-link" href="https://www.linkedin.com/shareArticle?mini=true&url={{ post.post.url }}&title={{ post.post.title }}&source=SHOUCE&summary={{ post.post.subtitle }}" target="_blank">
+                    <div class="share-button">
+                        <i class="fa fa-linkedin"></i>
+                    </div>
+                </a>
+
+                <div class="spacing-10"></div>
                 {% if current_user.is_authenticated %}
                 <div class="btn rebootB internalB" style="margin: 0;">
                     <a href="/edit_post" target="" class="" style="color: #fff;">edit blog post</a>
@@ -139,17 +169,19 @@
                 <div class="spacing-5"></div>
                 {% endif %}
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+
+            <div class="right-col spacing-5">
                 <div class="card">
                     <form action="" method="post">
                         <div class="card-block">
                             <div class="blog-body">
-                                {{ post.post.body }}
+                                <p>{{ post.post.body }}</p>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
         <div class="spacing-50"></div>
         <!-- footer -->
