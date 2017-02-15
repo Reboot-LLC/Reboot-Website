@@ -491,6 +491,13 @@ polyWorld {
     .mobile-hide {
         display: none
     }
+    .mobile-show {
+        display: block!important;
+    }
+}
+
+.mobile-show {
+    display: none;
 }
 
 .intro-title {
