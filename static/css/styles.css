@@ -898,24 +898,14 @@ input.materialChk {
     display: inline-block;
 }
 
-.right-col {
-    position: relative;
-    width: 65%;
-    float: right;
-}
-
-.left-col {
+@media all and (min-width: 991px) {
+  .left-col {
     position: fixed;
-    left: 0px;
-    right: 400px;
-}
-
-@media all and (min-width: 1024px) {
-    .left-col {
-        left: -512px;
-        right: initial;
-        margin-left: 45%;
-    }
+    width: 350px;
+  }
+  .right-col {
+    padding-left: 360px;
+  }
 }
 
 .italics {
