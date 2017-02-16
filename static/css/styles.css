@@ -898,6 +898,10 @@ input.materialChk {
     display: inline-block;
 }
 
+.share-buttons {
+    position: relative;
+}
+
 @media all and (min-width: 991px) {
   .left-col {
     position: fixed;
