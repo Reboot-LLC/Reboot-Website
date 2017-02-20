@@ -1,24 +1,28 @@
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
+import config
+from datetime import timedelta, datetime
 from flask import Flask, render_template, request, session
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, redirect, abort, current_user, fresh_login_required
-from logging import FileHandler, Formatter
-from datetime import timedelta, datetime
-from urllib.parse import urlsplit
-from apscheduler.schedulers.background import BackgroundScheduler
-from slacker import Slacker
-import pymongo
-import os
+import flask_profiler
 import hashlib
-import time
+from logging import FileHandler, Formatter
+from urllib.parse import urlsplit
+from slacker import Slacker
+import os
+import pymongo
 import random
 import requests
-import atexit
+import time
+
 
 # initialization #
 # create instance of Flask class
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.config.update(SECRET_KEY='what_a_big_secret')
+app.config["DEBUG"] = True
 
 # create instance of Flask-Login and configure the app
 login_manager = LoginManager()
@@ -56,14 +60,24 @@ else:
     search = db['search']
     # add kpi collection
 
-# for local testing #
-# test = blog_posts.find()
-# for i in test:
-#     print(i)
-#
-# test = users.find()
-# for i in test:
-#     print(i)
+# declare the necessary configuration for flask profiler
+app.config["flask_profiler"] = {
+    "enabled": app.config["DEBUG"],
+    "storage": {
+        "engine": "mongodb",
+        "MONGO_URL": "mongodb://heroku_dw195pzd:71cjfem949up0gml4pkpe0r9r@ds011775.mlab.com:11775/heroku_dw195pzd",
+        "DATABASE": "heroku_dw195pzd",
+        "COLLECTION": "measurements"
+    },
+    "basicAuth": {
+        "enabled": True,
+        "username": config.username,
+        "password": config.password
+    },
+    "ignore": [
+        "^/static/.*"
+    ]
+}
 
 
 # fuzzy search functionality #
@@ -1256,6 +1270,7 @@ atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
+flask_profiler.init_app(app)
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, threaded=True)

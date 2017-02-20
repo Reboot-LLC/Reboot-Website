@@ -6,3 +6,5 @@
 xero_oauth.txt
 *.idea
 *.iml
+*.ca-bundle
+__pycache__/*

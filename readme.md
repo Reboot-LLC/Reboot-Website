@@ -71,7 +71,9 @@ is below:
         * SQL
             * *Requires creation of database classes for core db functions.*
         * Elastic Search
-7. Further Ideas for Core Functionality
+7. Endpoint Monitoring and Analysis
+    * Uses Flask-Profiler to monitor endpoint calls and present information in a dashboard (/flask-profiler).
+8. Further Ideas for Core Functionality
     * Prediction API (Pandas + SciPy + *some nice viz library*)
     * UpWork API (grab and store freelancer/project data, other things)
     * Xero API (for accounting and transparency)
@@ -81,13 +83,14 @@ is below:
 
 
 Non-native python dependencies:
-* pymongo
+* APScheduler
+* cffi
 * flask
 * flask-login
 * flask-bcrypt
-* requests
-* cffi
-* slacker
-* APScheduler
-* twython
+* flask-profiler
 * nltk
+* pymongo
+* requests
+* slacker
+* twython
