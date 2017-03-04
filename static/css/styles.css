@@ -680,7 +680,7 @@ polyWorld {
 }
 
 .form:hover {
-    border: 1px solid #006691;
+    box-shadow: 0 1px 0 0 #33A2BA;
 }
 
 .form:focus {
