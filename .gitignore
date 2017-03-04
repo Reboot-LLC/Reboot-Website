@@ -8,4 +8,5 @@ xero_oauth.txt
 *.iml
 *.ca-bundle
 *.log
+config.py
 __pycache__/*
