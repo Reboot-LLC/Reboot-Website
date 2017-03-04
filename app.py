@@ -39,7 +39,7 @@ handler.setFormatter(
 app.logger.addHandler(handler)
 
 # mongo database setup #
-mongo_url = os.getenv('MONGOLAB_URI', 'mongodb://heroku_dw195pzd:71cjfem949up0gml4pkpe0r9r@ds011775.mlab.com:11775/heroku_dw195pzd')
+mongo_url = os.getenv('MONGOLAB_URI', config.mongo)
 if mongo_url:
     parsed = urlsplit(mongo_url)
     db_name = parsed.path[1:]
@@ -49,7 +49,7 @@ if mongo_url:
     support_tickets = db['support_tickets']
     website_leads = db['website_leads']
     search = db['search']
-    # add kpi collection
+    # add kpi collection)
 else:
     conn = pymongo.MongoClient()
     db = conn['db']
@@ -65,14 +65,14 @@ app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {
         "engine": "mongodb",
-        "MONGO_URL": "mongodb://heroku_dw195pzd:71cjfem949up0gml4pkpe0r9r@ds011775.mlab.com:11775/heroku_dw195pzd",
+        "MONGO_URL": config.mongo,
         "DATABASE": "heroku_dw195pzd",
         "COLLECTION": "measurements"
     },
     "basicAuth": {
         "enabled": True,
-        "username": config.username,
-        "password": config.password
+        "username": config.profiler_username,
+        "password": config.profiler_password
     },
     "ignore": [
         "^/static/.*"
@@ -103,8 +103,8 @@ def make_ngrams(word, min_size, prefix_only=False):
 
 
 # this function fires every time someone creates or modifies a blog post.
-# n-grams are created for the title of the blog post, and usec in fuzzy search
-def index_for_search(title, subtitle, authors, body, external_link, external_link_name, username, url, url_new):
+# n-grams are created for the title of the blog post, and used in fuzzy search
+def index_for_search(title, subtitle, authors, body, external_link, external_link_name, username, url, url_new, publish_date):
     date_edited = str(datetime.utcnow())
     search.update(
         {
@@ -120,6 +120,7 @@ def index_for_search(title, subtitle, authors, body, external_link, external_lin
                 'post.external_link': external_link,
                 'post.external_link_name': external_link_name,
                 'post.user': username,
+                'post.publish_date': publish_date,
                 'post.last_edit_date': date_edited,
                 'post.url': url_new,
                 'post.ngrams': make_ngrams(title, min_size=2),
@@ -163,6 +164,8 @@ def search_collection(query):
             'post.authors': True,
             'post.body': True,
             'post.url': True,
+            'post.publish_date': True,
+            'post.last_edit_date': True,
             '$score': {
                 '$meta': "textScore"
             }
@@ -402,9 +405,8 @@ def load_user(userid):
 
 # blog post management #
 # publish post to mongo db. all times in utc
-def publish_post(title, subtitle, authors, body, username, url, publish_flag):
+def publish_post(title, subtitle, authors, body, username, url, publish_flag, publish_date):
     key = hashlib.sha224(str(time.time()).encode('UTF-8')).hexdigest()
-    date_posted = str(datetime.utcnow())
     # create json-like object for the posts attributes
     post = {
         'title': title,
@@ -414,8 +416,8 @@ def publish_post(title, subtitle, authors, body, username, url, publish_flag):
         'user': username,
         # the below attribute, published, will serve as an indication for save states in the future (i.e. save not pub)
         'published': publish_flag,
-        'publish_date': date_posted,
-        'last_edit_date': date_posted,
+        'publish_date': publish_date,
+        'last_edit_date': publish_date,
         'url': url
     }
     # store the post in mongodb
@@ -676,6 +678,7 @@ def forgot_password():
 def create_post():
     user = current_user.get_id()
     user_profile = users.find_one({'username': user})
+    date_posted = str(datetime.utcnow())
     if request.method == 'POST':
         title = request.form['title']
         subtitle = request.form['subtitle']
@@ -683,8 +686,8 @@ def create_post():
         body = request.form['body']
         user = current_user.get_id()
         url = request.form['url']
-        publish_post(title, subtitle, authors, body, user, url, True)
-        index_for_search(title, subtitle, authors, body, user, '', '', url, url)
+        publish_post(title, subtitle, authors, body, user, url, True, date_posted)
+        index_for_search(title, subtitle, authors, body, user, '', '', url, url, date_posted)
         index_collection()
         return redirect('/profile')
     else:
@@ -729,10 +732,12 @@ def blog():
         query = request.form['query']
         ngrams = make_ngrams(query, min_size=2)
         results = search_collection(str(ngrams))
+
+        print(results)
+
         return render_template('blog.html', posts=results)
     else:
         return render_template('blog.html', posts=posts)
-    #return render_template('blog.html', posts=posts)
 
 
 @app.route('/blog/<url>', methods=['GET', 'POST'])
@@ -798,7 +803,7 @@ def define_color_support_ticket(urgency):
 # lead bot #
 def report_lead(name, email, subject, message, category):
     # token for bot
-    lead_bot = Slacker('xoxb-120556026706-4IFLfzIy7cYWoD42yRIGvGFi')
+    lead_bot = Slacker(config.slack_lead)
     # post to slack
     lead_bot.chat.post_message(
         '#web-site',
@@ -832,7 +837,7 @@ def report_lead(name, email, subject, message, category):
 # communication bot #
 def report_communication():
     # token for bot
-    communication_kpi = Slacker('xoxb-92491297476-u4yNkWPlqApD9RWn5eLQJt1C')
+    communication_kpi = Slacker(config.slack_communication)
     # calculate time deltas
     d24 = (datetime.today() - timedelta(days=1)).timestamp()
     d168 = (datetime.today() - timedelta(days=7)).timestamp()
@@ -930,7 +935,7 @@ def report_communication():
 # sentiment bot #
 def report_sentiment():
     # token for bot
-    sentiment_kpi = Slacker('xoxb-92458687843-PTtRPnnUiGYCOjijZr0pQCXJ')
+    sentiment_kpi = Slacker(config.slack_sentiment)
     # calculate time deltas
     d24 = (datetime.today() - timedelta(days=1)).timestamp()
     d168 = (datetime.today() - timedelta(days=7)).timestamp()
@@ -1192,7 +1197,7 @@ def report_sentiment():
 # support bot
 def report_ticket(id, resolve):
     # token for bot
-    support_helper = Slacker('xoxb-96286074081-1F7tLojdfdO7DCDiDoHmCLHp')
+    support_helper = Slacker(config.slack_support)
     ticket = support_tickets.find_one({'id': id})
     # post to slack
     if resolve is False:
