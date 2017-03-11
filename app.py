@@ -1,6 +1,5 @@
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
-import config
 from datetime import timedelta, datetime
 from flask import Flask, render_template, request, session
 from flask_bcrypt import Bcrypt
@@ -38,18 +37,27 @@ handler.setFormatter(
 )
 app.logger.addHandler(handler)
 
-# mongo database setup #
-mongo_url = os.getenv('MONGOLAB_URI', config.mongo)
+# mongo database setup, virtual env #
+mongo_url = os.getenv('MONGOLAB_URI')
 if mongo_url:
+    # mongo
     parsed = urlsplit(mongo_url)
     db_name = parsed.path[1:]
     db = pymongo.MongoClient(mongo_url)[db_name]
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
+    support_tickets = db['support_tickets']
     website_leads = db['website_leads']
     search = db['search']
-    # add kpi collection)
+    # add kpi collection
+    # config vars
+    profiler_username = os.getenv('PROFILER_USERNAME')
+    profiler_password = os.getenv('PROFILER_PASSWORD')
+    slack_lead = os.getenv('SLACK_LEAD')
+    slack_communication = os.getenv('SLACK_COMMUNICATION')
+    slack_sentiment = os.getenv('SLACK_SENTIMENT')
+    slack_support = os.getenv('SLACK_SUPPORT')
 else:
     conn = pymongo.MongoClient()
     db = conn['db']
@@ -59,20 +67,28 @@ else:
     website_leads = db['website_leads']
     search = db['search']
     # add kpi collection
+    # config vars
+    import config
+    profiler_username = config.profiler_username
+    profiler_password = config.profiler_password
+    slack_lead = config.slack_lead
+    slack_communication = config.slack_communication
+    slack_sentiment = config.slack_sentiment
+    slack_support = config.slack_support
 
 # declare the necessary configuration for flask profiler
 app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {
         "engine": "mongodb",
-        "MONGO_URL": config.mongo,
+        "MONGO_URL": mongo_url,
         "DATABASE": "heroku_dw195pzd",
         "COLLECTION": "measurements"
     },
     "basicAuth": {
         "enabled": True,
-        "username": config.profiler_username,
-        "password": config.profiler_password
+        "username": profiler_username,
+        "password": profiler_password
     },
     "ignore": [
         "^/static/.*"
@@ -803,7 +819,7 @@ def define_color_support_ticket(urgency):
 # lead bot #
 def report_lead(name, email, subject, message, category):
     # token for bot
-    lead_bot = Slacker(config.slack_lead)
+    lead_bot = Slacker(slack_lead)
     # post to slack
     lead_bot.chat.post_message(
         '#web-site',
@@ -837,7 +853,7 @@ def report_lead(name, email, subject, message, category):
 # communication bot #
 def report_communication():
     # token for bot
-    communication_kpi = Slacker(config.slack_communication)
+    communication_kpi = Slacker(slack_communication)
     # calculate time deltas
     d24 = (datetime.today() - timedelta(days=1)).timestamp()
     d168 = (datetime.today() - timedelta(days=7)).timestamp()
@@ -935,7 +951,7 @@ def report_communication():
 # sentiment bot #
 def report_sentiment():
     # token for bot
-    sentiment_kpi = Slacker(config.slack_sentiment)
+    sentiment_kpi = Slacker(slack_sentiment)
     # calculate time deltas
     d24 = (datetime.today() - timedelta(days=1)).timestamp()
     d168 = (datetime.today() - timedelta(days=7)).timestamp()
@@ -1197,7 +1213,7 @@ def report_sentiment():
 # support bot
 def report_ticket(id, resolve):
     # token for bot
-    support_helper = Slacker(config.slack_support)
+    support_helper = Slacker(slack_support)
     ticket = support_tickets.find_one({'id': id})
     # post to slack
     if resolve is False:
