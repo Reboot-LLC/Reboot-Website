@@ -37,8 +37,18 @@ handler.setFormatter(
 )
 app.logger.addHandler(handler)
 
-# mongo database setup, virtual env #
+
+# config vars #
 mongo_url = os.getenv('MONGOLAB_URI')
+profiler_username = os.getenv('PROFILER_USERNAME')
+profiler_password = os.getenv('PROFILER_PASSWORD')
+slack_lead = os.getenv('SLACK_LEAD')
+slack_communication = os.getenv('SLACK_COMMUNICATION')
+slack_sentiment = os.getenv('SLACK_SENTIMENT')
+slack_support = os.getenv('SLACK_SUPPORT')
+
+
+# mongo database setup, virtual env #
 if mongo_url:
     # mongo
     parsed = urlsplit(mongo_url)
@@ -51,13 +61,6 @@ if mongo_url:
     website_leads = db['website_leads']
     search = db['search']
     # add kpi collection
-    # config vars
-    profiler_username = os.getenv('PROFILER_USERNAME')
-    profiler_password = os.getenv('PROFILER_PASSWORD')
-    slack_lead = os.getenv('SLACK_LEAD')
-    slack_communication = os.getenv('SLACK_COMMUNICATION')
-    slack_sentiment = os.getenv('SLACK_SENTIMENT')
-    slack_support = os.getenv('SLACK_SUPPORT')
 else:
     conn = pymongo.MongoClient()
     db = conn['db']
