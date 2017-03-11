@@ -47,8 +47,26 @@ slack_communication = os.getenv('SLACK_COMMUNICATION')
 slack_sentiment = os.getenv('SLACK_SENTIMENT')
 slack_support = os.getenv('SLACK_SUPPORT')
 
+app.config["flask_profiler"] = {
+    "enabled": app.config["DEBUG"],
+    "storage": {
+        "engine": "mongodb",
+        "MONGO_URL": mongo_url,
+        "DATABASE": "heroku_dw195pzd",
+        "COLLECTION": "measurements"
+    },
+    "basicAuth": {
+        "enabled": True,
+        "username": profiler_username,
+        "password": profiler_password
+    },
+    "ignore": [
+        "^/static/.*"
+    ]
+}
 
-# mongo database setup, virtual env #
+
+# mongo database setup #
 if mongo_url:
     # mongo
     parsed = urlsplit(mongo_url)
@@ -70,33 +88,6 @@ else:
     website_leads = db['website_leads']
     search = db['search']
     # add kpi collection
-    # config vars
-    import config
-    profiler_username = config.profiler_username
-    profiler_password = config.profiler_password
-    slack_lead = config.slack_lead
-    slack_communication = config.slack_communication
-    slack_sentiment = config.slack_sentiment
-    slack_support = config.slack_support
-
-# declare the necessary configuration for flask profiler
-app.config["flask_profiler"] = {
-    "enabled": app.config["DEBUG"],
-    "storage": {
-        "engine": "mongodb",
-        "MONGO_URL": mongo_url,
-        "DATABASE": "heroku_dw195pzd",
-        "COLLECTION": "measurements"
-    },
-    "basicAuth": {
-        "enabled": True,
-        "username": profiler_username,
-        "password": profiler_password
-    },
-    "ignore": [
-        "^/static/.*"
-    ]
-}
 
 
 # fuzzy search functionality #
