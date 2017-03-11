@@ -43,7 +43,7 @@ app.logger.addHandler(handler)
 dotenv_path = os.path.join('', '.env')
 load_dotenv(dotenv_path)
 
-mongo_url = os.getenv('MONGOLAB_URI')
+mongo_url = os.getenv('MONGODB_URI')
 print(mongo_url)
 profiler_username = os.getenv('PROFILER_USERNAME')
 profiler_password = os.getenv('PROFILER_PASSWORD')
