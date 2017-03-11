@@ -1,6 +1,7 @@
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import timedelta, datetime
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, session
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, redirect, abort, current_user, fresh_login_required
@@ -39,6 +40,9 @@ app.logger.addHandler(handler)
 
 
 # config vars #
+dotenv_path = os.path.join('', '.env')
+load_dotenv(dotenv_path)
+
 mongo_url = os.getenv('MONGOLAB_URI')
 profiler_username = os.getenv('PROFILER_USERNAME')
 profiler_password = os.getenv('PROFILER_PASSWORD')
@@ -1202,6 +1206,10 @@ def report_sentiment():
         ],
         as_user='@sentiment_kpi'
     )
+
+
+print(slack_sentiment)
+report_sentiment()
 
 
 # support bot
