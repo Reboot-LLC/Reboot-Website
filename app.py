@@ -44,6 +44,7 @@ dotenv_path = os.path.join('', '.env')
 load_dotenv(dotenv_path)
 
 mongo_url = os.getenv('MONGOLAB_URI')
+print(mongo_url)
 profiler_username = os.getenv('PROFILER_USERNAME')
 profiler_password = os.getenv('PROFILER_PASSWORD')
 slack_lead = os.getenv('SLACK_LEAD')
@@ -1206,10 +1207,6 @@ def report_sentiment():
         ],
         as_user='@sentiment_kpi'
     )
-
-
-print(slack_sentiment)
-report_sentiment()
 
 
 # support bot
