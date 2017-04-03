@@ -17,8 +17,13 @@
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+
+    <!-- mapbox items -->
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet'/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
+
     <!-- json objects -->
     <!--<script src="{{ url_for('static', filename='data/display_github.json') }}"></script>-->
     <!-- map styling -->
@@ -181,7 +186,7 @@
                             <div class="row">
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="apps">
-                                    <input type="checkbox" id="apps" name="category" value="Web Applications" class="materialChk">Web Apps & Software</label>
+                                    <input type="checkbox" id="apps" name="category" value="Web Applications" class="materialChk">Intelligent Web Applications</label>
                                 </div>
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="data">

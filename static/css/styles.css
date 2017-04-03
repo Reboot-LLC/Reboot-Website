@@ -645,16 +645,27 @@ input {
 
 /* Contact Page */
 
-
 /* making the copyright label on the map less intense. kinda ruins the asethetic of the dark map, I think*/
-
+.marker-img {
+    display: block;
+    border: 1px solid #f8f8f8;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}
+/* making the copyright label on the map less intense. kinda ruins the asethetic of the dark map, I think */
 .leaflet-control-attribution.leaflet-control {
     opacity: 0.25;
 }
 .leaflet-control-attribution.leaflet-control:hover {
     opacity: 0.75;
 }
-
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}
+.mapboxgl-ctrl-attrib {
+    display: none !important;
+}
 /*end*/
 
 .chkLabel {
