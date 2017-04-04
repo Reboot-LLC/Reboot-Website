@@ -247,6 +247,11 @@ button {
 .bold {
     font-weight: bold;
 }
+@media (max-width: 991px) {
+    .navbar-brand {
+        float: none;
+    }
+}
 .nav-item {
     margin-top: 3px !important;
 }
