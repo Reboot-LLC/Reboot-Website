@@ -8,7 +8,7 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 import flask_profiler
 import hashlib
 from logging import FileHandler, Formatter
-from urllib.parse import urlsplit
+from urllib.parse import urlparse
 from slacker import Slacker
 import os
 import pymongo
@@ -42,9 +42,7 @@ app.logger.addHandler(handler)
 # config vars #
 dotenv_path = os.path.join('', '.env')
 load_dotenv(dotenv_path)
-
 mongo_url = os.getenv('MONGODB_URI')
-print(mongo_url)
 profiler_username = os.getenv('PROFILER_USERNAME')
 profiler_password = os.getenv('PROFILER_PASSWORD')
 slack_lead = os.getenv('SLACK_LEAD')
@@ -52,31 +50,39 @@ slack_communication = os.getenv('SLACK_COMMUNICATION')
 slack_sentiment = os.getenv('SLACK_SENTIMENT')
 slack_support = os.getenv('SLACK_SUPPORT')
 
-app.config["flask_profiler"] = {
-    "enabled": app.config["DEBUG"],
-    "storage": {
-        "engine": "mongodb",
-        "MONGO_URL": mongo_url,
-        "DATABASE": "heroku_dw195pzd",
-        "COLLECTION": "measurements"
-    },
-    "basicAuth": {
-        "enabled": True,
-        "username": profiler_username,
-        "password": profiler_password
-    },
-    "ignore": [
-        "^/static/.*"
-    ]
-}
+# app.config["flask_profiler"] = {
+#     "enabled": app.config["DEBUG"],
+#     "storage": {
+#         "engine": "mongodb",
+#         "MONGO_URL": urlparse(mongo_url[1:-1]).netloc.split(':')[1],
+#         "DATABASE": "heroku_dw195pzd",
+#         "COLLECTION": "measurements"
+#     },
+#     "basicAuth": {
+#         "enabled": True,
+#         "username": profiler_username,
+#         "password": profiler_password
+#     },
+#     "ignore": [
+#         "^/static/.*"
+#     ]
+# }
 
 
 # mongo database setup #
 if mongo_url:
     # mongo
-    parsed = urlsplit(mongo_url)
+    parsed = urlparse(mongo_url[1:-1])
+
+    print(mongo_url)
+    print(type(mongo_url))
+
+    # parsed = urlsplit(mongo_url)
     db_name = parsed.path[1:]
-    db = pymongo.MongoClient(mongo_url)[db_name]
+    print(parsed)
+    print(parsed.path)
+    print(parsed.path[1:])
+    db = pymongo.MongoClient(parsed.netloc.split(':')[1])[parsed.path[1:]]
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
@@ -1290,7 +1296,7 @@ atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
-flask_profiler.init_app(app)
+# flask_profiler.init_app(app)
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, threaded=True)
