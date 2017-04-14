@@ -7,7 +7,7 @@
 *.iml
 *.key
 *.log
-*.txt
+log.txt
 *.xml
 xero_oauth.txt
 config.py
