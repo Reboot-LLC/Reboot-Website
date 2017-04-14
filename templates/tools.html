@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Reboot Tools</title>
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <!-- css and other styling -->
+    <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:500,600,700" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
+    <!-- json objects -->
+    <!--<script src="{{ url_for('static', filename='data/display_github.json') }}"></script>-->
+    <!-- heap analytics script -->
+    <script type="text/javascript">
+        window.heap = window.heap || [], heap.load = function (e, t) {
+            window.heap.appid = e, window.heap.config = t = t || {};
+            var r = t.forceSSL || "https:" === document.location.protocol, a = document.createElement("script");
+            a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
+            var n = document.getElementsByTagName("script")[0];
+            n.parentNode.insertBefore(a, n);
+            for (var o = function (e) {
+                return function () {
+                    heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                }
+            }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c])
+        };
+        heap.load("1573873728");
+    </script>
+</head>
+<div class="loading-gif">
+    <div class="loader"></div>
+</div>
+<!-- Navbar -->
+
+<body class="hide">
+<!-- Polymorph Background -->
+<div class="polymorph"></div>
+<!--end poly-->
+<nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
+    <div class="container">
+        <!-- Collapse button-->
+        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+            <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [re:boot]</a>
+
+        <!--Collapse content-->
+        <div class="collapse navbar-collapse navbar-toggleable-md" id="collapseEx2">
+            <!--Links-->
+            <ul class="nav navbar-nav mont" style="margin-left:-5px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/tools">Tools/</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/team">Team/</a>
+                </li>
+                <!-- uncomment once we complete blog and populate with content -->
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link">Blog</a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact/</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/support">Support/</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav nav-flex-icons mont">
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">
+                        {% if current_user.is_authenticated %}
+                        Hi {{ current_user.first_name }}!
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <!-- Eventually we can replace the user icon with a particular user's photo -->
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="dropdownMenu1"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i
+                            class="fa fa-user-circle"></i></a>
+                    <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1"
+                         data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        {% if not current_user.is_authenticated %}
+                        <a class="dropdown-item waves-effect waves-light" href="/login">Login</a>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                        <a class="dropdown-item waves-effect waves-light" href="/profile">My Profile</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/create_post">New Blog Post</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/logout">Logout</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+            <!--Search form-->
+            <!-- uncomment and connect once blog is live -->
+            <!--<form class="form-inline">-->
+            <!--<input class="form-control" type="text" placeholder="Search">-->
+            <!--</form>-->
+        </div>
+        <!--/.Collapse content-->
+    </div>
+</nav>
+
+<div class="fullpage">
+    <div class="polyContainer">
+        <div class="polyWorld">
+            <div class="innerCircle"><div class="innerTag"></div></div>
+        </div>
+    </div>
+    <div class="container homeContainer">
+        <div class="spacing-50 mobile-hide"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">[re:boot] Tools</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">
+                        <b class="mont">[re:boot]</b> provides three core services: Web applications and software, data science and analytics, & small business consulting.
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <article id="slider">
+            <!-- Slider Setup -->
+            <input checked id="slide1" name="slider" type="radio"> 
+            <input id="slide2" name="slider" type="radio"> 
+            <input id="slide3" name="slider" type="radio"> 
+            <input id="slide4" name="slider" type="radio"> 
+            <input id="slide5" name="slider" type="radio"> 
+            <!-- The Slider -->
+            <div id="slides">
+                <div id="overflow">
+                    <div class="inner">
+                        <article>
+                            <div class="info">
+                                <h3>Cloud Dragon</h3>by <a>Brendan Zabarauskas</a>
+                            </div>
+                            <img src="http://placehold.it/1000x500">
+                        </article>
+                        <article>
+                            <div class="info">
+                                <h3>Mountain Fort</h3>by <a>Brendan Zabarauskas</a>
+                            </div>
+                            <img src="http://placehold.it/1000x500">
+                        </article>
+                        <article>
+                            <div class="info">
+                                <h3>Mountain Outpost</h3>by <a>Brendan Zabarauskas</a>
+                            </div>
+                            <img src="http://placehold.it/1000x500">
+                        </article>
+                        <article>
+                            <div class="info">
+                                <h3>Cliffs</h3>by <a>Brendan Zabarauskas</a>
+                            </div>
+                            <img src="http://placehold.it/1000x500">
+                        </article>
+                        <article>
+                            <div class="info">
+                                <h3>Hill Fort</h3>by <a>Brendan Zabarauskas</a>
+                            </div>
+                            <img src="http://placehold.it/1000x500">
+                        </article>
+                    </div><!-- .inner -->
+                </div><!-- #overflow -->
+            </div><!-- #slides -->
+            <!-- Controls and Active Slide Display -->
+            <div id="controls">
+                <label for="slide1"></label> 
+                <label for="slide2"></label> 
+                <label for="slide3"></label> 
+                <label for="slide4"></label> 
+                <label for="slide5"></label>
+            </div><!-- #controls -->
+            <div id="active">
+                <label for="slide1"></label> 
+                <label for="slide2"></label> 
+                <label for="slide3"></label> 
+                <label for="slide4"></label> 
+                <label for="slide5"></label>
+            </div><!-- #active -->
+        </article>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">[re:boot] Tool Suites</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">
+                        <b class="mont">[re:boot]</b> provides three core services: Web applications and software, data science and analytics, & small business consulting.
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">Enterprise<br>Suite</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <div class="image-container">
+                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title mont">Coming Soon</h4>
+                        <h5 class="card-title subTitle">Your Great Idea!</h5>
+                        <p class="card-text  folio">
+                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                        </p>
+                        <div class="info-tab">
+                            <label class="home-label">
+                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>  
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">Business<br>Suite</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <div class="image-container">
+                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title mont">Coming Soon</h4>
+                        <h5 class="card-title subTitle">Your Great Idea!</h5>
+                        <p class="card-text  folio">
+                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                        </p>
+                        <div class="info-tab">
+                            <label class="home-label">
+                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>  
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">Startup<br>Suite</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <div class="image-container">
+                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title mont">Coming Soon</h4>
+                        <h5 class="card-title subTitle">Your Great Idea!</h5>
+                        <p class="card-text  folio">
+                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                        </p>
+                        <div class="info-tab">
+                            <label class="home-label">
+                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">Personal<br>Suite</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <div class="image-container">
+                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title mont">Coming Soon</h4>
+                        <h5 class="card-title subTitle">Your Great Idea!</h5>
+                        <p class="card-text  folio">
+                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                        </p>
+                        <div class="info-tab">
+                            <label class="home-label">
+                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                <div class="bodyHeadingCell">
+                    <h4 class="bodyHeading mont">Custom<br>Suite</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
+                <div class="card">
+                    <div class="image-container">
+                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title mont">Coming Soon</h4>
+                        <h5 class="card-title subTitle">Your Great Idea!</h5>
+                        <p class="card-text  folio">
+                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                        </p>
+                        <div class="info-tab">
+                            <label class="home-label">
+                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacing-25"></div>
+        <div class="spacing-5"></div>
+
+        <div class="rotateContainer">
+            <h1 class="mont"><span>[</span>re<span>:</span><span class="rotate">imagine,construct,define,vamp,vitalize,boot</span><span>]</span></h1>
+        </div>
+
+        <div class="spacing-15"></div>
+
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        © 2017 Reboot, LLC.
+    </div>
+
+</div>
+
+
+</body>
+<!-- javascript -->
+<script src="{{ url_for('static', filename='material_bootstrap/js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='material_bootstrap/js/mdb.min.js') }}"></script>
+<script src="https://use.fontawesome.com/65276217d5.js"></script>
+<script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/Projector.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/CanvasRenderer.js"></script>
+<script type="text/javascript">
+    if (screen.width >= 991) {
+        (function() {
+            'use strict';
+            
+            var camera, scene, renderer,
+                container, particle,
+                winHalfX, winHalfY,
+                height, width, fieldOfView,
+                aspectRatio, nearPlane, farPlane,
+                body, cameraZ, material,
+                i = 0,
+                count = 0,
+                Tau = Math.PI * 2,
+                mouseX = 0,
+                mouseY = 0,
+                amtX = 50,
+                amtY = 50,
+                sep = 100,
+                spriteOpts = {},
+                particles = [],
+                cssString = 'margin: 0;';
+
+            function onDocumentReady() {
+                body = document.body;
+                body.style.cssText = cssString;
+
+                container = document.createElement('polyWorld');
+                body.appendChild(container);
+
+                height = window.innerHeight;
+                winHalfY = height / 2;
+                width = window.innerWidth;
+                winHalfX = width / 2;
+                fieldOfView = 75;
+                aspectRatio = width / height;
+                nearPlane = 1;
+                farPlane = 10000;
+                cameraZ = 750;
+
+                rendererer(onRendererRenderered);
+            }
+
+            // renders the renderer 
+            function rendererer(complete) {
+                camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+                camera.position.z = cameraZ;
+
+                scene = new THREE.Scene();
+
+                //material settings
+                spriteOpts = {
+                    color: 0xffffff,
+                    program: function(ctx) {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, 0.5, 0, Tau, true);
+                        ctx.fill();
+                    }
+                };
+
+                material = new THREE.SpriteCanvasMaterial(spriteOpts);
+
+                // particle time!
+                for (var ix = 0, lx = amtX; ix < lx; ix++) {
+
+                    for (var iy = 0, ly = amtY; iy < ly; iy++) {
+                        particle = particles[i++] = new THREE.Sprite(material);
+                        particle.position.x = ix * sep - ((amtX * sep) / 2);
+                        particle.position.z = iy * sep - ((amtY * sep) / 2);
+                        scene.add(particle);
+                    }
+                }
+
+                //render the scene
+                renderer = new THREE.CanvasRenderer( { alpha: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(width, height);
+
+                // append the rendered scene to the container
+                container.appendChild(renderer.domElement);
+                
+                // aaaaaaaaand Scene
+                if (complete) {
+                    complete();
+                }
+            }
+
+            function onRendererRenderered() {
+                // bind events
+                document.addEventListener('mousemove', onDocumentMouseMove);
+                document.addEventListener('touchstart', onDocumentTouchStart);
+                document.addEventListener('touchmove', onDocumentTouchMove);
+                window.addEventListener('resize', onWindowResize);
+
+            }
+
+            function onDocumentMouseMove(e) {
+                mouseX = e.clientX - winHalfX;
+                mouseY = e.clientY - winHalfY;
+            }
+
+            function onDocumentTouchStart(e) {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    mouseX = e.touches[0].pageX - winHalfX;
+                    mouseY = e.touches[0].pageY - winHalfY;
+                }
+            }
+
+            function onDocumentTouchMove(e) {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    mouseX = e.touches[0].pageX - winHalfX;
+                    mouseY = e.touches[0].pageY - winHalfY;
+                }
+            }
+
+            function onWindowResize() {
+                // update variables to new values
+                height = window.innerHeight;
+                winHalfY = height / 2;
+                width = window.innerWidth;
+                winHalfX = width / 2;
+
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                update();
+            }
+
+            function update() {
+                camera.position.x += (mouseX - camera.position.x) * 0.05;
+                camera.position.y += (mouseY - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                
+                i = 0;
+                for (var ix = 0, lx = amtX; ix < lx; ix++) {
+
+                    for (var iy = 0, ly = amtY; iy < ly; iy++) {
+                        particle = particles[i++];
+                        particle.position.y = (Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50);
+                        particle.scale.x = particle.scale.y = (Math.sin((ix + count) * 0.3) + 1) * 4 + (Math.sin((iy + count) * 0.5) + 1) * 4;
+                        scene.add(particle);
+                    }
+                }
+
+                renderer.render(scene, camera);
+                count += 0.1;
+            }
+
+            document.addEventListener('DOMContentLoaded', onDocumentReady);
+            document.addEventListener('DOMContentLoaded', animate);
+
+        })();
+    }
+</script>
+<script type="text/javascript">
+function setEqualHeight(selector, triggerOnInput) {
+    if (screen.width >= 992) {
+        var elements = $(selector)
+        elements.css("height", "auto")
+        var max = Number.NEGATIVE_INFINITY;
+        $.each(elements, function(index, item) {
+            if ($(item).height() > max) {
+                max = $(item).height()
+            }
+        })
+        $(selector).css("height", max + "px")
+        if (!!triggerOnInput) {
+            $(document).on("input", selector, function() {
+                setEqualHeight(selector, false)
+            })
+        }
+        $(window).resize(function() {
+            setEqualHeight(selector, false)
+        })
+    }
+}
+setEqualHeight(".card-title.weDo", true) 
+setEqualHeight(".card-text.weDo", true) 
+setEqualHeight(".card-text.folio", true) 
+setEqualHeight(".card-title.subTitle", true) 
+</script>
+<script src="{{ url_for('static', filename='js/text_rotate.js') }}"></script>
+<script type="text/javascript">
+    $(".rotate").textrotator();
+</script>
+</html>
