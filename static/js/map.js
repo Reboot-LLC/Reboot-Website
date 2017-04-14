@@ -186,15 +186,6 @@ function mapbox_gl() {
                 map.flyTo({center: feature.geometry.coordinates, speed: 0.75, curve: 1});
             }
         }
-
-        //TO-DO: environ var for api key
-        // grab real time IP addresses, map those to a latitude and longitude
-        // from lat/long pull up other information
-        // from ip pull up other information
-        // display this info on the map for effect
-
-
-
     });
 
     // on mouse move listen for movement over a marker and change the cursor if hovering
@@ -206,8 +197,8 @@ function mapbox_gl() {
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl());
 
-//    // add geolocation control
-//    map.addControl(new mapboxgl.GeolocateControl());
+    // add geolocation control
+    map.addControl(new mapboxgl.GeolocateControl());
 //
 //    // add fullscreen control
 //    map.addControl(new mapboxgl.FullscreenControl());
@@ -215,7 +206,6 @@ function mapbox_gl() {
 
 
 function render_map() {
-    // if webGL is not supported, use mapbox js.
     if (mapboxgl.supported() == true) {
         mapbox_gl();
     }

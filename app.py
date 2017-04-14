@@ -50,39 +50,16 @@ slack_communication = os.getenv('SLACK_COMMUNICATION')
 slack_sentiment = os.getenv('SLACK_SENTIMENT')
 slack_support = os.getenv('SLACK_SUPPORT')
 
-# app.config["flask_profiler"] = {
-#     "enabled": app.config["DEBUG"],
-#     "storage": {
-#         "engine": "mongodb",
-#         "MONGO_URL": urlparse(mongo_url[1:-1]).netloc.split(':')[1],
-#         "DATABASE": "heroku_dw195pzd",
-#         "COLLECTION": "measurements"
-#     },
-#     "basicAuth": {
-#         "enabled": True,
-#         "username": profiler_username,
-#         "password": profiler_password
-#     },
-#     "ignore": [
-#         "^/static/.*"
-#     ]
-# }
-
 
 # mongo database setup #
 if mongo_url:
     # mongo
     parsed = urlparse(mongo_url[1:-1])
-
-    print(mongo_url)
-    print(type(mongo_url))
-
-    # parsed = urlsplit(mongo_url)
     db_name = parsed.path[1:]
-    print(parsed)
-    print(parsed.path)
-    print(parsed.path[1:])
-    db = pymongo.MongoClient(parsed.netloc.split(':')[1])[parsed.path[1:]]
+    # there is some strange shit going on with the environment variables and python strings...
+    # at the moment I am too annoyed to come up with an elegant solution
+    # so here's a patchwork solution that works and maintains privacy of our environment variables
+    db = pymongo.MongoClient("mongodb://" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[1]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[2] + "/" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0])))[parsed.path[1:]]
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
@@ -99,6 +76,26 @@ else:
     website_leads = db['website_leads']
     search = db['search']
     # add kpi collection
+
+
+app.config["flask_profiler"] = {
+    "enabled": app.config["DEBUG"],
+    "storage": {
+        "engine": "mongodb",
+        # no judging at the below code... I promise I will do better next time.
+        "MONGO_URL": "mongodb://" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[1]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[2] + "/" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0])),
+        "DATABASE": str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]),
+        "COLLECTION": "measurements"
+    },
+    "basicAuth": {
+        "enabled": True,
+        "username": profiler_username,
+        "password": profiler_password
+    },
+    "ignore": [
+        "^/static/.*"
+    ]
+}
 
 
 # fuzzy search functionality #
@@ -1284,22 +1281,31 @@ def report_ticket(id, resolve):
 # cron scheduler for functions that fire periodically, like Slack bots #
 scheduler = BackgroundScheduler()
 scheduler.start()
+try:
+    scheduler.remove_job('report_communication')
+    scheduler.remove_job('report_sentiment')
+except Exception as e:
+    print('No previously scheduled job with that ID.')
 scheduler.add_job(
     report_communication,
     'interval',
-    minutes=1440
+    minutes=1440,
+    max_instances=1,
+    id='report_communication'
 )
 scheduler.add_job(
     report_sentiment,
     'interval',
-    minutes=1440
+    minutes=1440,
+    max_instances=1,
+    id='report_sentiment'
 )
 # shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
 
 
 # run the Flask app #
-# flask_profiler.init_app(app)
+flask_profiler.init_app(app)
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, threaded=True)
