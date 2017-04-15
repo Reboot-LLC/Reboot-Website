@@ -502,9 +502,6 @@ def home():
     posts = blog_posts.find()
     return render_template('index.html', posts=posts)
 
-@app.route('/tools')
-def tools():
-    return render_template('tools.html')
 
 @app.route('/team')
 def team():
