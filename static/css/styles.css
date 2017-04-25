@@ -1582,3 +1582,77 @@ input[type='checkbox']:checked+label li:nth-of-type(4) {
     background: none!important;
     border: none!important;
 }
+
+/* success modal */
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.conf-modal {
+  width: 290px;
+  max-width: 80%;
+  height: 260px;
+  background-color: #fafafa;
+  border-radius: 3px;
+  box-shadow: 0 12px 36px 16px rgba(0, 0, 0, 0.24);
+}
+.conf-modal h1 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 10px;
+  display: inline-block;
+}
+.title-text {
+  display: inline-block;
+  height: 35px;
+  line-height: 52px;
+  margin-left: 72px;
+  margin-top: 22px;
+}
+.success h1 {
+  color: #26cf36;
+}
+.title-icon {
+  width: 27px;
+  height: 27px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 30px;
+  margin-top: 30px;
+  position: absolute;
+}
+.conf-modal p {
+  color: #737373;
+  padding: 15px 30px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.modal-footer .conf-but {
+  display: inline-block;
+  float: right;
+  margin-right: 15px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #4c4c4c;
+  background: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.modal-footer .conf-but:hover {
+  background: #eee;
+  cursor: pointer;
+  opacity: .8;
+}
+.modal-footer .conf-but {
+  color: #f8f8f8;
+}
+.modal-icon {
+    color: #26cf36;
+    font-size: 1.85rem;
+}

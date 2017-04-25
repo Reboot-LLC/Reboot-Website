@@ -235,6 +235,19 @@
                 </div>
             </div>
         </div>
+        {% if success %}
+        <div class="conf-modal center success" id="modal-success">
+            <div class="title-icon">
+                <i class="fa fa-check modal-icon" aria-hidden="true"></i>
+            </div>
+            <div class="title-text"><h1>Success!</h1></div>
+            <p>{{ text }}</p>
+            <div class="modal-footer">
+                <div class="conf-but green" id="modal-close" onClick="modalClose()">close</div>
+                <!--<div class="conf-but" onClick="">No</div>-->
+            </div>
+        </div>
+        {% endif %}
         <div class="spacing-50"></div>
         <!-- footer -->
         <div class="footer">
@@ -252,4 +265,6 @@
 <script src="{{ url_for('static', filename='material_bootstrap/js/mdb.min.js') }}"></script>
 <script src="https://use.fontawesome.com/65276217d5.js"></script>
 <script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
 </html>

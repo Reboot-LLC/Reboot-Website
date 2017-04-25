@@ -191,7 +191,12 @@ function mapbox_gl() {
     // on mouse move listen for movement over a marker and change the cursor if hovering
     map.on('mousemove', function (e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
-        map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+        try {
+            map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+        }
+        catch(e) {
+            console.log(e);
+        }
     });
 
     // Add zoom and rotation controls to the map.

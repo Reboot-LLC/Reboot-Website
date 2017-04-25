@@ -21,8 +21,11 @@ import time
 # create instance of Flask class
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-app.config.update(SECRET_KEY='what_a_big_secret')
-app.config["DEBUG"] = True
+app.config.update(
+    DEBUG=True,
+    SECRET_KEY='what_a_big_secret',
+    TEMPLATES_AUTO_RELOAD=True
+)
 
 # create instance of Flask-Login and configure the app
 login_manager = LoginManager()
@@ -52,14 +55,12 @@ slack_support = os.getenv('SLACK_SUPPORT')
 
 
 # mongo database setup #
+db_name = ''
 if mongo_url:
     # mongo
     parsed = urlparse(mongo_url[1:-1])
     db_name = parsed.path[1:]
-    # there is some strange shit going on with the environment variables and python strings...
-    # at the moment I am too annoyed to come up with an elegant solution
-    # so here's a patchwork solution that works and maintains privacy of our environment variables
-    db = pymongo.MongoClient("mongodb://" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[1]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[2] + "/" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0])))[parsed.path[1:]]
+    db = pymongo.MongoClient(mongo_url[1:-1])[parsed.path[1:]]
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
@@ -82,9 +83,8 @@ app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {
         "engine": "mongodb",
-        # no judging at the below code... I promise I will do better next time.
-        "MONGO_URL": "mongodb://" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[1]) + ":" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[2] + "/" + str(urlparse(mongo_url[1:-1]).netloc.split(':')[0])),
-        "DATABASE": str(urlparse(mongo_url[1:-1]).netloc.split(':')[0]),
+        "MONGO_URL": mongo_url[1:-1],
+        "DATABASE": db_name,
         "COLLECTION": "measurements"
     },
     "basicAuth": {
@@ -449,6 +449,8 @@ def publish_post(title, subtitle, authors, body, username, url, publish_flag, pu
 def remove_post(url, user):
     if blog_posts.find_one({'post.url': url, 'post.user': user}) is not None:
         blog_posts.delete_one({'post.url': url, 'post.user': user})
+    if search.find_one({'post.url': url}) is not None:
+        search.delete_one({'post.url': url})
 
 
 # modify post
@@ -508,24 +510,26 @@ def team():
     return render_template('team.html')
 
 
+@app.route('/tools')
+def tools():
+    return render_template('tools.html')
+
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    success = False
     if request.method == 'POST':
         form = dict(request.form)
         name = form['name'][0]
         email = form['email'][0]
-        # we removed the subject line from the form for now
+        # we removed the subject line from the form for now, but it's still a field in the database
         subject = None
-        message = form['message'][0]
+        message = form['message']
         category = form['category']
         if record_web_lead(name, email, subject, message, category) is True:
-            render_template('contact.html',
-                            message='Message sent successfully! We will be in touch as soon as possible.')
             report_lead(name, email, subject, message, category)
-        else:
-            render_template('contact.html',
-                            message='Whoops! Please try again later.')
-    return render_template('contact.html')
+            success = True
+    return render_template('contact.html', success=success, text="Message sent! We'll be in touch soon.")
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -541,9 +545,9 @@ def search_page():
 
 @app.route('/support', methods=['GET', 'POST'])
 def support():
+    success = False
     if request.method == 'POST':
         form = dict(request.form)
-        print(form)
         product_name = form['product_name'][0]
         contact_name = form['contact_name'][0]
         email = form['email'][0]
@@ -556,14 +560,13 @@ def support():
         else:
             urgency = False
         if submit_ticket(product_name, contact_name, email, phone, description, category, urgency) is True:
-            render_template('support.html',
-                            message='Message sent successfully! We will be in touch as soon as possible.')
+            success = True
             report_ticket(session['support_ticket_id'], False)
             # confirm_ticket() # sends out an email confirmation
-        else:
-            render_template('support.html',
-                            message='Whoops! Please try again later.')
-    return render_template('support.html')
+    return render_template('support.html',
+                           success=success,
+                           text="We apologize for the issues you are experiencing. We'll be in touch as soon as possible."
+                           )
 
 
 @app.route('/support/resolve', methods=['GET', 'POST'])
@@ -573,9 +576,9 @@ def support_resolve():
         ticket_id = int(request.form['ticket_id'])
         if resolve_ticket(ticket_id) is True:
             # confirm_ticket() # sends out an email confirmation
-            return render_template('resolve.html', message='Success! The support ticket has been resolved.')
+            return render_template('resolve.html', success=True)
         else:
-            return render_template('resolve.html', message='Ticket ID not found or invalid ID format.')
+            return render_template('resolve.html', success=False)
     return render_template('resolve.html')
 
 
@@ -611,6 +614,7 @@ def logout():
 
 
 @app.route('/new_user', methods=['GET', 'POST'])
+@login_required # requiring login to create new user on our site.
 def new_user():
     if request.method == 'POST':
         first_name = request.form['firstname']
@@ -705,7 +709,7 @@ def create_post():
         user = current_user.get_id()
         url = request.form['url']
         publish_post(title, subtitle, authors, body, user, url, True, date_posted)
-        index_for_search(title, subtitle, authors, body, user, '', '', url, url, date_posted)
+        index_for_search(title, subtitle, authors, body, '', '', user, url, url, date_posted)
         index_collection()
         return redirect('/profile')
     else:
@@ -727,8 +731,7 @@ def edit_post():
     url = session['blog_url']
     user = current_user.get_id()
     user_profile = users.find_one({'username': user})
-    if blog_posts.find_one({'post.url': url, 'post.user': user}) is not None:
-        post = blog_posts.find_one({'post.url': url, 'post.user': user})
+    post = blog_posts.find_one({'post.url': url, 'post.user': user})
     if request.method == 'POST':
         title = request.form['title']
         subtitle = request.form['subtitle']
@@ -736,7 +739,7 @@ def edit_post():
         body = request.form['body']
         url_new = request.form['url']
         modify_post(title, subtitle, authors, body, user, url, url_new)
-        index_for_search(title, subtitle, authors, body, user, '', '', url, url_new)
+        index_for_search(title, subtitle, authors, body, '', '', user, url, url_new, post['post']['publish_date'])
         index_collection()
         return redirect('/profile')
     else:
@@ -750,9 +753,6 @@ def blog():
         query = request.form['query']
         ngrams = make_ngrams(query, min_size=2)
         results = search_collection(str(ngrams))
-
-        print(results)
-
         return render_template('blog.html', posts=results)
     else:
         return render_template('blog.html', posts=posts)

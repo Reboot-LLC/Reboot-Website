@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Reboot | Logic Made Beautiful</title>
+
     <!-- favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}"
+          sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}"
+          sizes="16x16">
     <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
     <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
 
     <!-- css and other styling -->
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:400,700" rel="stylesheet">
-    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css"
+          rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" rel="stylesheet">
 
@@ -22,13 +27,14 @@
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet'/>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet'/>
 
     <!-- json objects -->
     <!--<script src="{{ url_for('static', filename='data/display_github.json') }}"></script>-->
     <!-- map styling -->
     <style>
         .map { position: relative; height: 350px; width:100%; border-top: 3px solid #1AADC1; border-bottom: 3px solid #1AADC1; text-shadow: none;}
+
     </style>
     <!-- heap analytics script -->
     <script type="text/javascript">
@@ -45,6 +51,7 @@
             }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c])
         };
         heap.load("1573873728");
+
     </script>
 </head>
 
@@ -121,52 +128,53 @@
 <div class="spacing-15"></div>
 <div class="fullpage">
     <div class="container homeContainer">
-    <!--<div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <h4 class="bodyHeading mont">East & West Coast</h4>
-                <div class="spacing-5"></div>
-                <h5 class="bold headingText">Our team spans three American cities and multiple fields of focus.</h5>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="card-block numbers">
-                        <h4 class="card-title mont">Los Angeles, CA</h4>
-                        <h5 class="card-title subTitle">
-                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
-                        </h5>
-                        <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, Data Science</span></div>
+        <!--<div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <h4 class="bodyHeading mont">East & West Coast</h4>
+                    <div class="spacing-5"></div>
+                    <h5 class="bold headingText">Our team spans three American cities and multiple fields of focus.</h5>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="card-block numbers">
+                            <h4 class="card-title mont">Los Angeles, CA</h4>
+                            <h5 class="card-title subTitle">
+                                <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                            </h5>
+                            <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, Data Science</span></div>
+                        </div>
                     </div>
                 </div>
-            </div> 
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="card-block numbers">
-                        <h4 class="card-title mont">Philadelphia, PA</h4>
-                        <h5 class="card-title subTitle">
-                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
-                        </h5>
-                        <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, UI/UX</span></div>
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="card-block numbers">
+                            <h4 class="card-title mont">Philadelphia, PA</h4>
+                            <h5 class="card-title subTitle">
+                                <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                            </h5>
+                            <div class="heightctrl"><span class="card-text bold mont 1rem">Web Apps, UI/UX</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="card-block numbers">
-                        <h4 class="card-title mont">Knoxville, TN</h4>
-                        <h5 class="card-title subTitle">
-                            <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
-                        </h5>
-                        <div class="heightctrl"><span class="card-text bold mont 1rem">Small Business Consulting</span></div>
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="card-block numbers">
+                            <h4 class="card-title mont">Knoxville, TN</h4>
+                            <h5 class="card-title subTitle">
+                                <a class="rebootB2" href="tel:123-456-7890"><i class="fa fa-phone"></i> (123) 456-7890</a>
+                            </h5>
+                            <div class="heightctrl"><span class="card-text bold mont 1rem">Small Business Consulting</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>-->
+            </div>-->
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                 <div class="bodyHeadingCell">
                     <h4 class="bodyHeading mont">Send a Message</h4>
                     <div class="spacing-5"></div>
-                    <h5 class="bold headingText">Reach out for questions on availability, pricing, our services, or joining the team!</h5>
+                    <h5 class="bold headingText">Reach out for questions on availability, pricing, our services, or
+                        joining the team!</h5>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-9 spacing-5">
@@ -175,40 +183,60 @@
                         <div class="card-block">
                             <div class="spacing-5"></div>
                             <h4 class="card-title mont">Let's Talk About:</h4>
-                            
+
                             <div class="row">
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="apps">
-                                    <input type="checkbox" id="apps" name="category" value="Web Applications" class="materialChk">Intelligent Web Applications</label>
+                                        <input type="checkbox" id="apps" name="category" value="Web Applications"
+                                               class="materialChk">Intelligent Web Applications</label>
                                 </div>
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="data">
-                                    <input type="checkbox" id="data" name="category" value="Data Science" class="materialChk">Data Science & Analytics</label>  
+                                        <input type="checkbox" id="data" name="category" value="Data Science"
+                                               class="materialChk">Data Science & Analytics</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="consulting">
-                                    <input type="checkbox" id="consulting" name="category" value="Consulting" class="materialChk">Small Business Consulting</label>
+                                        <input type="checkbox" id="consulting" name="category" value="Consulting"
+                                               class="materialChk">Small Business Consulting</label>
                                 </div>
                                 <div class="col-md-6 mobile-right">
                                     <label class="chkLabel noselect spacing-tb h5" for="hire">
-                                    <input type="checkbox" id="hire" name="category" value="Joining Team" class="materialChk">Joining The Team</label>
+                                        <input type="checkbox" id="hire" name="category" value="Joining Team"
+                                               class="materialChk">Joining The Team</label>
                                 </div>
                             </div>
 
                             <div class="spacing-25"></div>
                             <h4 class="card-title mont">Your Details:</h4>
-                            <input class="form" id="name" name="name" placeholder="Name" required="required" type="text">
-                            <input class="form" id="email" name="email" placeholder="Email" required="required" type="email">
-                            <textarea class="form textarea" id="message" name="message" placeholder="Message"></textarea>
+                            <input class="form" id="name" name="name" placeholder="Name" required="required"
+                                   type="text">
+                            <input class="form" id="email" name="email" placeholder="Email" required="required"
+                                   type="email">
+                            <textarea class="form textarea" id="message" name="message"
+                                      placeholder="Message"></textarea>
                             <input class="btn rebootB contactB" id="input-submit" type=submit value="Send Message">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        {% if success %}
+        <div class="conf-modal center success" id="modal-success">
+            <div class="title-icon">
+                <i class="fa fa-check modal-icon" aria-hidden="true"></i>
+            </div>
+            <div class="title-text"><h1>Success!</h1></div>
+            <p>{{ text }}</p>
+            <div class="modal-footer">
+                <div class="conf-but green" id="modal-close" onClick="modalClose()">close</div>
+                <!--<div class="conf-but" onClick="">No</div>-->
+            </div>
+        </div>
+        {% endif %}
         <div class="spacing-50"></div>
         <!-- footer -->
         <div class="footer">
@@ -226,6 +254,8 @@
 <script src="https://use.fontawesome.com/65276217d5.js"></script>
 <script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/styles.js') }}"></script>
 <script type="text/javascript">
 function setEqualHeight(selector, triggerOnInput) {
     if (screen.width >= 992) {
