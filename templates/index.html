@@ -12,6 +12,7 @@
     <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
     <!-- css and other styling -->
+    <link href="{{ url_for('static', filename='css/loading.css') }}" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Montserrat:500,600,700" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ url_for('static', filename='material_bootstrap/css/mdb.css') }}" type="text/css" rel="stylesheet">
@@ -35,110 +36,119 @@
         heap.load("1573873728");
     </script>
 </head>
-<div class="loading-gif">
-    <div class="loader"></div>
+
+
+
+<!--<div class="loading-gif">-->
+    <!--<div class="loader"></div>-->
+<!--</div>-->
+<body>
+<!-- intro animation -->
+<div class="loading" id="loading">
+    <div class="load_text" id="progress">
+        0%
+    </div>
 </div>
-<!-- Navbar -->
 
-<body class="hide">
-<!-- Polymorph Background -->
-<div class="polymorph"></div>
-<!--end poly-->
-<nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
-    <div class="container">
-        <!-- Collapse button-->
-        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
-            <i class="fa fa-bars"></i>
-        </button>
-        <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [re:boot]</a>
+<div id="fade-in">
+    <!-- Polymorph Background -->
+    <div class="polymorph"></div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark scooter" style="position:fixed;width:100%;z-index:500;background:#040707;">
+        <div class="container">
+            <!-- Collapse button-->
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand mont" href="/" style="color:#1AADC1"><img src="../static/images/kube.png"> [re:boot]</a>
 
-        <!--Collapse content-->
-        <div class="collapse navbar-collapse navbar-toggleable-md" id="collapseEx2">
-            <!--Links-->
-            <ul class="nav navbar-nav mont" style="margin-left:-5px;">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/team">Team/</a>
-                </li>
-                <!-- uncomment once we complete blog and populate with content -->
-                <!--<li class="nav-item">-->
-                <!--<a class="nav-link">Blog</a>-->
-                <!--</li>-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact/</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/support">Support/</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav nav-flex-icons mont">
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">
-                        {% if current_user.is_authenticated %}
-                        Hi {{ current_user.first_name }}!
-                        {% endif %}
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <!-- Eventually we can replace the user icon with a particular user's photo -->
-                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="dropdownMenu1"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i
-                            class="fa fa-user-circle"></i></a>
-                    <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1"
-                         data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                        {% if not current_user.is_authenticated %}
-                        <a class="dropdown-item waves-effect waves-light" href="/login">Login</a>
-                        {% endif %}
-                        {% if current_user.is_authenticated %}
-                        <a class="dropdown-item waves-effect waves-light" href="/profile">My Profile</a>
-                        <a class="dropdown-item waves-effect waves-light" href="/create_post">New Blog Post</a>
-                        <a class="dropdown-item waves-effect waves-light" href="/logout">Logout</a>
-                        {% endif %}
-                    </div>
-                </li>
-            </ul>
-            <!--Search form-->
-            <!-- uncomment and connect once blog is live -->
-            <!--<form class="form-inline">-->
-            <!--<input class="form-control" type="text" placeholder="Search">-->
-            <!--</form>-->
-        </div>
-        <!--/.Collapse content-->
-    </div>
-</nav>
-
-<div class="fullpage">
-    <div class="polyContainer">
-        <div class="polyWorld">
-            <div class="innerCircle"><div class="innerTag"></div></div>
-        </div>
-    </div>
-    <div class="container homeContainer">
-        <div class="spacing-50 mobile-hide"></div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="bodyHeadingCell">
-                    <h4 class="bodyHeading mont">What We Do</h4>
-                    <div class="spacing-5"></div>
-                    <h5 class="bold headingText">
-                        <b class="mont">[re:boot]</b> provides three core services: Web applications and software, data science and analytics, & small business consulting.
-                    </h5>
-                </div>
+            <!--Collapse content-->
+            <div class="collapse navbar-collapse navbar-toggleable-md" id="collapseEx2">
+                <!--Links-->
+                <ul class="nav navbar-nav mont" style="margin-left:-5px;">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home/ <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/team">Team/</a>
+                    </li>
+                    <!-- uncomment once we complete blog and populate with content -->
+                    <!--<li class="nav-item">-->
+                    <!--<a class="nav-link">Blog</a>-->
+                    <!--</li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact/</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/support">Support/</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav nav-flex-icons mont">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">
+                            {% if current_user.is_authenticated %}
+                            Hi {{ current_user.first_name }}!
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- Eventually we can replace the user icon with a particular user's photo -->
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" id="dropdownMenu1"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i
+                                class="fa fa-user-circle"></i></a>
+                        <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1"
+                             data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                            {% if not current_user.is_authenticated %}
+                            <a class="dropdown-item waves-effect waves-light" href="/login">Login</a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a class="dropdown-item waves-effect waves-light" href="/profile">My Profile</a>
+                            <a class="dropdown-item waves-effect waves-light" href="/create_post">New Blog Post</a>
+                            <a class="dropdown-item waves-effect waves-light" href="/logout">Logout</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+                <!--Search form-->
+                <!-- uncomment and connect once blog is live -->
+                <!--<form class="form-inline">-->
+                <!--<input class="form-control" type="text" placeholder="Search">-->
+                <!--</form>-->
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/webapps.jpg" alt="Card image cap">
+            <!--/.Collapse content-->
+        </div>
+    </nav>
+
+    <div class="fullpage">
+        <div class="polyContainer">
+            <div class="polyWorld">
+                <div class="innerCircle"><div class="innerTag"></div></div>
+            </div>
+        </div>
+        <div class="container homeContainer">
+            <div class="spacing-50 mobile-hide"></div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="bodyHeadingCell">
+                        <h4 class="bodyHeading mont">What We Do</h4>
+                        <div class="spacing-5"></div>
+                        <h5 class="bold headingText">
+                            <b class="mont">[re:boot]</b> provides three core services: Web applications and software, data science and analytics, & small business consulting.
+                        </h5>
                     </div>
-                    <div class="card-block">
-                        <h4 class="card-title weDo mont">Web Applications & Software</h4>
-                        <p class="card-text  weDo">
-                            We build modern, mobile-ready, intelligent Web applications that incorporate beautiful & functional user interfaces, efficient & scalable code, and a holistic focus on the application's user-experience and purpose. Our applications go beyond the standards of the modern Web.
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="image-container">
+                            <img class="img-fluid" src="static/images/webapps.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title weDo mont">Web Applications & Software</h4>
+                            <p class="card-text  weDo">
+                                We build modern, mobile-ready, intelligent Web applications that incorporate beautiful & functional user interfaces, efficient & scalable code, and a holistic focus on the application's user-experience and purpose. Our applications go beyond the standards of the modern Web.
                             <div class="info-dropdown">
                                 <div class="info-tab">
-                                    <input id="app-tab" type="checkbox" data-toggle="modal" data-target="#app-modal"> 
+                                    <input id="app-tab" type="checkbox" data-toggle="modal" data-target="#app-modal">
                                     <label for="app-tab"><i class="fa fa-lightbulb-o"></i> Read More</label>
                                 </div>
                             </div>
@@ -187,22 +197,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/analytics-c.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title weDo mont">Data Science & Analytics</h4>
-                        <p class="card-text  weDo">
-                            We provide data science & analytics capability. Our Web applications often include complex machine learning and analysis techniques, from clustering to text analysis to deep learning. We also offer project-based data science consulting services on a case-by-case basis.
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="image-container">
+                            <img class="img-fluid" src="static/images/analytics-c.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title weDo mont">Data Science & Analytics</h4>
+                            <p class="card-text  weDo">
+                                We provide data science & analytics capability. Our Web applications often include complex machine learning and analysis techniques, from clustering to text analysis to deep learning. We also offer project-based data science consulting services on a case-by-case basis.
                             <div class="info-dropdown">
                                 <div class="info-tab">
-                                    <input id="data-tab" type="checkbox" data-toggle="modal" data-target="#data-modal"> 
+                                    <input id="data-tab" type="checkbox" data-toggle="modal" data-target="#data-modal">
                                     <label for="data-tab"><i class="fa fa-lightbulb-o"></i> Read More</label>
                                 </div>
                             </div>
@@ -239,22 +249,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/consulting.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title weDo mont">Small Business Consulting</h4>
-                        <p class="card-text  weDo">
-                            Our consulting and strategy team transforms small businesses by taking a long-term, balanced approach to company operations, mindset, & culture. We focus on cultivating a culture and work-flow that's inclusive, balanced, hard-working, and efficient.
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="image-container">
+                            <img class="img-fluid" src="static/images/consulting.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title weDo mont">Small Business Consulting</h4>
+                            <p class="card-text  weDo">
+                                Our consulting and strategy team transforms small businesses by taking a long-term, balanced approach to company operations, mindset, & culture. We focus on cultivating a culture and work-flow that's inclusive, balanced, hard-working, and efficient.
                             <div class="info-dropdown">
                                 <div class="info-tab">
-                                    <input id="consult-tab" type="checkbox" data-toggle="modal" data-target="#consulting-modal"> 
+                                    <input id="consult-tab" type="checkbox" data-toggle="modal" data-target="#consulting-modal">
                                     <label for="consult-tab"><i class="fa fa-lightbulb-o"></i> Read More</label>
                                 </div>
                             </div>
@@ -278,349 +288,194 @@
                                     </div>
                                 </div>
                             </div>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="spacing-25"></div>
-        <div class="spacing-5"></div>
-
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="bodyHeadingCell">
-                    <h4 class="bodyHeading mont">What We've Done</h4>
-                    <div class="spacing-5"></div>
-                    <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/keti-c.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title mont">OptiEd</h4>
-                        <h5 class="card-title subTitle">Web App, Optimization</h5>
-                        <p class="card-text  folio">
-                            Opti-Ed, originally aimed at Northwestern University Kellogg Executive MBA students, brings clarity and transparency to course scheduling. Courses are scheduled quickly and efficiently using an optimization algorithm designed to minimize overall preference loss.
-                        </p>
-                        <div class="info-tab">
-                            <input id="keti-tab" class="home-input" type="checkbox" data-toggle="modal" data-target="#keti-modal"> 
-                            <label for="keti-tab" class="home-label">
-                                <a class="btn rebootB waves-button-input">View</a>
-                            </label>
+                            </p>
                         </div>
-                        <div aria-labelledby="keti" class="modal fade" id="keti-modal" role="dialog" tabindex="-1">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title mont rebootB2" id="keti">OptiEd</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            OptiED is a custom application that served two purposes: visualization of course-related information, and generation of optimized course schedules from student specified preferences.
-                                        </p>
-                                        <div class="spacing-5"></div>
-                                        <div id="ketipics">
-                                            <img src="static/images/keti2.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="spacing-25"></div>
+            <div class="spacing-5"></div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="bodyHeadingCell">
+                        <h4 class="bodyHeading mont">What We've Done</h4>
+                        <div class="spacing-5"></div>
+                        <h5 class="bold headingText">Building efficient, powerful, and beautiful platforms is only half the job; developing a lasting and impactful relationship with our clients completes the story.</h5>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
+                    <div class="card">
+                        <div class="image-container">
+                            <img class="img-fluid" src="static/images/keti-c.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title mont">OptiEd</h4>
+                            <h5 class="card-title subTitle">Web App, Optimization</h5>
+                            <p class="card-text  folio">
+                                Opti-Ed, originally aimed at Northwestern University Kellogg Executive MBA students, brings clarity and transparency to course scheduling. Courses are scheduled quickly and efficiently using an optimization algorithm designed to minimize overall preference loss.
+                            </p>
+                            <div class="info-tab">
+                                <input id="keti-tab" class="home-input" type="checkbox" data-toggle="modal" data-target="#keti-modal">
+                                <label for="keti-tab" class="home-label">
+                                    <a class="btn rebootB waves-button-input">View</a>
+                                </label>
+                            </div>
+                            <div aria-labelledby="keti" class="modal fade" id="keti-modal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title mont rebootB2" id="keti">OptiEd</h4>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                                        <div class="modal-body">
+                                            <p>
+                                                OptiED is a custom application that served two purposes: visualization of course-related information, and generation of optimized course schedules from student specified preferences.
+                                            </p>
+                                            <div class="spacing-5"></div>
+                                            <div id="ketipics">
+                                                <img src="static/images/keti2.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/intune-c.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title mont">Intune Health</h4>
-                        <h5 class="card-title subTitle">Web App, Sentiment Analysis</h5>
-                        <p class="card-text  folio">
-                            Intune Health allows users and their wellness managers (nutritionists, trainers, doctors, psychiatrists, psychologists) to track how they feel in a wellness journal, using text and emojis. Journal entries are translated to a sentiment score, providing information on a user's well-being.
-                        </p>
-                        <div class="info-tab">
-                            <label class="home-label">
-                                <a class="btn rebootB waves-button-input" target="_blank" href="http://www.be-intune.com/">View</a>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
-                <div class="card">
-                    <div class="image-container">
-                        <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title mont">Coming Soon</h4>
-                        <h5 class="card-title subTitle">Your Great Idea!</h5>
-                        <p class="card-text  folio">
-                            Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
-
-                        </p>
-                        <div class="info-tab">
-                            <label class="home-label">
-                                <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="spacing-25"></div>
-        <div class="spacing-5"></div>  
-
-        <div class="row">
-            <div class="col-md-12 col-lg-6 spacing-5">
-                <div class="col-md-12 col-lg-6 spacing-5">
-                    <div class="card">
-                        <div class="card-block spacing-25">
-                            <h4 class="card-title bottom mont rebootB2 bold">Meet Our Team</h4>
-                            <p class="card-text bold">Our team spans three American cities and multiple fields of focus.</p>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-md-12 col-lg-6 spacing-5">
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                     <div class="card">
                         <div class="image-container">
-                            <a href="/team"><img class="img-fluid" src="static/images/team.jpg" alt="Card image cap"></a>
+                            <img class="img-fluid" src="static/images/intune-c.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title mont">Intune Health</h4>
+                            <h5 class="card-title subTitle">Web App, Sentiment Analysis</h5>
+                            <p class="card-text  folio">
+                                Intune Health allows users and their wellness managers (nutritionists, trainers, doctors, psychiatrists, psychologists) to track how they feel in a wellness journal, using text and emojis. Journal entries are translated to a sentiment score, providing information on a user's well-being.
+                            </p>
+                            <div class="info-tab">
+                                <label class="home-label">
+                                    <a class="btn rebootB waves-button-input" target="_blank" href="http://www.be-intune.com/">View</a>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-6 spacing-5">
-                <div class="col-md-12 col-lg-6 spacing-5">
-                    <div class="card">
-                        <div class="card-block spacing-25">
-                            <h4 class="card-title bottom mont rebootB2 bold">Ask Us Questions</h4>
-                            <p class="card-text bold">Reach out for questions on availability, pricing, or our services.</p>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-md-12 col-lg-6 spacing-5">
+                <div class="col-sm-12 col-md-12 col-lg-3 spacing-5">
                     <div class="card">
                         <div class="image-container">
-                            <a href="/contact"><img class="img-fluid" src="static/images/ask.jpg" alt="Card image cap"></a>
+                            <img class="img-fluid" src="static/images/yourscreen-c.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title mont">Coming Soon</h4>
+                            <h5 class="card-title subTitle">Your Great Idea!</h5>
+                            <p class="card-text  folio">
+                                Have a great idea that needs UI/UX design, advanced algorithms, or scalable code? We love working with fresh ideas that open up new possibilities in both technology and society. Plus, working with others is simply fun and rewarding. Go ahead, get in touch. We'd love to hear from you.
+
+                            </p>
+                            <div class="info-tab">
+                                <label class="home-label">
+                                    <a class="btn rebootB waves-button-input" href="/contact">Contact</a>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="spacing-25"></div>
+            <div class="spacing-5"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-6 spacing-5">
+                    <div class="col-md-12 col-lg-6 spacing-5">
+                        <div class="card">
+                            <div class="card-block spacing-25">
+                                <h4 class="card-title bottom mont rebootB2 bold">Meet Our Team</h4>
+                                <p class="card-text bold">Our team spans three American cities and multiple fields of focus.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 spacing-5">
+                        <div class="card">
+                            <div class="image-container">
+                                <a href="/team"><img class="img-fluid" src="static/images/team.jpg" alt="Card image cap"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 spacing-5">
+                    <div class="col-md-12 col-lg-6 spacing-5">
+                        <div class="card">
+                            <div class="card-block spacing-25">
+                                <h4 class="card-title bottom mont rebootB2 bold">Ask Us Questions</h4>
+                                <p class="card-text bold">Reach out for questions on availability, pricing, or our services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 spacing-5">
+                        <div class="card">
+                            <div class="image-container">
+                                <a href="/contact"><img class="img-fluid" src="static/images/ask.jpg" alt="Card image cap"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spacing-25"></div>
+            <div class="spacing-5"></div>
+
+            <div class="rotateContainer">
+                <h1 class="mont"><span>[</span>re<span>:</span><span class="rotate">imagine,construct,define,vamp,vitalize,boot</span><span>]</span></h1>
+            </div>
+
+            <div class="spacing-15"></div>
+
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            © 2017 Reboot, LLC.
         </div>
 
-        <div class="spacing-25"></div>
-        <div class="spacing-5"></div>
-
-        <div class="rotateContainer">
-            <h1 class="mont"><span>[</span>re<span>:</span><span class="rotate">imagine,construct,define,vamp,vitalize,boot</span><span>]</span></h1>
-        </div>
-
-        <div class="spacing-15"></div>
-
     </div>
-    <!-- footer -->
-    <div class="footer">
-        © 2017 Reboot, LLC.
-    </div>
-
 </div>
+
 
 
 </body>
 <!-- javascript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.min.js"></script>
+<script src="{{ url_for('static', filename='js/TweenMax.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/velocity.js') }}"></script>
+<script src="{{ url_for('static', filename='js/loading.js') }}"></script>
 <script src="{{ url_for('static', filename='material_bootstrap/js/jquery-3.1.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/preload.js') }}"></script>
 <script src="{{ url_for('static', filename='material_bootstrap/js/tether.min.js') }}"></script>
 <script src="{{ url_for('static', filename='material_bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='material_bootstrap/js/mdb.min.js') }}"></script>
 <script src="https://use.fontawesome.com/65276217d5.js"></script>
 <script src="{{ url_for('static', filename='js/polymorph.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/Projector.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82015/CanvasRenderer.js"></script>
-<script type="text/javascript">
-    if (screen.width >= 991) {
-        (function() {
-            'use strict';
-            
-            var camera, scene, renderer,
-                container, particle,
-                winHalfX, winHalfY,
-                height, width, fieldOfView,
-                aspectRatio, nearPlane, farPlane,
-                body, cameraZ, material,
-                i = 0,
-                count = 0,
-                Tau = Math.PI * 2,
-                mouseX = 0,
-                mouseY = 0,
-                amtX = 50,
-                amtY = 50,
-                sep = 100,
-                spriteOpts = {},
-                particles = [],
-                cssString = 'margin: 0;';
+<script src="{{ url_for('static', filename='js/dotGrid.js') }}"></script>
 
-            function onDocumentReady() {
-                body = document.body;
-                body.style.cssText = cssString;
-
-                container = document.createElement('polyWorld');
-                body.appendChild(container);
-
-                height = window.innerHeight;
-                winHalfY = height / 2;
-                width = window.innerWidth;
-                winHalfX = width / 2;
-                fieldOfView = 75;
-                aspectRatio = width / height;
-                nearPlane = 1;
-                farPlane = 10000;
-                cameraZ = 750;
-
-                rendererer(onRendererRenderered);
-            }
-
-            // renders the renderer 
-            function rendererer(complete) {
-                camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-                camera.position.z = cameraZ;
-
-                scene = new THREE.Scene();
-
-                //material settings
-                spriteOpts = {
-                    color: 0xffffff,
-                    program: function(ctx) {
-                        ctx.beginPath();
-                        ctx.arc(0, 0, 0.5, 0, Tau, true);
-                        ctx.fill();
-                    }
-                };
-
-                material = new THREE.SpriteCanvasMaterial(spriteOpts);
-
-                // particle time!
-                for (var ix = 0, lx = amtX; ix < lx; ix++) {
-
-                    for (var iy = 0, ly = amtY; iy < ly; iy++) {
-                        particle = particles[i++] = new THREE.Sprite(material);
-                        particle.position.x = ix * sep - ((amtX * sep) / 2);
-                        particle.position.z = iy * sep - ((amtY * sep) / 2);
-                        scene.add(particle);
-                    }
-                }
-
-                //render the scene
-                renderer = new THREE.CanvasRenderer( { alpha: true });
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(width, height);
-
-                // append the rendered scene to the container
-                container.appendChild(renderer.domElement);
-                
-                // aaaaaaaaand Scene
-                if (complete) {
-                    complete();
-                }
-            }
-
-            function onRendererRenderered() {
-                // bind events
-                document.addEventListener('mousemove', onDocumentMouseMove);
-                document.addEventListener('touchstart', onDocumentTouchStart);
-                document.addEventListener('touchmove', onDocumentTouchMove);
-                window.addEventListener('resize', onWindowResize);
-
-            }
-
-            function onDocumentMouseMove(e) {
-                mouseX = e.clientX - winHalfX;
-                mouseY = e.clientY - winHalfY;
-            }
-
-            function onDocumentTouchStart(e) {
-                if (e.touches.length === 1) {
-                    e.preventDefault();
-                    mouseX = e.touches[0].pageX - winHalfX;
-                    mouseY = e.touches[0].pageY - winHalfY;
-                }
-            }
-
-            function onDocumentTouchMove(e) {
-                if (e.touches.length === 1) {
-                    e.preventDefault();
-                    mouseX = e.touches[0].pageX - winHalfX;
-                    mouseY = e.touches[0].pageY - winHalfY;
-                }
-            }
-
-            function onWindowResize() {
-                // update variables to new values
-                height = window.innerHeight;
-                winHalfY = height / 2;
-                width = window.innerWidth;
-                winHalfX = width / 2;
-
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-
-                update();
-            }
-
-            function update() {
-                camera.position.x += (mouseX - camera.position.x) * 0.05;
-                camera.position.y += (mouseY - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                i = 0;
-                for (var ix = 0, lx = amtX; ix < lx; ix++) {
-
-                    for (var iy = 0, ly = amtY; iy < ly; iy++) {
-                        particle = particles[i++];
-                        particle.position.y = (Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50);
-                        particle.scale.x = particle.scale.y = (Math.sin((ix + count) * 0.3) + 1) * 4 + (Math.sin((iy + count) * 0.5) + 1) * 4;
-                        scene.add(particle);
-                    }
-                }
-
-                renderer.render(scene, camera);
-                count += 0.1;
-            }
-
-            document.addEventListener('DOMContentLoaded', onDocumentReady);
-            document.addEventListener('DOMContentLoaded', animate);
-
-        })();
-    }
-</script>
 <script type="text/javascript">
 function setEqualHeight(selector, triggerOnInput) {
     if (screen.width >= 992) {
-        var elements = $(selector)
-        elements.css("height", "auto")
+        var elements = $(selector);
+        elements.css("height", "auto");
         var max = Number.NEGATIVE_INFINITY;
         $.each(elements, function(index, item) {
             if ($(item).height() > max) {
                 max = $(item).height()
             }
-        })
-        $(selector).css("height", max + "px")
+        });
+        $(selector).css("height", max + "px");
         if (!!triggerOnInput) {
             $(document).on("input", selector, function() {
                 setEqualHeight(selector, false)
@@ -628,13 +483,13 @@ function setEqualHeight(selector, triggerOnInput) {
         }
         $(window).resize(function() {
             setEqualHeight(selector, false)
-        })
+        });
     }
 }
-setEqualHeight(".card-title.weDo", true) 
-setEqualHeight(".card-text.weDo", true) 
-setEqualHeight(".card-text.folio", true) 
-setEqualHeight(".card-title.subTitle", true) 
+setEqualHeight(".card-title.weDo", true);
+setEqualHeight(".card-text.weDo", true) ;
+setEqualHeight(".card-text.folio", true) ;
+setEqualHeight(".card-title.subTitle", true);
 </script>
 <script src="{{ url_for('static', filename='js/text_rotate.js') }}"></script>
 <script type="text/javascript">

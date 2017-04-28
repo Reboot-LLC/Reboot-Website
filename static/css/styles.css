@@ -42,7 +42,8 @@ nav {
     user-select: none!important;
 }
 .hide {
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
 }
 .btn {
     text-shadow: none;

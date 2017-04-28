@@ -1,6 +1,7 @@
 /* check if the project is using jQuery and set the appropriate value */
 if (window.jQuery) { var V = $.Velocity; } else {var V = Velocity; }
 
+
 /* grabbing the window attributes for certain things */
 var w = window,
     d = document,
@@ -8,6 +9,7 @@ var w = window,
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
 
 /* http://stackoverflow.com/a/27067033/5441252 */
 /* modified to include random timeout for more human-like typing */
@@ -61,6 +63,8 @@ RGBToHex = function (r, g, b) {
     })(bin.toString(16).toUpperCase())
 };
 
+
+/* modal close */
 function modalClose() {
     var modal = document.getElementById('modal-success');
     V(modal, {opacity: 0}, {duration: 500});
