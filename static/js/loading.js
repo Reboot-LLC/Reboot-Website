@@ -229,7 +229,7 @@ function introduction() {
         V(homeContainer, {opacity: 1}, {duration: 2000});
         setTimeout(function() {
             loadContainer.style.zIndex = "-1";
-        }, 5500);
+        }, 1900);
 
     }
 
