@@ -139,6 +139,49 @@ a {
 .error {
     color: #c90a3a;
 }
+.error-title {
+    width: 200px;
+    color: #FFB71C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 4rem;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.error-subtitle {
+    color: #f8f8f8;
+    font-family: 'Jura', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    text-transform: lowercase;
+}
+.middle {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+.loading {
+    opacity: 1.0;
+    position: absolute;
+    z-index: 50000;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: -webkit-linear-gradient(right, #003073, #66CBD9);
+    background: linear-gradient(270deg, #003073, #66CBD9);
+    background-size: 400% 400%;
+    -webkit-animation: background 30s ease infinite;
+    animation: background 30s ease infinite;
+}
+@keyframes background {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 @-webkit-keyframes rotate {
     100% {
         -webkit-transform: rotate(360deg);
