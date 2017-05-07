@@ -60,7 +60,7 @@ if mongo_url:
     # mongo
     parsed = urlparse(mongo_url[1:-1])
     db_name = parsed.path[1:]
-    db = pymongo.MongoClient(mongo_url[1:-1])[parsed.path[1:]]
+    db = pymongo.MongoClient(mongo_url)[parsed.path[1:]]
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
@@ -83,7 +83,7 @@ app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {
         "engine": "mongodb",
-        "MONGO_URL": mongo_url[1:-1],
+        "MONGO_URL": mongo_url,
         "DATABASE": db_name,
         "COLLECTION": "measurements"
     },
