@@ -64,7 +64,6 @@ if mongo_url:
     users = db['users']
     blog_posts = db['blog_posts']
     support_tickets = db['support_tickets']
-    support_tickets = db['support_tickets']
     website_leads = db['website_leads']
     search = db['search']
     # add kpi collection
@@ -83,7 +82,7 @@ app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {
         "engine": "mongodb",
-        "MONGO_URL": mongo_url,
+        "MONGO_URL": mongo_url[1:-1],
         "DATABASE": db_name,
         "COLLECTION": "measurements"
     },
