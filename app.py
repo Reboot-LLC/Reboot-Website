@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, session
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, redirect, abort, current_user, fresh_login_required
 # import flask_profiler
+from flask_sslify import SSLify
 import hashlib
 from logging import FileHandler, Formatter
 from urllib.parse import urlparse
@@ -21,6 +22,7 @@ import time
 # create instance of Flask class
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+sslify = SSLify(app)
 app.config.update(
     DEBUG=True,
     SECRET_KEY='what_a_big_secret',
